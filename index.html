@@ -22,9 +22,7 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .bg-duo-gradient {
-            background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6);
-        }
+        .bg-duo-gradient { background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6); }
 
         .bg-logo-shadow {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -38,15 +36,12 @@
         }
 
         .logo-container img { 
-            max-height: 95px;
+            max-height: 110px; 
             width: auto; 
             display: block; 
             transition: transform 0.3s ease;
-            padding: 10px 0;
+            padding: 12px 0;
         }
-
-        .lang-btn { opacity: 0.4; transition: all 0.3s; cursor: pointer; font-size: 10px; font-weight: bold; padding: 2px 4px; }
-        .lang-btn.active { opacity: 1; color: #2dd4bf; border-bottom: 1px solid #2dd4bf; }
 
         .section-padding { padding: 120px 0; }
         
@@ -56,405 +51,368 @@
             backdrop-filter: blur(10px);
             transition: all 0.4s ease;
         }
-        .glass-card:hover { border-color: #2dd4bf; background: rgba(255, 255, 255, 0.04); }
+        .glass-card:hover { border-color: #2dd4bf; background: rgba(255, 255, 255, 0.04); transform: translateY(-5px); }
+
+        .lang-btn { opacity: 0.4; transition: all 0.3s; cursor: pointer; font-size: 10px; font-weight: bold; padding: 2px 4px; }
+        .lang-btn.active { opacity: 1; color: #2dd4bf; border-bottom: 1px solid #2dd4bf; }
 
         .legal-box { transition: all 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
-        .legal-box.open { max-height: 500px; opacity: 1; margin-top: 1.5rem; }
+        .legal-box.open { max-height: 500px; opacity: 1; margin-top: 1.5rem; display: block !important; }
 
-        .fade-in { animation: fadeIn 1.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 768px) {
-            .logo-container img { max-height: 70px; }
-            .mobile-cta { 
-                display: block; position: fixed; bottom: 20px; left: 20px; right: 20px; 
-                z-index: 100; background: linear-gradient(135deg, #8b5cf6, #2dd4bf); color: white; text-align: center;
-                padding: 16px; border-radius: 50px; font-weight: bold; font-size: 11px;
-                letter-spacing: 0.1em; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
-            }
-        }
+        .feature-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+        @media (max-width: 768px) { .logo-container img { max-height: 85px; } }
     </style>
 </head>
 <body>
 
     <img src="logo.png" alt="" class="bg-logo-shadow">
 
-    <a href="#waitlist" id="mobile-cta" class="mobile-cta hidden uppercase">Join the Waitlist</a>
-
     <nav class="fixed w-full z-50 nav-dark">
         <div class="max-w-7xl mx-auto px-8 py-1 flex justify-between items-center">
-            <a href="#" class="logo-container">
-                <img src="logo.png" alt="Duolyn Logo">
-            </a>
-            
+            <a href="#" class="logo-container"><img src="logo.png" alt="Duolyn Logo"></a>
             <div class="flex items-center gap-4 md:gap-8">
                 <div class="flex gap-3 uppercase tracking-widest border-r border-white/10 pr-6">
-                    <span onclick="setLanguage('en')" id="lang-en" class="lang-btn active">EN</span>
-                    <span onclick="setLanguage('lv')" id="lang-lv" class="lang-btn">LV</span>
-                    <span onclick="setLanguage('de')" id="lang-de" class="lang-btn">DE</span>
-                    <span onclick="setLanguage('sv')" id="lang-sv" class="lang-btn">SV</span>
+                    <span onclick="changeLanguage('en')" id="lang-en" class="lang-btn active">EN</span>
+                    <span onclick="changeLanguage('lv')" id="lang-lv" class="lang-btn">LV</span>
+                    <span onclick="changeLanguage('de')" id="lang-de" class="lang-btn">DE</span>
+                    <span onclick="changeLanguage('sv')" id="lang-sv" class="lang-btn">SV</span>
                 </div>
-
-                <a href="#waitlist" id="nav-cta" class="bg-duo-gradient text-white px-7 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all hidden md:block">
-                    Early Access
-                </a>
+                <a href="#waitlist" id="nav-cta" class="bg-duo-gradient text-white px-7 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all hidden md:block">Early Access</a>
             </div>
         </div>
     </nav>
 
     <header class="pt-64 pb-24 px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
-        <div class="md:w-1/2 fade-in text-center md:text-left">
-            <div id="hero-tag" class="inline-block px-4 py-1 mb-6 text-[10px] font-bold tracking-[0.2em] uppercase bg-white/5 text-duo-gradient border border-white/10 rounded-full">
-                Launching Summer 2026
-            </div>
-            <h1 class="text-6xl md:text-8xl mb-8 leading-[1.05] text-white tracking-tight">
-                <span id="hero-title-1">Beauty & Care</span> <br>
-                <span id="hero-title-2" class="italic font-normal text-duo-gradient">Synchronized.</span>
+        <div class="md:w-1/2 text-center md:text-left">
+            <div id="hero-tag" class="inline-block px-4 py-1 mb-6 text-[10px] font-bold tracking-[0.2em] uppercase bg-white/5 text-duo-gradient border border-white/10 rounded-full"></div>
+            <h1 class="text-6xl md:text-8xl mb-8 leading-[1.05] text-white tracking-tight font-bold">
+                <span id="hero-title-1"></span> <span id="hero-title-2" class="italic font-normal text-duo-gradient"></span> <br>
+                <span id="hero-title-3"></span>
             </h1>
-            <p id="hero-desc" class="text-xl text-stone-400 mb-10 max-w-lg leading-relaxed font-light mx-auto md:mx-0">
-                Duolyn is the unified operating system for modern salons, barbers, and clinics. Refined technology built for the artistry of people.
-            </p>
+            <p id="hero-desc" class="text-xl text-stone-400 mb-10 max-w-lg leading-relaxed font-light mx-auto md:mx-0"></p>
             <div class="flex justify-center md:justify-start gap-4">
-                <a href="#about" id="hero-link" class="text-xs font-bold uppercase tracking-widest border-b-2 border-indigo-500 text-indigo-400 pb-1 hover:text-white transition">Our Vision</a>
+                <a href="#features" id="hero-btn-features" class="bg-duo-gradient text-white px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition"></a>
+                <a href="#about" id="hero-link" class="text-xs font-bold uppercase tracking-widest border-b-2 border-indigo-500 text-indigo-400 pb-1 hover:text-white transition"></a>
             </div>
         </div>
         <div class="md:w-1/2">
-            <div class="aspect-[4/5] bg-stone-900 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] relative border border-white/5">
-                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[40%] opacity-80" alt="Salon">
+            <div class="aspect-[4/5] bg-stone-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/5">
+                <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover opacity-60" alt="Luxury Salon">
             </div>
         </div>
     </header>
 
-    <section id="about" class="section-padding bg-[#0F0F0F]/50">
-        <div class="max-w-6xl mx-auto px-8">
-            <div class="grid md:grid-cols-2 gap-20 items-start">
-                <div>
-                    <h2 id="about-title" class="text-4xl md:text-5xl mb-10 text-white">About Duolyn</h2>
-                    <p id="about-p1" class="text-stone-400 leading-relaxed mb-6 text-lg font-light">
-                        Duolyn is the unified operating system for beauty and wellness businesses. We bring operations into one connected platform so you can focus on your craft.
-                    </p>
-                    <p id="about-quote" class="text-white leading-relaxed italic border-l-4 border-teal-500 pl-8 my-10 text-xl font-serif">
-                        "We believe beauty and wellness businesses deserve technology that feels as refined as the services they provide."
-                    </p>
-                </div>
-                
-                <div class="glass-card p-12 rounded-[2.5rem]">
-                    <h3 id="vision-tag" class="text-[10px] font-bold mb-10 tracking-[0.4em] uppercase text-stone-500">Internal Vision</h3>
-                    <ul class="space-y-4 font-serif text-3xl">
-                        <li><span class="text-duo-gradient font-bold">D</span>igital</li>
-                        <li><span class="text-duo-gradient font-bold">U</span>nified</li>
-                        <li><span class="text-duo-gradient font-bold">O</span>perations</li>
-                        <li><span class="text-duo-gradient font-bold">L</span>ink</li>
-                        <li><span class="text-duo-gradient font-bold">Y</span>our</li>
-                        <li><span class="text-duo-gradient font-bold">N</span>etwork</li>
-                    </ul>
-                </div>
-            </div>
+    <section class="py-20 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <h3 id="built-tag" class="text-stone-500 uppercase tracking-[0.4em] text-[10px] font-bold mb-12"></h3>
+            <div id="business-types" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 md:gap-4 font-serif italic text-lg text-stone-300"></div>
         </div>
     </section>
 
-    <section class="section-padding bg-[#050505]">
-        <div class="max-w-5xl mx-auto px-8 text-center">
-            <h2 id="meaning-title" class="text-4xl md:text-6xl mb-6 italic text-white font-light">The Meaning Behind Duolyn</h2>
-            <div class="w-24 h-1 bg-duo-gradient mx-auto mb-20 rounded-full"></div>
-            
-            <div class="grid md:grid-cols-2 gap-16 text-left">
-                <div class="glass-card p-10 rounded-2xl">
-                    <h4 id="meaning-duo-title" class="text-indigo-400 uppercase tracking-[0.3em] text-[10px] font-bold mb-6">Synergy (Duo)</h4>
-                    <p id="meaning-duo-desc" class="text-stone-400 font-light leading-relaxed text-lg">
-                        Reflects the balance between technology and human connection. It represents the synergy between beauty and wellness.
-                    </p>
-                </div>
-                <div class="glass-card p-10 rounded-2xl">
-                    <h4 id="meaning-lyn-title" class="text-teal-400 uppercase tracking-[0.3em] text-[10px] font-bold mb-6">Elegance (Lyn)</h4>
-                    <p id="meaning-lyn-desc" class="text-stone-400 font-light leading-relaxed text-lg">
-                        Represents elegance, individuality, and the personal relationships at the center of every client experience.
-                    </p>
-                </div>
+    <section id="features" class="section-padding bg-[#0F0F0F]/50">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <div class="mb-20">
+                <h2 id="features-title" class="text-5xl text-white mb-6"></h2>
+                <div class="w-24 h-1 bg-duo-gradient mx-auto rounded-full"></div>
+            </div>
+            <div id="feature-grid" class="grid md:grid-cols-4 gap-6 text-left"></div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding bg-[#0A0A0A]">
+        <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-20">
+            <div>
+                <h2 id="about-title" class="text-4xl text-white mb-10"></h2>
+                <p id="about-p1" class="text-stone-400 text-lg font-light mb-6"></p>
+                <p id="about-quote" class="text-white italic border-l-4 border-teal-500 pl-8 text-xl font-serif"></p>
+            </div>
+            <div class="glass-card p-12 rounded-[2.5rem]">
+                <h3 id="vision-tag" class="text-[10px] font-bold mb-10 tracking-[0.4em] uppercase text-stone-500">Internal Vision</h3>
+                <ul id="vision-list" class="space-y-4 font-serif text-3xl"></ul>
             </div>
         </div>
     </section>
 
     <section class="section-padding">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="mb-16">
-                <span id="partner-tag" class="text-xs uppercase tracking-widest text-indigo-400 block mb-2 font-bold">Network Hub</span>
-                <h2 id="partner-title" class="text-4xl italic text-white">Local Partners in <span id="partner-country-text" class="font-bold not-italic">...</span></h2>
-            </div>
+            <h2 id="partner-title" class="text-4xl italic text-white mb-16">Local Partners in <span id="partner-country-text" class="font-bold not-italic">...</span></h2>
             <div id="partner-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10"></div>
         </div>
     </section>
 
-    <section id="waitlist" class="section-padding bg-[#0A0A0A] border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-8 text-center">
-            <h2 id="waitlist-title" class="text-5xl md:text-7xl mb-10 tracking-tighter text-white font-bold">Join the Waitlist.</h2>
-            <p id="waitlist-desc" class="text-stone-400 mb-12 font-light text-xl max-w-2xl mx-auto leading-relaxed">
-                Opening Summer 2026. Be among the first 100 salons to receive our Founding Partner toolkit and exclusive lifetime rates.
-            </p>
-            
-            <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" class="flex flex-col sm:flex-row gap-3 glass-card rounded-[2.5rem] overflow-hidden p-3 max-w-xl mx-auto border-white/10 mb-8">
-                <input id="input-email" type="email" name="email" placeholder="Professional Email" required class="flex-grow px-8 py-5 focus:outline-none bg-transparent text-white">
-                <button id="btn-submit" type="submit" class="bg-duo-gradient text-white px-10 py-5 rounded-[2rem] font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-xl">
-                    Get Early Access
-                </button>
-            </form>
-            
-            <div class="pt-6">
-                <button onclick="shareLink()" id="share-btn" class="text-[10px] font-bold border border-white/10 text-stone-500 px-6 py-2 rounded-full hover:bg-white hover:text-black transition uppercase tracking-widest">Copy Invite Link</button>
+    <section id="waitlist" class="section-padding bg-[#050505] border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-8">
+            <div class="glass-card rounded-[3rem] p-12 md:p-20 text-center border-white/20">
+                <div id="founding-tag" class="inline-block px-4 py-1 mb-8 text-[10px] font-bold uppercase bg-white/5 text-duo-gradient border border-white/10 rounded-full"></div>
+                <h2 id="founding-title" class="text-5xl text-white mb-6 font-bold tracking-tighter"></h2>
+                <p id="founding-desc" class="text-stone-400 text-lg mb-12"></p>
+                
+                <form action="https://formspree.io/f/mykodaar" method="POST" class="text-left space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label id="lbl-biz-name" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                            <input type="text" name="Business_Name" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label id="lbl-email" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                            <input type="email" name="email" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label id="lbl-phone" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                            <input type="tel" name="Phone" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label id="lbl-country" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                            <input type="text" name="Country" id="input-country" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                        </div>
+                        <div>
+                            <label id="lbl-city" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                            <input type="text" name="City" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                        </div>
+                    </div>
+                    
+                    <div id="perks-list" class="grid md:grid-cols-3 gap-4 pt-4"></div>
+
+                    <div class="flex items-start gap-4 py-4 bg-white/5 p-6 rounded-2xl">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 accent-teal-500">
+                        <p id="gdpr-text" class="text-[11px] text-stone-400"></p>
+                    </div>
+
+                    <button id="btn-submit" type="submit" class="w-full bg-duo-gradient text-white py-6 rounded-full font-bold uppercase text-[11px] shadow-2xl"></button>
+                </form>
+
+                <div class="pt-10">
+                    <button onclick="shareLink()" id="share-btn" class="text-[10px] font-bold border border-white/10 text-stone-500 px-8 py-3 rounded-full hover:bg-white hover:text-black transition uppercase tracking-widest"></button>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 bg-[#050505] border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-8 flex flex-col items-center text-center">
-            
-            <div class="flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 mb-12">
-                <a href="#" class="hover:text-indigo-400 transition">Instagram</a>
-                <a href="#" class="hover:text-teal-400 transition">Facebook</a>
-                <a href="#" class="hover:text-blue-400 transition">LinkedIn</a>
-                <a href="#" class="hover:text-white transition">X</a>
-            </div>
-
-            <div class="mb-4">
-                <p class="text-[11px] font-bold tracking-[0.5em] uppercase text-white mb-8">Duolyn &copy; 2026 — Riga, Latvia</p>
-                
-                <div class="flex gap-6 justify-center text-[9px] text-stone-500 uppercase tracking-widest font-bold">
-                    <button onclick="toggleLegal('privacy')" id="footer-privacy" class="hover:text-white">Privacy Policy</button>
-                    <span>|</span>
-                    <button onclick="toggleLegal('terms')" id="footer-terms" class="hover:text-white">Terms of Service</button>
-                    <span>|</span>
-                    <button onclick="toggleLegal('cookies')" id="footer-cookies" class="hover:text-white">Cookies</button>
-                </div>
-
-                <div id="privacy-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto leading-relaxed italic p-6 rounded-2xl">
-                    </div>
-                
-                <div id="terms-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto leading-relaxed italic p-6 rounded-2xl">
-                    </div>
-
-                <div id="cookies-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto leading-relaxed italic p-6 rounded-2xl">
-                    </div>
-            </div>
+    <footer class="py-20 text-center border-t border-white/5">
+        <div class="flex gap-8 justify-center text-[10px] font-bold uppercase text-stone-500 mb-12">
+            <a href="#" class="hover:text-indigo-400 transition">Instagram</a>
+            <a href="#" class="hover:text-teal-400 transition">Facebook</a>
+            <a href="#" class="hover:text-blue-400 transition">LinkedIn</a>
+            <a href="#" class="hover:text-white transition">X</a>
         </div>
+        <p class="text-[11px] font-bold tracking-widest text-white mb-8">DUOLYN &copy; 2026 — RIGA, LATVIA</p>
+        <div class="flex gap-6 justify-center text-[9px] text-stone-500 uppercase font-bold mb-10">
+            <button onclick="toggleLegal('privacy')" id="footer-privacy">Privacy Policy</button>
+            <span>|</span>
+            <button onclick="toggleLegal('terms')" id="footer-terms">Terms of Service</button>
+            <span>|</span>
+            <button onclick="toggleLegal('cookies')" id="footer-cookies">Cookies</button>
+        </div>
+        <div id="privacy-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
+        <div id="terms-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
+        <div id="cookies-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
     </footer>
 
     <script>
         const translations = {
             en: {
-                navCta: "Early Access",
-                mobileCta: "Join the Waitlist",
-                heroTag: "Launching Summer 2026",
-                heroTitle1: "Beauty & Care",
-                heroTitle2: "Synchronized.",
-                heroDesc: "Duolyn is the unified operating system for modern salons, barbers, and clinics. Refined technology built for the artistry of people.",
-                heroLink: "Our Vision",
-                aboutTitle: "About Duolyn",
-                aboutP1: "Duolyn is the unified operating system for beauty and wellness businesses. We bring operations into one connected platform so you can focus on your craft.",
+                navCta: "Early Access", heroTag: "Launching Summer 2026",
+                heroTitle1: "Manage with", heroTitle2: "elegance.", heroTitle3: "Grow with confidence.",
+                heroDesc: "All-in-one platform for wellness & service businesses — bookings, payments, loyalty, staff, inventory, marketing, and chat.",
+                heroBtnFeatures: "See Features", heroLink: "Our Vision",
+                builtTag: "Built for every service business", businessTypes: ["Salons","Spas","Barbershops","Nails","Wellness","Clinics","Fitness","Tattoo"],
+                featuresTitle: "Everything you need in one place",
+                aboutTitle: "About Duolyn", aboutP1: "Duolyn is the unified operating system for beauty and wellness businesses. We bring operations into one connected platform so you can focus on your craft.",
                 aboutQuote: '"We believe beauty and wellness businesses deserve technology that feels as refined as the services they provide."',
-                meaningTitle: "The Meaning Behind Duolyn",
-                meaningDuoTitle: "Synergy (Duo)",
-                meaningDuoDesc: "Reflects the balance between technology and human connection. It represents the synergy between beauty and wellness.",
-                meaningLynTitle: "Elegance (Lyn)",
-                meaningLynDesc: "Represents elegance, individuality, and the personal relationships at the center of every client experience.",
-                partnerTag: "Network Hub",
-                partnerTitle: "Local Partners in ",
-                waitlistTitle: "Join the Waitlist.",
-                waitlistDesc: "Opening Summer 2026. Be among the first 100 salons to receive our Founding Partner toolkit and exclusive lifetime rates.",
-                inputEmail: "Professional Email",
-                btnSubmit: "Get Early Access",
-                shareBtn: "Copy Invite Link",
-                footerPrivacy: "Privacy Policy",
-                footerTerms: "Terms of Service",
-                footerCookies: "Cookies",
-                msgPrivacy: "<strong>Privacy:</strong> We collect emails via Formspree solely for Duolyn product updates. Data is stored in the EU and never shared. (GDPR/DVI Compliant).",
-                msgTerms: "<strong>Terms:</strong> Duolyn is currently in pre-launch. Signing up does not guarantee a service contract. Full terms provided upon 2026 release.",
-                msgCookies: "<strong>Cookies:</strong> This site uses functional cookies to remember location for partner detection. No invasive tracking is used."
+                vision: ["Digital","Unified","Operations","Link","Your","Network"],
+                partnerTitle: "Local Partners in ", foundingTag: "Opening Summer 2026",
+                foundingTitle: "Founding Partner Program", foundingDesc: "Be among the first 50 businesses per country to receive our Founding Partner toolkit and lock in exclusive lifetime rates — for life.",
+                lblBizName: "Business Name", lblEmail: "Professional Email", lblPhone: "Phone Number", lblCountry: "Country", lblCity: "City",
+                gdprText: "I agree to receive updates about the Duolyn 2026 launch. I understand that spots are limited to 50 per country.",
+                btnSubmit: "Secure My Founding Spot", shareBtn: "Copy Invite Link",
+                footerPrivacy: "Privacy Policy", footerTerms: "Terms of Service", footerCookies: "Cookies",
+                msgPrivacy: "<strong>Privacy:</strong> We collect business data solely for Duolyn launch updates. GDPR compliant.",
+                msgTerms: "<strong>Terms:</strong> This is a pre-launch phase. Application does not guarantee a service contract.",
+                msgCookies: "<strong>Cookies:</strong> Functional cookies only for location and language preference.",
+                features: [
+                    { icon: "📅", title: "Smart Booking", desc: "Real-time scheduling and auto reminders." },
+                    { icon: "💳", title: "Payments", desc: "Secure in-app checkout and history." },
+                    { icon: "⭐", title: "Loyalty", desc: "Points and perks to boost repeat business." },
+                    { icon: "👥", title: "Staff & Payroll", desc: "Hours, tips, and flexible salary modes." },
+                    { icon: "📦", title: "Inventory", desc: "Stock alerts and supplier tracking." },
+                    { icon: "📣", title: "Marketing", desc: "Campaigns and rebooking nudges." },
+                    { icon: "💬", title: "In-App Chat", desc: "Faster client communication." },
+                    { icon: "📊", title: "Analytics", desc: "Revenue and staff performance." }
+                ],
+                perks: ["Lifetime discounts", "Early access", "Founder badge"]
             },
             lv: {
-                navCta: "Pieteikties",
-                mobileCta: "Pievienoties rindai",
-                heroTag: "Atklāšana 2026. gada vasarā",
-                heroTitle1: "Skaistums un rūpes",
-                heroTitle2: "Sinhronizēti.",
-                heroDesc: "Duolyn ir vienota operētājsistēma mūsdienīgiem saloniem, bārberšopiem un klīnikām. Izsmalcināta tehnoloģija cilvēku meistarībai.",
-                heroLink: "Mūsu vīzija",
-                aboutTitle: "Par Duolyn",
-                aboutP1: "Duolyn ir vienota platforma skaistumkopšanas un labsajūtas uzņēmumiem. Mēs apvienojam procesus, lai jūs varētu koncentrēties uz savu amatu.",
-                aboutQuote: '"Mēs ticam, ka skaistumkopšanas biznesi ir pelnījuši tehnoloģijas, kas ir tikpat izsmalcinātas kā viņu sniegtie pakalpojumi."',
-                meaningTitle: "Duolyn nozīme",
-                meaningDuoTitle: "Sinerģija (Duo)",
-                meaningDuoDesc: "Atspoguļo līdzsvaru starp tehnoloģijām un cilvēcisko saikni. Tas simbolizē skaistuma un labsajūtas sinerģiju.",
-                meaningLynTitle: "Elegance (Lyn)",
-                meaningLynDesc: "Pārstāv eleganci, individualitāti un personīgās attiecības, kas ir katra klienta pieredzes centrā.",
-                partnerTag: "Tīkla Mezgls",
-                partnerTitle: "Vietējie partneri ",
-                waitlistTitle: "Pievienojies sarakstam.",
-                waitlistDesc: "Atklāšana 2026. gadā. Esi starp pirmajiem 100 saloniem, kas saņem īpašas cenas un dibinātāja rīku komplektu.",
-                inputEmail: "Darba e-pasts",
-                btnSubmit: "Saņemt piekļuvi",
-                shareBtn: "Kopēt saiti",
-                footerPrivacy: "Privātuma politika",
-                footerTerms: "Lietošanas noteikumi",
-                footerCookies: "Sīkdatnes",
-                msgPrivacy: "<strong>Privātums:</strong> Mēs apkopojam e-pastus, izmantojot Formspree, tikai Duolyn jaunumiem. Dati tiek glabāti ES un netiek kopīgoti. (GDPR/DVI atbilstība).",
-                msgTerms: "<strong>Noteikumi:</strong> Duolyn pašlaik ir pirms palaišanas fāzē. Reģistrācija negarantē pakalpojumu sniegšanas līgumu. Pilni noteikumi tiks sniegti 2026. gadā.",
-                msgCookies: "<strong>Sīkdatnes:</strong> Šī vietne izmanto funkcionālās sīkdatnes, lai noteiktu atrašanās vietu partneru meklēšanai. Izsekošanas sīkdatnes netiek izmantotas."
+                navCta: "Pieteikties", heroTag: "Atklāšana 2026. gada vasarā",
+                heroTitle1: "Pārvaldiet ar", heroTitle2: "eleganci.", heroTitle3: "Audziet ar pārliecību.",
+                heroDesc: "Viss-vienā platforma skaistumkopšanas biznesiem — rezervācijas, maksājumi, lojalitāte, personāls un mārketings vienuviet.",
+                heroBtnFeatures: "Funkcijas", heroLink: "Vīzija",
+                builtTag: "Radīts ikvienam pakalpojumu biznesam", businessTypes: ["Saloni","SPA","Bārberšopi","Nagi","Veselība","Klīnikas","Fitness","Tetovēšana"],
+                featuresTitle: "Viss nepieciešamais vienuviet",
+                aboutTitle: "Par Duolyn", aboutP1: "Duolyn ir vienota platforma skaistumkopšanas uzņēmumiem. Mēs apvienojam procesus, lai jūs varētu koncentrēties uz savu amatu.",
+                aboutQuote: '"Mēs ticam, ka skaistumkopšanas biznesi ir pelnījuši tehnoloģijas, kas ir tikpat izsmalcinātas kā viņu pakalpojumi."',
+                vision: ["Digital","Unified","Operations","Link","Your","Network"],
+                partnerTitle: "Vietējie partneri ", foundingTag: "Atklāšana 2026. gada vasarā",
+                foundingTitle: "Dibinātāju programma", foundingDesc: "Esi starp pirmajiem 50 uzņēmumiem savā valstī un fiksē ekskluzīvas dibinātāja cenas uz mūžu.",
+                lblBizName: "Uzņēmuma nosaukums", lblEmail: "Darba e-pasts", lblPhone: "Tālruņa numurs", lblCountry: "Valsts", lblCity: "Pilsēta",
+                gdprText: "Es piekrītu saņemt jaunumus par Duolyn 2026. Es saprotu, ka vietu skaits ir ierobežots (50 katrā valstī).",
+                btnSubmit: "Nostiprināt savu vietu", shareBtn: "Kopēt saiti",
+                footerPrivacy: "Privātums", footerTerms: "Noteikumi", footerCookies: "Sīkdatnes",
+                msgPrivacy: "<strong>Privātums:</strong> Dati tiek vākti tikai jaunumiem. DVI/GDPR atbilstība.",
+                msgTerms: "<strong>Noteikumi:</strong> Šī ir pirms-palaišanas fāze. Reģistrācija negarantē līgumu.",
+                msgCookies: "<strong>Sīkdatnes:</strong> Tikai funkcionālās sīkdatnes lokācijai.",
+                features: [
+                    { icon: "📅", title: "Viedā rezervācija", desc: "Plānošana un automātiskie atgādinājumi." },
+                    { icon: "💳", title: "Maksājumi", desc: "Droši norēķini lietotnē." },
+                    { icon: "⭐", title: "Lojalitāte", desc: "Punkti klientu noturēšanai." },
+                    { icon: "👥", title: "Personāls", desc: "Darba laiks un elastīgas algas." },
+                    { icon: "📦", title: "Inventārs", desc: "Krājumu izsekošana." },
+                    { icon: "📣", title: "Mārketings", desc: "Kampaņas un kuponi." },
+                    { icon: "💬", title: "Čats", desc: "Saziņa ar klientiem lietotnē." },
+                    { icon: "📊", title: "Analītika", desc: "Ieņēmumi un personāls." }
+                ],
+                perks: ["Mūža atlaides", "Agrīna piekļuve", "Dibinātāja nozīmīte"]
             },
             de: {
-                navCta: "Frühzeitiger Zugang",
-                mobileCta: "Auf die Warteliste",
-                heroTag: "Start im Sommer 2026",
-                heroTitle1: "Schönheit & Pflege",
-                heroTitle2: "Synchronisiert.",
-                heroDesc: "Duolyn ist das einheitliche Betriebssystem für moderne Salons, Barbershops und Kliniken. Raffinierte Technologie für wahre Handwerkskunst.",
-                heroLink: "Unsere Vision",
-                aboutTitle: "Über Duolyn",
-                aboutP1: "Duolyn ist das Betriebssystem für Beauty-Unternehmen. Wir vereinen alle Abläufe in einer Plattform, damit Sie sich auf Ihr Handwerk konzentrieren können.",
-                aboutQuote: '"Wir glauben, dass Beauty-Unternehmen Technologien verdienen, die so exzellent sind wie ihre Dienstleistungen."',
-                meaningTitle: "Die Bedeutung hinter Duolyn",
-                meaningDuoTitle: "Synergie (Duo)",
-                meaningDuoDesc: "Spiegelt das Gleichgewicht zwischen Technologie und menschlicher Verbindung wider.",
-                meaningLynTitle: "Eleganz (Lyn)",
-                meaningLynDesc: "Repräsentiert Eleganz, Individualität und die persönlichen Beziehungen im Zentrum jeder Kundenerfahrung.",
-                partnerTag: "Netzwerk-Hub",
-                partnerTitle: "Lokale Partner in ",
-                waitlistTitle: "Warteliste beitreten.",
-                waitlistDesc: "Eröffnung Sommer 2026. Gehören Sie zu den ersten 100 Salons, die exklusive Partnerraten erhalten.",
-                inputEmail: "Geschäftliche E-Mail",
-                btnSubmit: "Zugang Erhalten",
-                shareBtn: "Link kopieren",
-                footerPrivacy: "Datenschutz",
-                footerTerms: "AGB",
-                footerCookies: "Cookies",
-                msgPrivacy: "<strong>Datenschutz:</strong> Wir sammeln E-Mails nur für Duolyn-Updates. Daten werden in der EU gespeichert. (DSGVO-konform).",
-                msgTerms: "<strong>AGB:</strong> Duolyn befindet sich in der Vorbereitungsphase. Die Anmeldung garantiert keinen Servicevertrag.",
-                msgCookies: "<strong>Cookies:</strong> Diese Seite verwendet funktionale Cookies zur Standorterkennung. Kein Tracking."
+                navCta: "Zugang", heroTag: "Start Sommer 2026",
+                heroTitle1: "Verwalten mit", heroTitle2: "Eleganz.", heroTitle3: "Wachsen mit Vertrauen.",
+                heroDesc: "All-in-One-Plattform für Wellness – Buchungen, Zahlungen, Loyalität, Personal und Marketing.",
+                heroBtnFeatures: "Funktionen", heroLink: "Vision",
+                builtTag: "Für jedes Business", businessTypes: ["Salons","Spas","Barbiere","Nägel","Wellness","Kliniken","Fitness","Tattoo"],
+                featuresTitle: "Alles an einem Ort",
+                aboutTitle: "Über Duolyn", aboutP1: "Duolyn ist das Betriebssystem für Beauty-Unternehmen.",
+                aboutQuote: '"Wir glauben an Technologie mit Eleganz."',
+                vision: ["Digital","Unified","Operations","Link","Your","Network"],
+                partnerTitle: "Partner in ", foundingTag: "Start Sommer 2026",
+                foundingTitle: "Gründerprogramm", foundingDesc: "Sichern Sie sich exklusive Preise ein Leben lang.",
+                lblBizName: "Firmenname", lblEmail: "E-Mail", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stadt",
+                gdprText: "Ich stimme zu, Updates zu erhalten. Plätze sind auf 50 pro Land begrenzt.",
+                btnSubmit: "Platz sichern", shareBtn: "Link kopieren",
+                footerPrivacy: "Datenschutz", footerTerms: "AGB", footerCookies: "Cookies",
+                msgPrivacy: "<strong>Datenschutz:</strong> DSGVO-konform.",
+                msgTerms: "<strong>AGB:</strong> Vorverkaufsphase.",
+                msgCookies: "<strong>Cookies:</strong> Funktionale Cookies.",
+                features: [
+                    { icon: "📅", title: "Buchung", desc: "Echtzeit-Termine." },
+                    { icon: "💳", title: "Zahlung", desc: "In-App Checkout." },
+                    { icon: "⭐", title: "Loyalität", desc: "Punkte & Empfehlungen." },
+                    { icon: "👥", title: "Personal", desc: "Lohn & Stunden." },
+                    { icon: "📦", title: "Inventar", desc: "Lagerverwaltung." },
+                    { icon: "📣", title: "Marketing", desc: "Kampagnen." },
+                    { icon: "💬", title: "Chat", desc: "Kundenkommunikation." },
+                    { icon: "📊", title: "Analysen", desc: "Umsatzdaten." }
+                ],
+                perks: ["Lebenslange Rabatte", "Mitspracherecht", "Gründer-Badge"]
             },
             sv: {
-                navCta: "Tidig tillgång",
-                mobileCta: "Gå med i kön",
-                heroTag: "Lansering sommaren 2026",
-                heroTitle1: "Skönhet & Vård",
-                heroTitle2: "Synkroniserat.",
-                heroDesc: "Duolyn är det enhetliga operativsystemet för moderna salonger och kliniker. Raffinerad teknik byggd för hantverket hos människor.",
-                heroLink: "Vår vision",
-                aboutTitle: "Om Duolyn",
-                aboutP1: "Duolyn är den enhetliga plattformen för skönhetsföretag. Vi samlar all verksamhet på ett ställe så att du kan fokusera på ditt skapande.",
-                aboutQuote: '"Vi anser att skönhetsföretag förtjänar teknik som känns lika sofistikerad som tjänsterna de tillhandahåller."',
-                meaningTitle: "Meningen bakom Duolyn",
-                meaningDuoTitle: "Synergi (Duo)",
-                meaningDuoDesc: "Speglar balansen mellan teknik och mänsklig koppling.",
-                meaningLynTitle: "Elegans (Lyn)",
-                meaningLynDesc: "Representerar elegans, individualitet och de personliga relationerna i centrum för varje kundupplevelse.",
-                partnerTag: "Nätverkshub",
-                partnerTitle: "Lokala partners i ",
-                waitlistTitle: "Gå med i väntelistan.",
-                waitlistDesc: "Lansering 2026. Bli en av de första 100 salongerna som får exklusiva livstidspriser.",
-                inputEmail: "Professionell e-post",
-                btnSubmit: "Få tillgång",
-                shareBtn: "Kopiera länk",
-                footerPrivacy: "Integritetspolicy",
-                footerTerms: "Användarvillkor",
-                footerCookies: "Cookies",
-                msgPrivacy: "<strong>Integritet:</strong> Vi samlar in e-post endast för uppdateringar. Data lagras inom EU. (GDPR-efterlevnad).",
-                msgTerms: "<strong>Villkor:</strong> Duolyn är i förlansering. Registrering garanterar inte ett avtal.",
-                msgCookies: "<strong>Cookies:</strong> Denna sida använder funktionella cookies för platstjänster. Ingen spårning används."
+                navCta: "Tidig tillgång", heroTag: "Lansering 2026",
+                heroTitle1: "Hantera med", heroTitle2: "elegans.", heroTitle3: "Väx med trygghet.",
+                heroDesc: "Allt-i-ett-plattform för friskvårdsföretag – bokningar, betalningar, lojalitet och marknadsföring.",
+                heroBtnFeatures: "Funktioner", heroLink: "Vår vision",
+                builtTag: "Byggd för alla", businessTypes: ["Salong","Spa","Barberare","Naglar","Wellness","Klinik","Fitness","Tatuering"],
+                featuresTitle: "Allt du behöver",
+                aboutTitle: "Om Duolyn", aboutP1: "Duolyn är den enhetliga plattformen för skönhetsföretag.",
+                aboutQuote: '"Vi tror på sofistikerad teknik."',
+                vision: ["Digital","Unified","Operations","Link","Your","Network"],
+                partnerTitle: "Partners i ", foundingTag: "Lansering sommaren 2026",
+                foundingTitle: "Founder-program", foundingDesc: "Lås in exklusiva priser för livet.",
+                lblBizName: "Företagsnamn", lblEmail: "E-post", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stad",
+                gdprText: "Jag godkänner uppdateringar. Begränsat till 50 platser per land.",
+                btnSubmit: "Säkra min plats", shareBtn: "Kopiera länk",
+                footerPrivacy: "Integritet", footerTerms: "Villkor", footerCookies: "Cookies",
+                msgPrivacy: "<strong>Integritet:</strong> GDPR-säkert.",
+                msgTerms: "<strong>Villkor:</strong> Förlansering.",
+                msgCookies: "<strong>Cookies:</strong> Endast funktionella.",
+                features: [
+                    { icon: "📅", title: "Bokning", desc: "Realtidsscheman." },
+                    { icon: "💳", title: "Betalning", desc: "Säker utcheckning." },
+                    { icon: "⭐", title: "Lojalitet", desc: "Poäng & bonus." },
+                    { icon: "👥", title: "Personal", desc: "Löner & timmar." },
+                    { icon: "📦", title: "Lager", desc: "Lagersaldon." },
+                    { icon: "📣", title: "Marknadsföring", desc: "Kampanjer." },
+                    { icon: "💬", title: "Chatt", desc: "Kundchatt." },
+                    { icon: "📊", title: "Analys", desc: "Intäktsanalys." }
+                ],
+                perks: ["Livstidsrabatt", "Rösträtt", "Founder-badge"]
             }
         };
 
         const partners = [
             { name: "Royal Barber Riga", country: "Latvia", city: "Riga", tag: "Barber" },
             { name: "Amber Wellness & Spa", country: "Latvia", city: "Jurmala", tag: "Spa" },
-            { name: "SIA Beauty Collective", country: "Latvia", city: "Riga", tag: "Cosmetics" },
             { name: "Berlin Grooming Loft", country: "Germany", city: "Berlin", tag: "Grooming" },
-            { name: "Munich Skin Studio", country: "Germany", city: "Munich", tag: "Dermatology" }
+            { name: "Stockholm Skin Clinic", country: "Sweden", city: "Stockholm", tag: "Clinical" }
         ];
 
-        let currentLang = 'en';
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('nav-cta').innerText = t.navCta;
+            document.getElementById('hero-tag').innerText = t.heroTag;
+            document.getElementById('hero-title-1').innerText = t.heroTitle1;
+            document.getElementById('hero-title-2').innerText = t.heroTitle2;
+            document.getElementById('hero-title-3').innerText = t.heroTitle3;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('hero-btn-features').innerText = t.heroBtnFeatures;
+            document.getElementById('hero-link').innerText = t.heroLink;
+            document.getElementById('built-tag').innerText = t.builtTag;
+            document.getElementById('features-title').innerText = t.featuresTitle;
+            document.getElementById('about-title').innerText = t.aboutTitle;
+            document.getElementById('about-p1').innerText = t.aboutP1;
+            document.getElementById('about-quote').innerText = t.aboutQuote;
+            document.getElementById('partner-title').firstChild.textContent = t.partnerTitle;
+            document.getElementById('founding-tag').innerText = t.foundingTag;
+            document.getElementById('founding-title').innerText = t.foundingTitle;
+            document.getElementById('founding-desc').innerText = t.foundingDesc;
+            document.getElementById('lbl-biz-name').innerText = t.lblBizName;
+            document.getElementById('lbl-email').innerText = t.lblEmail;
+            document.getElementById('lbl-phone').innerText = t.lblPhone;
+            document.getElementById('lbl-country').innerText = t.lblCountry;
+            document.getElementById('lbl-city').innerText = t.lblCity;
+            document.getElementById('gdpr-text').innerText = t.gdprText;
+            document.getElementById('btn-submit').innerText = t.btnSubmit;
+            document.getElementById('share-btn').innerText = t.shareBtn;
+            document.getElementById('footer-privacy').innerText = t.footerPrivacy;
+            document.getElementById('footer-terms').innerText = t.footerTerms;
+            document.getElementById('footer-cookies').innerText = t.footerCookies;
+            document.getElementById('privacy-box').innerHTML = t.msgPrivacy;
+            document.getElementById('terms-box').innerHTML = t.msgTerms;
+            document.getElementById('cookies-box').innerHTML = t.msgCookies;
 
-        async function fetchLocation() {
+            document.getElementById('vision-list').innerHTML = t.vision.map(word => `<li><span class="text-duo-gradient font-bold">${word[0]}</span>${word.slice(1)}</li>`).join('');
+            document.getElementById('business-types').innerHTML = t.businessTypes.map(b => `<div>${b}</div>`).join('');
+            document.getElementById('feature-grid').innerHTML = t.features.map(f => `<div class="glass-card p-8 rounded-3xl"><span class="feature-icon">${f.icon}</span><h4 class="text-white font-bold mb-3">${f.title}</h4><p class="text-stone-400 text-sm">${f.desc}</p></div>`).join('');
+            document.getElementById('perks-list').innerHTML = t.perks.map(p => `<div class="flex gap-4"><span class="text-duo-gradient font-bold">✓</span><p class="text-[10px] text-stone-300 font-bold uppercase">${p}</p></div>`).join('');
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+        }
+
+        async function initLocation() {
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
-                document.getElementById('detected-country').innerText = data.country_name;
                 document.getElementById('partner-country-text').innerText = data.country_name;
+                document.getElementById('input-country').value = data.country_name;
                 renderPartners(data.country_name);
-            } catch (error) {
-                renderPartners("Worldwide");
-            }
+            } catch { renderPartners("Worldwide"); }
         }
 
         function renderPartners(country) {
             const grid = document.getElementById('partner-grid');
             const filtered = partners.filter(p => p.country === country);
             if (filtered.length > 0) {
-                grid.innerHTML = filtered.map(p => `
-                    <div class="glass-card p-12 rounded-[2.5rem] text-left">
-                        <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-indigo-400 block mb-4">${p.tag}</span>
-                        <h3 class="text-2xl mb-2 font-medium tracking-tight text-white">${p.name}</h3>
-                        <p class="text-stone-500 italic font-serif text-sm">${p.city}, ${p.country}</p>
-                    </div>
-                `).join('');
+                grid.innerHTML = filtered.map(p => `<div class="glass-card p-12 rounded-[2.5rem] text-left"><span class="text-[9px] font-bold tracking-[0.3em] uppercase text-indigo-400 block mb-4">${p.tag}</span><h3 class="text-2xl mb-2 font-medium text-white">${p.name}</h3><p class="text-stone-500 italic font-serif text-sm">${p.city}, ${p.country}</p></div>`).join('');
             } else {
-                grid.innerHTML = `<div class="md:col-span-3 py-24 text-center glass-card rounded-[3rem] px-6 border-dashed border-white/20">
-                    <h3 class="text-2xl font-medium text-stone-300">Partner with Duolyn in ${country}</h3>
-                    <a href="#waitlist" class="mt-8 inline-block bg-duo-gradient text-white px-10 py-4 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-xl transition hover:scale-105">Apply Now</a>
-                </div>`;
+                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${country}</h3></div>`;
             }
         }
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            
-            // Core Text
-            document.getElementById('nav-cta').innerText = t.navCta;
-            document.getElementById('mobile-cta').innerText = t.mobileCta;
-            document.getElementById('hero-tag').innerText = t.heroTag;
-            document.getElementById('hero-title-1').innerText = t.heroTitle1;
-            document.getElementById('hero-title-2').innerText = t.heroTitle2;
-            document.getElementById('hero-desc').innerText = t.heroDesc;
-            document.getElementById('hero-link').innerText = t.heroLink;
-            document.getElementById('about-title').innerText = t.aboutTitle;
-            document.getElementById('about-p1').innerText = t.aboutP1;
-            document.getElementById('about-quote').innerText = t.aboutQuote;
-            document.getElementById('meaning-title').innerText = t.meaningTitle;
-            document.getElementById('meaning-duo-title').innerText = t.meaningDuoTitle;
-            document.getElementById('meaning-duo-desc').innerText = t.meaningDuoDesc;
-            document.getElementById('meaning-lyn-title').innerText = t.meaningLynTitle;
-            document.getElementById('meaning-lyn-desc').innerText = t.meaningLynDesc;
-            document.getElementById('partner-tag').innerText = t.partnerTag;
-            document.getElementById('partner-title').firstChild.textContent = t.partnerTitle;
-            document.getElementById('waitlist-title').innerText = t.waitlistTitle;
-            document.getElementById('waitlist-desc').innerText = t.waitlistDesc;
-            document.getElementById('input-email').placeholder = t.inputEmail;
-            document.getElementById('btn-submit').innerText = t.btnSubmit;
-            document.getElementById('share-btn').innerText = t.shareBtn;
-            
-            // Footer Text
-            document.getElementById('footer-privacy').innerText = t.footerPrivacy;
-            document.getElementById('footer-terms').innerText = t.footerTerms;
-            document.getElementById('footer-cookies').innerText = t.footerCookies;
-            
-            // Legal Message Content
-            document.getElementById('privacy-box').innerHTML = t.msgPrivacy;
-            document.getElementById('terms-box').innerHTML = t.msgTerms;
-            document.getElementById('cookies-box').innerHTML = t.msgCookies;
-
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('lang-' + lang).classList.add('active');
-            
-            fetchLocation(); 
-        }
-
         function toggleLegal(id) {
-            const boxes = ['privacy-box', 'terms-box', 'cookies-box'];
-            const targetId = id + '-box';
-            
-            boxes.forEach(boxId => {
-                if(boxId !== targetId) document.getElementById(boxId).classList.remove('open');
+            ['privacy-box', 'terms-box', 'cookies-box'].forEach(box => {
+                if(box !== id + '-box') document.getElementById(box).classList.remove('open');
             });
-            document.getElementById(targetId).classList.toggle('open');
+            document.getElementById(id + '-box').classList.toggle('open');
         }
 
         function shareLink() {
@@ -462,8 +420,8 @@
             alert("Invite link copied!");
         }
 
-        // Initialize with English content injected into boxes
-        setLanguage('en');
+        changeLanguage('en');
+        initLocation();
     </script>
 </body>
 </html>
