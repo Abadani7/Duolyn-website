@@ -30,10 +30,10 @@
             -webkit-text-fill-color: transparent;
         }
         .text-confidence {
-            background: linear-gradient(135deg, #3b82f6, #2dd4bf); /* A stronger, more confident blue-teal */
+            background: linear-gradient(135deg, #3b82f6, #2dd4bf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 700; /* Make it slightly bolder to show strength */
+            font-weight: 700;
         }
         
         .bg-duo-gradient { background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6); }
@@ -162,7 +162,10 @@
                 <h2 id="founding-title" class="text-5xl text-white mb-6 font-bold tracking-tighter"></h2>
                 <p id="founding-desc" class="text-stone-400 text-lg mb-12"></p>
                 
-                <form action="https://script.google.com/macros/s/AKfycbw1noRLS69S4zUSkWdz0E61j_VjETG3QPBTQnustMOhBn8z4SeetdSxdzJ_pt9REkRLFA/exec" method="POST" class="text-left space-y-6">
+                <form id="contact-form" action="https://script.google.com/macros/s/AKfycbw1noRLS69S4zUSkWdz0E61j_VjETG3QPBTQnustMOhBn8z4SeetdSxdzJ_pt9REkRLFA/exec" method="POST" class="text-left space-y-6">
+                    <!-- HIDDEN LANGUAGE TRACKER -->
+                    <input type="hidden" name="Language" id="form-lang-hidden" value="EN">
+                    
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label id="lbl-biz-name" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
@@ -186,6 +189,12 @@
                             <label id="lbl-city" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
                             <input type="text" name="City" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
+                    </div>
+                    
+                    <!-- NEW MESSAGE FIELD -->
+                    <div>
+                        <label id="lbl-message" class="text-[10px] uppercase font-bold text-stone-500 block mb-2">Message</label>
+                        <textarea name="Message" rows="3" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500"></textarea>
                     </div>
                     
                     <div id="perks-list" class="grid md:grid-cols-3 gap-4 pt-4"></div>
@@ -212,7 +221,13 @@
             <a href="https://linkedin.com/company/duolyn" target="_blank" class="hover:text-blue-400 transition">LinkedIn</a>
             <a href="https://x.com/duolyn" target="_blank" class="hover:text-white transition">X</a>
         </div>
-        <p class="text-[11px] font-bold tracking-widest text-white mb-8">DUOLYN &copy; 2026 — RIGA, LATVIA</p>
+        
+        <!-- UPDATED CONTACT DETAILS -->
+        <div class="mb-8">
+            <p class="text-[11px] font-bold tracking-widest text-white uppercase mb-2">DUOLYN &copy; 2026</p>
+            <p class="text-[10px] text-stone-500 uppercase tracking-widest">Riga, Latvia | info@duolyn.com</p>
+        </div>
+
         <div class="flex gap-6 justify-center text-[9px] text-stone-500 uppercase font-bold mb-10">
             <button onclick="toggleLegal('privacy')" id="footer-privacy"></button>
             <span>|</span>
@@ -231,6 +246,7 @@
 
         const translations = {
             en: {
+                langKey: "EN",
                 navCta: "Early Access", heroTag: "Launching Summer 2026",
                 heroTitle1: "Manage with", heroTitle2: "elegance.", heroTitle3: "Grow with confidence.",
                 heroDesc: "All-in-one platform for wellness & service businesses — bookings, payments, loyalty, staff, inventory, marketing, and chat.",
@@ -242,9 +258,9 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Local Partners in ", foundingTag: "Opening Summer 2026",
                 foundingTitle: "Founding Partner Program", foundingDesc: "Be among the first 50 businesses per country to receive our Founding Partner toolkit and lock in exclusive lifetime rates — for life.",
-                lblBizName: "Business Name", lblEmail: "Professional Email", lblPhone: "Phone Number", lblCountry: "Country", lblCity: "City",
+                lblBizName: "Business Name", lblEmail: "Professional Email", lblPhone: "Phone Number", lblCountry: "Country", lblCity: "City", lblMessage: "Message / Questions",
                 gdprText: "I agree to receive updates about the Duolyn 2026 launch. I understand that spots are limited to 50 per country.",
-                btnSubmit: "Secure My Founding Spot", shareBtn: "Copy Invite Link",
+                btnSubmit: "Secure My Founding Spot", btnProcessing: "Registering...", shareBtn: "Copy Invite Link",
                 footerPrivacy: "Privacy Policy", footerTerms: "Terms of Service", footerCookies: "Cookies",
                 msgPrivacy: "<strong>Privacy:</strong> We collect business data solely for Duolyn launch updates. GDPR compliant.",
                 msgTerms: "<strong>Terms:</strong> This is a pre-launch phase. Application does not guarantee a service contract.",
@@ -262,6 +278,7 @@
                 perks: ["Lifetime discounts", "Early access", "Founder badge"]
             },
             lv: {
+                langKey: "LV",
                 navCta: "Pieteikties", heroTag: "Atklāšana 2026. gada vasarā",
                 heroTitle1: "Pārvaldiet ar", heroTitle2: "eleganci.", heroTitle3: "Audziet ar pārliecību.",
                 heroDesc: "Viss-vienā platforma skaistumkopšanas biznesiem — rezervācijas, maksājumi, lojalitāte, personāls un mārketings vienuviet.",
@@ -273,9 +290,9 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Vietējie partneri ", foundingTag: "Atklāšana 2026. gada vasarā",
                 foundingTitle: "Dibinātāju programma", foundingDesc: "Esi starp pirmajiem 50 uzņēmumiem savā valstī un fiksē ekskluzīvas dibinātāja cenas uz mūžu.",
-                lblBizName: "Uzņēmuma nosaukums", lblEmail: "Darba e-pasts", lblPhone: "Tālruņa numurs", lblCountry: "Valsts", lblCity: "Pilsēta",
+                lblBizName: "Uzņēmuma nosaukums", lblEmail: "Darba e-pasts", lblPhone: "Tālruņa numurs", lblCountry: "Valsts", lblCity: "Pilsēta", lblMessage: "Ziņa / Jautājumi",
                 gdprText: "Es piekrītu saņemt jaunumus par Duolyn 2026. Es saprotu, ka vietu skaits ir ierobežots (50 katrā valstī).",
-                btnSubmit: "Nostiprināt savu vietu", shareBtn: "Kopēt saiti",
+                btnSubmit: "Nostiprināt savu vietu", btnProcessing: "Reģistrē...", shareBtn: "Kopēt saiti",
                 footerPrivacy: "Privātums", footerTerms: "Noteikumi", footerCookies: "Sīkdatnes",
                 msgPrivacy: "<strong>Privātums:</strong> Dati tiek vākti tikai jaunumiem. DVI/GDPR atbilstība.",
                 msgTerms: "<strong>Noteikumi:</strong> Šī ir pirms-palaišanas fāze. Reģistrācija negarantē līgumu.",
@@ -293,6 +310,7 @@
                 perks: ["Mūža atlaides", "Agrīna piekļuve", "Dibinātāja nozīmīte"]
             },
             de: {
+                langKey: "DE",
                 navCta: "Zugang", heroTag: "Start Sommer 2026",
                 heroTitle1: "Verwalten mit", heroTitle2: "Eleganz.", heroTitle3: "Wachsen mit Vertrauen.",
                 heroDesc: "All-in-One-Plattform für Wellness – Buchungen, Zahlungen, Loyalität, Personal und Marketing.",
@@ -304,9 +322,9 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Partner in ", foundingTag: "Start Sommer 2026",
                 foundingTitle: "Gründerprogramm", foundingDesc: "Sichern Sie sich exklusive Preise ein Leben lang.",
-                lblBizName: "Firmenname", lblEmail: "E-Mail", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stadt",
+                lblBizName: "Firmenname", lblEmail: "E-Mail", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stadt", lblMessage: "Nachricht / Fragen",
                 gdprText: "Ich stimme zu, Updates zu erhalten. Plätze sind auf 50 pro Land begrenzt.",
-                btnSubmit: "Platz sichern", shareBtn: "Link kopieren",
+                btnSubmit: "Platz sichern", btnProcessing: "Wird registriert...", shareBtn: "Link kopieren",
                 footerPrivacy: "Datenschutz", footerTerms: "AGB", footerCookies: "Cookies",
                 msgPrivacy: "<strong>Datenschutz:</strong> DSGVO-konform.",
                 msgTerms: "<strong>AGB:</strong> Vorverkaufsphase.",
@@ -324,6 +342,7 @@
                 perks: ["Lebenslange Rabatte", "Mitspracherecht", "Gründer-Badge"]
             },
             sv: {
+                langKey: "SE",
                 navCta: "Tidig tillgång", heroTag: "Lansering 2026",
                 heroTitle1: "Hantera med", heroTitle2: "elegans.", heroTitle3: "Väx med trygghet.",
                 heroDesc: "Allt-i-ett-plattform för friskvårdsföretag – bokningar, betalningar, lojalitet och marknadsföring.",
@@ -335,9 +354,9 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Partners i ", foundingTag: "Lansering sommaren 2026",
                 foundingTitle: "Founder-program", foundingDesc: "Lås in exklusiva priser för livet.",
-                lblBizName: "Företagsnamn", lblEmail: "E-post", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stad",
+                lblBizName: "Företagsnamn", lblEmail: "E-post", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stad", lblMessage: "Meddelande / Frågor",
                 gdprText: "Jag godkänner uppdateringar. Begränsat till 50 platser per land.",
-                btnSubmit: "Säkra min plats", shareBtn: "Kopiera länk",
+                btnSubmit: "Säkra min plats", btnProcessing: "Registrerar...", shareBtn: "Kopiera länk",
                 footerPrivacy: "Integritet", footerTerms: "Villkor", footerCookies: "Cookies",
                 msgPrivacy: "<strong>Integritet:</strong> GDPR-säkert.",
                 msgTerms: "<strong>Villkor:</strong> Förlansering.",
@@ -356,15 +375,17 @@
             }
         };
 
-        const partners = []; // CLEARED PARTNERS AS REQUESTED
-
         function changeLanguage(lang) {
             const t = translations[lang];
+            
+            // Set the hidden input for Google Script
+            document.getElementById('form-lang-hidden').value = t.langKey;
+            
             document.getElementById('nav-cta').innerText = t.navCta;
             document.getElementById('hero-tag').innerText = t.heroTag;
-            document.getElementById('hero-title-1').innerText = t.heroTitle1; // "Manage with"
-            document.getElementById('hero-title-2').innerText = t.heroTitle2; // "elegance."
-            document.getElementById('hero-title-3').innerText = t.heroTitle3; // "Grow with confidence."
+            document.getElementById('hero-title-1').innerText = t.heroTitle1;
+            document.getElementById('hero-title-2').innerText = t.heroTitle2;
+            document.getElementById('hero-title-3').innerText = t.heroTitle3;
             document.getElementById('hero-desc').innerText = t.heroDesc;
             document.getElementById('hero-btn-features').innerText = t.heroBtnFeatures;
             document.getElementById('hero-link').innerText = t.heroLink;
@@ -382,6 +403,7 @@
             document.getElementById('lbl-phone').innerText = t.lblPhone;
             document.getElementById('lbl-country').innerText = t.lblCountry;
             document.getElementById('lbl-city').innerText = t.lblCity;
+            document.getElementById('lbl-message').innerText = t.lblMessage;
             document.getElementById('gdpr-text').innerText = t.gdprText;
             document.getElementById('btn-submit').innerText = t.btnSubmit;
             document.getElementById('share-btn').innerText = t.shareBtn;
@@ -397,7 +419,6 @@
             document.getElementById('feature-grid').innerHTML = t.features.map(f => `<div class="glass-card p-8 rounded-3xl"><span class="feature-icon">${f.icon}</span><h4 class="text-white font-bold mb-3">${f.title}</h4><p class="text-stone-400 text-sm">${f.desc}</p></div>`).join('');
             document.getElementById('perks-list').innerHTML = t.perks.map(p => `<div class="flex gap-4"><span class="text-duo-gradient font-bold">✓</span><p class="text-[10px] text-stone-300 font-bold uppercase">${p}</p></div>`).join('');
 
-            // LOCK PERSISTENT DATA
             if(persistentCountry) {
                 document.getElementById('partner-country-text').innerText = persistentCountry;
                 document.getElementById('input-country').value = persistentCountry;
@@ -409,6 +430,15 @@
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('lang-' + lang).classList.add('active');
         }
+
+        // Form Submit Visual Logic
+        document.getElementById('contact-form').onsubmit = function() {
+            const currentLang = document.getElementById('form-lang-hidden').value.toLowerCase();
+            const langCode = currentLang === "se" ? "sv" : currentLang;
+            document.getElementById('btn-submit').innerText = translations[langCode].btnProcessing;
+            document.getElementById('btn-submit').style.opacity = "0.7";
+            document.getElementById('btn-submit').disabled = true;
+        };
 
         async function initLocation() {
             try {
@@ -427,7 +457,6 @@
 
         function renderPartners(country) {
             const grid = document.getElementById('partner-grid');
-            // ALWAYS SHOW APPLY MESSAGE AS REQUESTED
             const locationName = country || "Worldwide";
             grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${locationName}</h3></div>`;
         }
