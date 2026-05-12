@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duolyn | Unified Operating System for Beauty & Wellness</title>
+    <!-- Professional Emoji Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJC6JH9VSY"></script>
     <script>
@@ -148,12 +150,35 @@
         </div>
     </section>
 
+    <!-- UPDATED PARTNER SECTION WITH COUNTER -->
     <section class="section-padding">
         <div class="max-w-7xl mx-auto px-8">
-            <h2 id="partner-title" class="text-4xl italic text-white mb-16">Local Partners in <span id="partner-country-text" class="font-bold not-italic text-teal-400">...</span></h2>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                    <h2 id="partner-title" class="text-4xl italic text-white mb-4">Local Partners in <span id="partner-country-text" class="font-bold not-italic text-teal-400">...</span></h2>
+                    <p class="text-stone-500 uppercase tracking-widest text-[10px] font-bold">Exclusive Foundship: First 50 spots only</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl min-w-[220px]">
+                    <div class="flex justify-between text-[10px] font-bold uppercase mb-2">
+                        <span class="text-stone-400">Availability</span>
+                        <span id="spots-count" class="text-white">0 / 50</span>
+                    </div>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                        <div id="spots-bar" class="bg-duo-gradient h-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
             <div id="partner-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10"></div>
         </div>
     </section>
+
+    <!-- PARTNER MODAL POPUP -->
+    <div id="partner-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-card max-w-3xl w-full rounded-[3rem] overflow-hidden relative border-white/20">
+            <button onclick="closePartner()" class="absolute top-8 right-8 text-white text-3xl hover:text-teal-400 transition">&times;</button>
+            <div id="modal-content" class="p-8 md:p-12"></div>
+        </div>
+    </div>
 
     <section id="waitlist" class="section-padding bg-[#050505] border-t border-white/5">
         <div class="max-w-4xl mx-auto px-8">
@@ -163,7 +188,6 @@
                 <p id="founding-desc" class="text-stone-400 text-lg mb-12"></p>
                 
                 <form id="contact-form" action="https://script.google.com/macros/s/AKfycbw1noRLS69S4zUSkWdz0E61j_VjETG3QPBTQnustMOhBn8z4SeetdSxdzJ_pt9REkRLFA/exec" method="POST" class="text-left space-y-6">
-                    <!-- HIDDEN LANGUAGE TRACKER -->
                     <input type="hidden" name="Language" id="form-lang-hidden" value="EN">
                     
                     <div class="grid md:grid-cols-2 gap-6">
@@ -191,7 +215,6 @@
                         </div>
                     </div>
                     
-                    <!-- NEW MESSAGE FIELD -->
                     <div>
                         <label id="lbl-message" class="text-[10px] uppercase font-bold text-stone-500 block mb-2">Message</label>
                         <textarea name="Message" rows="3" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500"></textarea>
@@ -215,25 +238,28 @@
     </section>
 
     <footer class="py-20 text-center border-t border-white/5">
-        <div class="flex gap-8 justify-center text-[10px] font-bold uppercase text-stone-500 mb-12">
+        <!-- Social Media & Contact Links -->
+        <div class="flex flex-wrap gap-8 justify-center text-[10px] font-bold uppercase text-stone-500 mb-12">
             <a href="https://instagram.com/duolyn" target="_blank" class="hover:text-indigo-400 transition">Instagram</a>
-            <a href="https://facebook.com/duolyn" target="_blank" class="hover:text-teal-400 transition">Facebook</a>
-            <a href="https://linkedin.com/company/duolyn" target="_blank" class="hover:text-blue-400 transition">LinkedIn</a>
-            <a href="https://x.com/duolyn" target="_blank" class="hover:text-white transition">X</a>
+            <a href="https://facebook.com/duolyn" target="_blank" class="hover:text-blue-500 transition">Facebook</a>
+            <!-- WhatsApp Direct Link - Change the number below to yours -->
+            <a href="https://wa.me/37129919904?text=Hi%20Duolyn%20team!%20I'm%20interested%20in%20becoming%20a%20Founding%20Partner." target="_blank" class="hover:text-emerald-400 transition">WhatsApp</a>
+            <a href="https://tiktok.com/@duolyn" target="_blank" class="hover:text-teal-400 transition">TikTok</a>
+            <a href="https://threads.net/@duolyn" target="_blank" class="hover:text-white transition">Threads</a>
+            <a href="https://youtube.com/@duolyn" target="_blank" class="hover:text-red-500 transition">YouTube</a>
         </div>
         
-        <!-- UPDATED CONTACT DETAILS -->
         <div class="mb-8">
             <p class="text-[11px] font-bold tracking-widest text-white uppercase mb-2">DUOLYN &copy; 2026</p>
             <p class="text-[10px] text-stone-500 uppercase tracking-widest">Riga, Latvia | info@duolyn.com</p>
         </div>
 
         <div class="flex gap-6 justify-center text-[9px] text-stone-500 uppercase font-bold mb-10">
-            <button onclick="toggleLegal('privacy')" id="footer-privacy"></button>
+            <button onclick="toggleLegal('privacy')" id="footer-privacy">Privacy Policy</button>
             <span>|</span>
-            <button onclick="toggleLegal('terms')" id="footer-terms"></button>
+            <button onclick="toggleLegal('terms')" id="footer-terms">Terms of Service</button>
             <span>|</span>
-            <button onclick="toggleLegal('cookies')" id="footer-cookies"></button>
+            <button onclick="toggleLegal('cookies')" id="footer-cookies">Cookies</button>
         </div>
         <div id="privacy-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
         <div id="terms-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
@@ -243,6 +269,36 @@
     <script>
         let persistentCountry = "";
         let persistentCode = "";
+
+        // --- MANUAL PARTNER CONTROL ---
+        // Add your salons here and change spotsTaken manually
+        const globalPartnerData = {
+            "Latvia": {
+                spotsTaken: 12, 
+                partners: [
+                    {
+                        name: "B Salon",
+                        city: "Riga",
+                        address: "Elizabeth Street 15, Riga",
+                        description: "A premium concept salon specializing in modern aesthetics and luxury wellness experiences.",
+                        image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800",
+                        video: "" 
+                    }
+                ]
+            },
+            "Germany": {
+                spotsTaken: 0,
+                partners: []
+            },
+            "Sweden": {
+                spotsTaken: 0,
+                partners: []
+            },
+            "Worldwide": {
+                spotsTaken: 0,
+                partners: []
+            }
+        };
 
         const translations = {
             en: {
@@ -377,10 +433,7 @@
 
         function changeLanguage(lang) {
             const t = translations[lang];
-            
-            // Set the hidden input for Google Script
             document.getElementById('form-lang-hidden').value = t.langKey;
-            
             document.getElementById('nav-cta').innerText = t.navCta;
             document.getElementById('hero-tag').innerText = t.heroTag;
             document.getElementById('hero-title-1').innerText = t.heroTitle1;
@@ -431,7 +484,6 @@
             document.getElementById('lang-' + lang).classList.add('active');
         }
 
-        // Form Submit Visual Logic
         document.getElementById('contact-form').onsubmit = function() {
             const currentLang = document.getElementById('form-lang-hidden').value.toLowerCase();
             const langCode = currentLang === "se" ? "sv" : currentLang;
@@ -455,10 +507,66 @@
             } catch { renderPartners("Worldwide"); }
         }
 
+        // UPDATED RENDER FUNCTION
         function renderPartners(country) {
             const grid = document.getElementById('partner-grid');
-            const locationName = country || "Worldwide";
-            grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${locationName}</h3></div>`;
+            const countLabel = document.getElementById('spots-count');
+            const countBar = document.getElementById('spots-bar');
+            
+            // Find data or default
+            const data = globalPartnerData[country] || globalPartnerData["Worldwide"];
+            
+            // Update UI Counter
+            countLabel.innerText = `${data.spotsTaken} / 50`;
+            countBar.style.width = `${(data.spotsTaken / 50) * 100}%`;
+
+            if (data.partners.length === 0) {
+                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${country}</h3></div>`;
+            } else {
+                grid.innerHTML = data.partners.map((p, index) => `
+                    <div onclick="openPartner('${country}', ${index})" class="glass-card p-8 rounded-[2rem] cursor-pointer group">
+                        <div class="aspect-video rounded-xl overflow-hidden mb-6 bg-stone-800">
+                            <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <h4 class="text-white text-xl font-bold mb-1">${p.name}</h4>
+                        <p class="text-teal-400 text-[10px] uppercase tracking-widest font-bold">${p.city}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // NEW MODAL FUNCTIONS
+        function openPartner(country, index) {
+            const p = (globalPartnerData[country] || globalPartnerData["Worldwide"]).partners[index];
+            const modal = document.getElementById('partner-modal');
+            const content = document.getElementById('modal-content');
+            
+            content.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="rounded-2xl overflow-hidden bg-stone-900 aspect-[4/5]">
+                        ${p.video ? 
+                            `<iframe src="${p.video}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>` : 
+                            `<img src="${p.image}" class="w-full h-full object-cover">`
+                        }
+                    </div>
+                    <div class="text-left flex flex-col justify-center">
+                        <p class="text-teal-400 text-[10px] uppercase tracking-[0.3em] font-bold mb-4">${p.city}</p>
+                        <h2 class="text-4xl text-white mb-6">${p.name}</h2>
+                        <p class="text-stone-400 text-sm mb-8 leading-relaxed">${p.description}</p>
+                        <div class="space-y-2 border-t border-white/10 pt-6">
+                            <p class="text-[10px] text-stone-500 uppercase font-bold tracking-widest">Location</p>
+                            <p class="text-white text-sm italic font-serif">${p.address}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePartner() {
+            document.getElementById('partner-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         function toggleLegal(id) {
