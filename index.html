@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duolyn | Unified Operating System for Beauty & Wellness</title>
+    <meta name="description" content="Duolyn is a unified operating system for beauty and wellness businesses, combining bookings, payments, loyalty, staff tools, inventory, marketing, and analytics.">
     <!-- Professional Emoji Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
@@ -11,13 +12,32 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied'
+      });
       gtag('js', new Date());
       gtag('config', 'G-WJC6JH9VSY');
     </script>
     
-    <meta property="og:title" content="Duolyn | The Future of Salon Management">
-    <meta property="og:description" content="The unified operating system for modern beauty and wellness businesses. Launching 2026.">
+    <meta property="og:title" content="Duolyn | Unified Operating System for Beauty & Wellness">
+    <meta property="og:description" content="Bookings, payments, loyalty, staff, inventory, marketing, and analytics in one platform for modern service businesses.">
     <meta property="og:image" content="logo.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Duolyn",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "A unified operating system for beauty and wellness businesses.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/PreOrder",
+        "priceCurrency": "EUR"
+      }
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -76,22 +96,34 @@
         .legal-box.open { max-height: 500px; opacity: 1; margin-top: 1.5rem; display: block !important; }
 
         .feature-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-        @media (max-width: 768px) { .logo-container img { max-height: 85px; } }
+        @media (max-width: 768px) {
+            .logo-container img { max-height: 72px; }
+            .section-padding { padding: 76px 0; }
+            header { padding-top: 11rem !important; }
+            h1 { font-size: 3.6rem !important; }
+            h2 { font-size: 2.6rem !important; }
+            .glass-card { border-radius: 1.5rem !important; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 3rem !important; }
+            h2 { font-size: 2.25rem !important; }
+            .section-padding { padding: 64px 0; }
+        }
     </style>
 </head>
 <body>
 
-    <img src="logo.png" alt="" class="bg-logo-shadow">
+    <img src="logo.png" alt="" aria-hidden="true" decoding="async" class="bg-logo-shadow">
 
     <nav class="fixed w-full z-50 nav-dark">
         <div class="max-w-7xl mx-auto px-8 py-1 flex justify-between items-center">
-            <a href="#" class="logo-container"><img src="logo.png" alt="Duolyn Logo"></a>
+            <a href="#" class="logo-container"><img src="logo.png" alt="Duolyn Logo" width="220" height="110" decoding="async"></a>
             <div class="flex items-center gap-4 md:gap-8">
                 <div class="flex gap-3 uppercase tracking-widest border-r border-white/10 pr-6">
-                    <span onclick="changeLanguage('en')" id="lang-en" class="lang-btn active">EN</span>
-                    <span onclick="changeLanguage('lv')" id="lang-lv" class="lang-btn">LV</span>
-                    <span onclick="changeLanguage('de')" id="lang-de" class="lang-btn">DE</span>
-                    <span onclick="changeLanguage('sv')" id="lang-sv" class="lang-btn">SV</span>
+                    <span onclick="changeLanguage('en', true)" id="lang-en" class="lang-btn active">EN</span>
+                    <span onclick="changeLanguage('lv', true)" id="lang-lv" class="lang-btn">LV</span>
+                    <span onclick="changeLanguage('de', true)" id="lang-de" class="lang-btn">DE</span>
+                    <span onclick="changeLanguage('sv', true)" id="lang-sv" class="lang-btn">SV</span>
                 </div>
                 <a href="#waitlist" id="nav-cta" class="bg-duo-gradient text-white px-7 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all hidden md:block">Early Access</a>
             </div>
@@ -114,7 +146,7 @@
         </div>
         <div class="md:w-1/2">
             <div class="aspect-[4/5] bg-stone-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/5">
-                <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover opacity-60" alt="Luxury Salon">
+                <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover opacity-60" alt="Luxury Salon" loading="lazy" decoding="async">
             </div>
         </div>
     </header>
@@ -136,6 +168,37 @@
         </div>
     </section>
 
+    <section id="workflow" class="section-padding bg-[#080808] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <h2 id="workflow-title" class="text-5xl text-white mb-6"></h2>
+                <p id="workflow-sub" class="text-xl text-stone-400 max-w-2xl mx-auto font-light"></p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">01</span>
+                    <h3 id="workflow1-title" class="text-white text-xl mt-6 mb-3"></h3>
+                    <p id="workflow1-desc" class="text-stone-400 text-sm font-light"></p>
+                </div>
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">02</span>
+                    <h3 id="workflow2-title" class="text-white text-xl mt-6 mb-3"></h3>
+                    <p id="workflow2-desc" class="text-stone-400 text-sm font-light"></p>
+                </div>
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">03</span>
+                    <h3 id="workflow3-title" class="text-white text-xl mt-6 mb-3"></h3>
+                    <p id="workflow3-desc" class="text-stone-400 text-sm font-light"></p>
+                </div>
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">04</span>
+                    <h3 id="workflow4-title" class="text-white text-xl mt-6 mb-3"></h3>
+                    <p id="workflow4-desc" class="text-stone-400 text-sm font-light"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="about" class="section-padding bg-[#0A0A0A]">
         <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-20">
             <div>
@@ -150,17 +213,93 @@
         </div>
     </section>
 
+    <section id="pricing" class="section-padding bg-[#0A0A0A]">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-20">
+                <h2 id="pricing-title" class="text-5xl text-white mb-6"></h2>
+                <p id="pricing-sub" class="text-xl text-stone-400 max-w-2xl mx-auto font-light"></p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-20">
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <p id="plan1-tag" class="text-[10px] text-stone-500 font-bold uppercase tracking-[0.3em] mb-4"></p>
+                    <h3 id="plan1-title" class="text-3xl text-white mb-3"></h3>
+                    <p id="plan1-desc" class="text-stone-400 text-sm mb-8"></p>
+                    <ul id="plan1-list" class="space-y-3 text-stone-300 text-sm"></ul>
+                </div>
+                <div class="glass-card p-8 rounded-[2rem] border-teal-500/40">
+                    <p id="plan2-tag" class="text-[10px] text-teal-400 font-bold uppercase tracking-[0.3em] mb-4"></p>
+                    <h3 id="plan2-title" class="text-3xl text-white mb-3"></h3>
+                    <p id="plan2-desc" class="text-stone-400 text-sm mb-8"></p>
+                    <ul id="plan2-list" class="space-y-3 text-stone-300 text-sm"></ul>
+                </div>
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <p id="plan3-tag" class="text-[10px] text-stone-500 font-bold uppercase tracking-[0.3em] mb-4"></p>
+                    <h3 id="plan3-title" class="text-3xl text-white mb-3"></h3>
+                    <p id="plan3-desc" class="text-stone-400 text-sm mb-8"></p>
+                    <ul id="plan3-list" class="space-y-3 text-stone-300 text-sm"></ul>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10 mb-20">
+                <div class="glass-card p-12 rounded-[3rem]">
+                    <div class="text-3xl mb-6">🔄</div>
+                    <h3 id="pay-flow-title" class="text-2xl text-white mb-6 font-serif italic"></h3>
+                    <ul class="space-y-4 text-stone-400 font-light">
+                        <li id="pay-f1" class="flex items-start gap-3"></li>
+                        <li id="pay-f2" class="flex items-start gap-3"></li>
+                        <li id="pay-f3" class="flex items-start gap-3"></li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-12 rounded-[3rem] border-teal-500/30">
+                    <div class="text-3xl mb-6">📈</div>
+                    <h3 id="grow-title" class="text-2xl text-white mb-6 font-serif italic"></h3>
+                    <p id="grow-sub" class="text-stone-400 mb-6 font-light"></p>
+                    <div class="space-y-4">
+                        <div class="bg-white/5 p-4 rounded-2xl flex justify-between items-center">
+                            <span id="grow-i1" class="text-xs uppercase tracking-widest text-stone-300"></span>
+                            <span class="cost-down text-teal-400 font-bold"></span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl flex justify-between items-center">
+                            <span id="grow-i2" class="text-xs uppercase tracking-widest text-stone-300"></span>
+                            <span class="cost-down text-teal-400 font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-2xl mb-4">🔒</div>
+                    <h4 id="trust1-t" class="text-white font-bold mb-2 uppercase text-[10px] tracking-widest"></h4>
+                    <p id="trust1-d" class="text-stone-500 text-sm"></p>
+                </div>
+                <div class="p-6 border-x border-white/5">
+                    <div class="text-2xl mb-4">🤝</div>
+                    <h4 id="trust2-t" class="text-white font-bold mb-2 uppercase text-[10px] tracking-widest"></h4>
+                    <p id="trust2-d" class="text-stone-500 text-sm"></p>
+                </div>
+                <div class="p-6">
+                    <div class="text-2xl mb-4">🚀</div>
+                    <h4 id="trust3-t" class="text-white font-bold mb-2 uppercase text-[10px] tracking-widest"></h4>
+                    <p id="trust3-d" class="text-stone-500 text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- UPDATED PARTNER SECTION WITH COUNTER -->
     <section class="section-padding">
         <div class="max-w-7xl mx-auto px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
                     <h2 id="partner-title" class="text-4xl italic text-white mb-4">Local Partners in <span id="partner-country-text" class="font-bold not-italic text-teal-400">...</span></h2>
-                    <p class="text-stone-500 uppercase tracking-widest text-[10px] font-bold">Exclusive Foundship: First 50 spots only</p>
+                    <p id="partner-sub" class="text-stone-500 uppercase tracking-widest text-[10px] font-bold"></p>
                 </div>
                 <div class="glass-card p-6 rounded-2xl min-w-[220px]">
                     <div class="flex justify-between text-[10px] font-bold uppercase mb-2">
-                        <span class="text-stone-400">Availability</span>
+                        <span id="availability-label" class="text-stone-400"></span>
                         <span id="spots-count" class="text-white">0 / 50</span>
                     </div>
                     <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
@@ -168,6 +307,7 @@
                     </div>
                 </div>
             </div>
+            <div id="country-badges" class="flex flex-wrap gap-3 mb-12"></div>
             <div id="partner-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10"></div>
         </div>
     </section>
@@ -180,15 +320,30 @@
         </div>
     </div>
 
+    <section id="faq" class="section-padding bg-[#080808] border-y border-white/5">
+        <div class="max-w-5xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <h2 id="faq-title" class="text-5xl text-white mb-6"></h2>
+                <p id="faq-sub" class="text-xl text-stone-400 font-light"></p>
+            </div>
+            <div id="faq-list" class="grid md:grid-cols-2 gap-6"></div>
+        </div>
+    </section>
+
     <section id="waitlist" class="section-padding bg-[#050505] border-t border-white/5">
         <div class="max-w-4xl mx-auto px-8">
             <div class="glass-card rounded-[3rem] p-12 md:p-20 text-center border-white/20">
                 <div id="founding-tag" class="inline-block px-4 py-1 mb-8 text-[10px] font-bold uppercase bg-white/5 text-duo-gradient border border-white/10 rounded-full"></div>
                 <h2 id="founding-title" class="text-5xl text-white mb-6 font-bold tracking-tighter"></h2>
                 <p id="founding-desc" class="text-stone-400 text-lg mb-12"></p>
+                <p id="founder-city-message" class="text-teal-300 text-sm font-bold uppercase tracking-widest mb-10"></p>
                 
                 <form id="contact-form" action="https://script.google.com/macros/s/AKfycbw1noRLS69S4zUSkWdz0E61j_VjETG3QPBTQnustMOhBn8z4SeetdSxdzJ_pt9REkRLFA/exec" method="POST" class="text-left space-y-6">
                     <input type="hidden" name="Language" id="form-lang-hidden" value="EN">
+                    <input type="hidden" name="Selected_Language" id="hidden-selected-language">
+                    <input type="hidden" name="Detected_Country" id="hidden-detected-country">
+                    <input type="hidden" name="Page_URL" id="hidden-page-url">
+                    <input type="hidden" name="Signup_Timestamp" id="hidden-signup-timestamp">
                     
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
@@ -211,8 +366,23 @@
                         </div>
                         <div>
                             <label id="lbl-city" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="text" name="City" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="text" name="City" id="input-city" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
+                    </div>
+                    <div>
+                        <label id="lbl-business-type" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
+                        <select id="business-type" name="Business_Type" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <option value=""></option>
+                            <option value="Salon">Salon</option>
+                            <option value="Spa">Spa</option>
+                            <option value="Barbershop">Barbershop</option>
+                            <option value="Nails">Nails</option>
+                            <option value="Wellness">Wellness</option>
+                            <option value="Clinic">Clinic</option>
+                            <option value="Fitness">Fitness</option>
+                            <option value="Tattoo">Tattoo</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                     
                     <div>
@@ -228,7 +398,14 @@
                     </div>
 
                     <button id="btn-submit" type="submit" class="w-full bg-duo-gradient text-white py-6 rounded-full font-bold uppercase text-[11px] shadow-2xl hover:scale-[1.02] transition"></button>
+                    <p id="form-status" class="text-center text-sm text-teal-400 font-bold min-h-[1.5rem]" aria-live="polite"></p>
                 </form>
+
+                <div id="success-panel" class="hidden glass-card p-10 rounded-[2rem] border-teal-500/30 text-center">
+                    <div class="text-4xl mb-5">✓</div>
+                    <h3 id="success-title" class="text-3xl text-white mb-4"></h3>
+                    <p id="success-desc" class="text-stone-400 max-w-xl mx-auto"></p>
+                </div>
 
                 <div class="pt-10">
                     <button onclick="shareLink()" id="share-btn" class="text-[10px] font-bold border border-white/10 text-stone-500 px-8 py-3 rounded-full hover:bg-white hover:text-black transition uppercase tracking-widest"></button>
@@ -246,10 +423,10 @@
 
             <!-- WhatsApp Link: Replace 37129919904 with your actual phone number (no + sign) -->
             <a href="https://wa.me/37129919904?text=Hi%20Duolyn%20team!%20I'm%20interested%20in%20becoming%20a%20Founding%20Partner." target="_blank" class="hover:text-emerald-400 transition">WhatsApp</a>
-            <a href="https://tiktok.com/@yourprofile" target="_blank" class="hover:text-teal-400 transition">TikTok</a>
+            <a href="https://www.tiktok.com/@duolyn.official" target="_blank" class="hover:text-teal-400 transition">TikTok</a>
             <a href="https://www.threads.com/@duolyn.official" target="_blank" class="hover:text-white transition">Threads</a>
             <a href="https://www.youtube.com/@Duolyn.official" target="_blank" class="hover:text-red-500 transition">YouTube</a>
-            <a href="https://www.linkedin.com/company/duolyn" target="_blank" class="hover:text-red-500 transition">linkedIn</a>
+            <a href="https://www.linkedin.com/company/duolyn" target="_blank" class="hover:text-sky-400 transition">LinkedIn</a>
         </div>
     
         <div class="mb-8">
@@ -271,9 +448,21 @@
         <div id="cookies-box" class="legal-box glass-card text-[10px] text-stone-400 max-w-lg mx-auto italic p-6 rounded-2xl"></div>
     </footer>
 
+    <div id="cookie-banner" class="fixed bottom-5 left-5 right-5 md:left-auto md:right-8 md:max-w-md glass-card p-6 rounded-2xl z-[120] hidden">
+        <h3 class="text-white font-bold mb-2">Cookies</h3>
+        <p class="text-stone-400 text-sm mb-5">Duolyn uses essential cookies and optional analytics to improve the site.</p>
+        <div class="flex flex-wrap gap-3">
+            <button id="cookie-reject" type="button" class="px-5 py-3 rounded-full border border-white/10 text-stone-300 text-[10px] font-bold uppercase tracking-widest">Reject</button>
+            <button id="cookie-accept" type="button" class="px-5 py-3 rounded-full bg-duo-gradient text-white text-[10px] font-bold uppercase tracking-widest">Accept</button>
+        </div>
+    </div>
+
     <script>
         let persistentCountry = "";
         let persistentCode = "";
+        let detectedCountry = "";
+        let activeLanguage = "en";
+        const LANG_STORAGE_KEY = "duolyn_lang";
 
         // --- MANUAL PARTNER CONTROL ---
         // Add your salons here and change spotsTaken manually
@@ -287,10 +476,6 @@
                 partners: []
             },
             "Sweden": {
-                spotsTaken: 0,
-                partners: []
-            },
-            "Worldwide": {
                 spotsTaken: 0,
                 partners: []
             }
@@ -310,6 +495,34 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Local Partners in ", foundingTag: "Opening Summer 2026",
                 foundingTitle: "Founding Partner Program", foundingDesc: "Be among the first 50 businesses per country to receive our Founding Partner toolkit and lock in exclusive lifetime rates — for life.",
+                pricingTitle: "Simple & Transparent Pricing", pricingSub: "Built to grow with your business.",
+                payFlowTitle: "Payment Flow Strategy", payFlow1: "Customers pay salons <strong>directly</strong>.", payFlow2: "Funds go to your account immediately.", payFlow3: "Duolyn never holds your funds.",
+                growTitle: "Grow More. Pay Less.", growSub: "The more you scale digitally, the more you save.", growItem1: "Online Bookings", growItem2: "Digital Loyalty", costDown: "Cost ↓",
+                trust1Title: "No Hidden Contracts", trust1Desc: "Flexible terms for real operations.", trust2Title: "Multi-Channel", trust2Desc: "Online, in-store, or mobile support.", trust3Title: "Founder Rates", trust3Desc: "Exclusive lifetime pricing advantages.",
+                workflowTitle: "How Duolyn Works", workflowSub: "One connected flow from first booking to repeat visit.",
+                workflow: [
+                    ["Book", "Clients book online or your team creates visits in-store."],
+                    ["Confirm", "Reminders, staff calendars, and client details stay aligned."],
+                    ["Serve", "Payments, loyalty, notes, and product sales connect to the visit."],
+                    ["Grow", "Owners track revenue, retention, and next-best actions."]
+                ],
+                planTags: ["One system", "Founder access", "Launch support"],
+                plans: [
+                    ["Unified Platform", "One connected product, not separate pricing tiers.", ["Bookings, loyalty, staff, inventory", "Marketing, chat, analytics", "Built as one operating system"]],
+                    ["Founder Pricing", "Early partners lock in preferred lifetime terms.", ["Transparent launch offer", "No hidden contracts", "Priority feedback channel"]],
+                    ["Guided Start", "Support to move your team into Duolyn.", ["Setup guidance", "Business-type onboarding", "Early feature voting"]]
+                ],
+                faqTitle: "Questions Before Launch", faqSub: "The short version of what founders usually ask.",
+                faqs: [
+                    ["When does Duolyn launch?", "We are preparing for a summer 2026 launch with founding partners first."],
+                    ["Do you hold salon payments?", "No. The payment strategy is direct-to-salon, so funds go to your account."],
+                    ["Is it only for salons?", "No. Duolyn is built for salons, spas, barbershops, nails, wellness, clinics, fitness, and tattoo studios."],
+                    ["How will pricing work?", "For launch, pricing will stay simple and transparent, with founder advantages for early partners."],
+                    ["Is Duolyn GDPR-ready?", "The product is being designed for EU privacy expectations and transparent data handling."],
+                    ["What do founder spots include?", "Founder spots are intended to include early access, launch support, and lifetime pricing advantages."]
+                ],
+                partnerSub: "Exclusive Foundship: First 50 spots only", availabilityLabel: "Availability",
+                lblBusinessType: "Business Type", businessTypePlaceholder: "Select your business type", founderCity: "Be the first Duolyn founding partner in {place}.", formSuccess: "Thank you. Your founding partner request was sent.", formError: "Something went wrong. Please try again later.", successTitle: "You are on the founder list", successDesc: "We received your request and will contact you with early access details as launch preparation moves forward.",
                 lblBizName: "Business Name", lblEmail: "Professional Email", lblPhone: "Phone Number", lblCountry: "Country", lblCity: "City", lblMessage: "Message / Questions",
                 gdprText: "I agree to receive updates about the Duolyn 2026 launch. I understand that spots are limited to 50 per country.",
                 btnSubmit: "Secure My Founding Spot", btnProcessing: "Registering...", shareBtn: "Copy Invite Link",
@@ -342,6 +555,34 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Vietējie partneri ", foundingTag: "Atklāšana 2026. gada vasarā",
                 foundingTitle: "Dibinātāju programma", foundingDesc: "Esi starp pirmajiem 50 uzņēmumiem savā valstī un fiksē ekskluzīvas dibinātāja cenas uz mūžu.",
+                pricingTitle: "Vienkārša un caurspīdīga cenu noteikšana", pricingSub: "Radīts, lai augtu kopā ar jūsu biznesu.",
+                payFlowTitle: "Maksājumu plūsmas stratēģija", payFlow1: "Klienti maksā saloniem <strong>tieši</strong>.", payFlow2: "Nauda nekavējoties nonāk jūsu kontā.", payFlow3: "Duolyn nekad neaiztur jūsu līdzekļus.",
+                growTitle: "Audziet vairāk. Maksājiet mazāk.", growSub: "Jo vairāk izmantojat digitālos rīkus, jo vairāk ietaupāt.", growItem1: "Online rezervācijas", growItem2: "Digitālā lojalitāte", costDown: "Cena ↓",
+                trust1Title: "Nav slēptu līgumu", trust1Desc: "Elastīgi noteikumi reālam darbam.", trust2Title: "Visi kanāli", trust2Desc: "Atbalsts internetā, salonā vai mobilajā ierīcē.", trust3Title: "Dibinātāju cenas", trust3Desc: "Ekskluzīvas cenu priekšrocības uz mūžu.",
+                workflowTitle: "Kā Duolyn darbojas", workflowSub: "Viens savienots process no pirmās rezervācijas līdz atkārtotam apmeklējumam.",
+                workflow: [
+                    ["Rezervācija", "Klienti rezervē tiešsaistē vai komanda izveido vizīti salonā."],
+                    ["Apstiprinājums", "Atgādinājumi, komandas kalendāri un klientu dati paliek saskaņoti."],
+                    ["Pakalpojums", "Maksājumi, lojalitāte, piezīmes un produktu pārdošana pieslēdzas vizītei."],
+                    ["Izaugsme", "Īpašnieki seko ieņēmumiem, noturēšanai un nākamajām darbībām."]
+                ],
+                planTags: ["Viena sistēma", "Dibinātāju piekļuve", "Palaišanas atbalsts"],
+                plans: [
+                    ["Vienota platforma", "Viens savienots produkts, nevis atsevišķi cenu līmeņi.", ["Rezervācijas, lojalitāte, komanda, inventārs", "Mārketings, čats, analītika", "Veidota kā viena operāciju sistēma"]],
+                    ["Dibinātāju cenas", "Agrīnie partneri fiksē īpašus nosacījumus uz mūžu.", ["Caurspīdīgs palaišanas piedāvājums", "Nav slēptu līgumu", "Prioritārs atsauksmju kanāls"]],
+                    ["Vadīts starts", "Atbalsts komandas pārejai uz Duolyn.", ["Ieviešanas vadība", "Pielāgošana biznesa tipam", "Agrīna funkciju balsošana"]]
+                ],
+                faqTitle: "Jautājumi pirms palaišanas", faqSub: "Īsās atbildes uz biežākajiem dibinātāju jautājumiem.",
+                faqs: [
+                    ["Kad Duolyn tiks palaists?", "Mēs gatavojamies 2026. gada vasaras palaišanai ar dibinātāju partneriem."],
+                    ["Vai Duolyn aiztur salona maksājumus?", "Nē. Maksājumu stratēģija ir tieši salonam, tāpēc līdzekļi nonāk jūsu kontā."],
+                    ["Vai tas ir tikai saloniem?", "Nē. Duolyn ir veidots saloniem, SPA, bārberšopiem, nagiem, wellness, klīnikām, fitnesam un tetovēšanas studijām."],
+                    ["Kā darbosies cenas?", "Palaišanas sākumā cenas būs vienkāršas un caurspīdīgas, ar dibinātāju priekšrocībām agrīnajiem partneriem."],
+                    ["Vai Duolyn būs atbilstošs GDPR?", "Produkts tiek veidots ar ES privātuma prasībām un caurspīdīgu datu apstrādi."],
+                    ["Ko ietver dibinātāju vietas?", "Dibinātāju vietas paredz agrīnu piekļuvi, palaišanas atbalstu un cenu priekšrocības."]
+                ],
+                partnerSub: "Ekskluzīva dibinātāju programma: tikai pirmās 50 vietas", availabilityLabel: "Pieejamība",
+                lblBusinessType: "Biznesa tips", businessTypePlaceholder: "Izvēlieties biznesa tipu", founderCity: "Kļūstiet par pirmo Duolyn dibinātāju partneri: {place}.", formSuccess: "Paldies. Jūsu dibinātāja partnera pieteikums ir nosūtīts.", formError: "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.", successTitle: "Jūs esat dibinātāju sarakstā", successDesc: "Mēs saņēmām jūsu pieteikumu un sazināsimies ar agrīnās piekļuves informāciju, kad tuvosies palaišana.",
                 lblBizName: "Uzņēmuma nosaukums", lblEmail: "Darba e-pasts", lblPhone: "Tālruņa numurs", lblCountry: "Valsts", lblCity: "Pilsēta", lblMessage: "Ziņa / Jautājumi",
                 gdprText: "Es piekrītu saņemt jaunumus par Duolyn 2026. Es saprotu, ka vietu skaits ir ierobežots (50 katrā valstī).",
                 btnSubmit: "Nostiprināt savu vietu", btnProcessing: "Reģistrē...", shareBtn: "Kopēt saiti",
@@ -374,6 +615,34 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Partner in ", foundingTag: "Start Sommer 2026",
                 foundingTitle: "Gründerprogramm", foundingDesc: "Sichern Sie sich exklusive Preise ein Leben lang.",
+                pricingTitle: "Einfache und transparente Preise", pricingSub: "Gemacht, um mit Ihrem Unternehmen zu wachsen.",
+                payFlowTitle: "Zahlungsfluss-Strategie", payFlow1: "Kunden bezahlen Salons <strong>direkt</strong>.", payFlow2: "Gelder gehen sofort auf Ihr Konto.", payFlow3: "Duolyn hält Ihre Gelder niemals zurück.",
+                growTitle: "Mehr wachsen. Weniger zahlen.", growSub: "Je stärker Sie digital skalieren, desto mehr sparen Sie.", growItem1: "Online-Buchungen", growItem2: "Digitale Treueprogramme", costDown: "Kosten ↓",
+                trust1Title: "Keine versteckten Verträge", trust1Desc: "Flexible Bedingungen für echte Abläufe.", trust2Title: "Multi-Channel", trust2Desc: "Online-, Salon- oder mobile Unterstützung.", trust3Title: "Founder-Preise", trust3Desc: "Exklusive Preisvorteile auf Lebenszeit.",
+                workflowTitle: "So funktioniert Duolyn", workflowSub: "Ein verbundener Ablauf von der ersten Buchung bis zum Wiederbesuch.",
+                workflow: [
+                    ["Buchen", "Kunden buchen online oder Ihr Team erstellt Termine vor Ort."],
+                    ["Bestätigen", "Erinnerungen, Teamkalender und Kundendaten bleiben abgestimmt."],
+                    ["Bedienen", "Zahlungen, Treue, Notizen und Produktverkäufe verbinden sich mit dem Besuch."],
+                    ["Wachsen", "Inhaber verfolgen Umsatz, Bindung und nächste Maßnahmen."]
+                ],
+                planTags: ["Ein System", "Founder-Zugang", "Launch-Support"],
+                plans: [
+                    ["Einheitliche Plattform", "Ein verbundenes Produkt, keine getrennten Preisstufen.", ["Buchungen, Treue, Team, Inventar", "Marketing, Chat, Analysen", "Als ein Betriebssystem gebaut"]],
+                    ["Founder-Preise", "Frühe Partner sichern bevorzugte Konditionen auf Lebenszeit.", ["Transparentes Launch-Angebot", "Keine versteckten Verträge", "Priorisierter Feedback-Kanal"]],
+                    ["Geführter Start", "Unterstützung beim Wechsel Ihres Teams zu Duolyn.", ["Einrichtungsbegleitung", "Onboarding nach Geschäftstyp", "Frühe Funktionsabstimmung"]]
+                ],
+                faqTitle: "Fragen vor dem Start", faqSub: "Kurzantworten auf typische Fragen von Gründungspartnern.",
+                faqs: [
+                    ["Wann startet Duolyn?", "Wir bereiten einen Start im Sommer 2026 zuerst mit Gründungspartnern vor."],
+                    ["Hält Duolyn Salon-Zahlungen?", "Nein. Die Zahlungsstrategie ist direkt zum Salon, damit Gelder auf Ihr Konto gehen."],
+                    ["Ist es nur für Salons?", "Nein. Duolyn ist für Salons, Spas, Barbiere, Nägel, Wellness, Kliniken, Fitness und Tattoo-Studios gebaut."],
+                    ["Wie funktionieren die Preise?", "Zum Start bleiben die Preise einfach und transparent, mit Founder-Vorteilen für frühe Partner."],
+                    ["Ist Duolyn DSGVO-orientiert?", "Das Produkt wird für EU-Datenschutzanforderungen und transparente Datenverarbeitung entwickelt."],
+                    ["Was enthalten Founder-Plätze?", "Founder-Plätze sollen frühen Zugang, Launch-Support und Preisvorteile auf Lebenszeit bieten."]
+                ],
+                partnerSub: "Exklusives Gründerprogramm: nur die ersten 50 Plätze", availabilityLabel: "Verfügbarkeit",
+                lblBusinessType: "Unternehmenstyp", businessTypePlaceholder: "Unternehmenstyp auswählen", founderCity: "Werden Sie der erste Duolyn-Gründungspartner in {place}.", formSuccess: "Danke. Ihre Anfrage als Gründungspartner wurde gesendet.", formError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.", successTitle: "Sie stehen auf der Founder-Liste", successDesc: "Wir haben Ihre Anfrage erhalten und melden uns mit Details zum frühen Zugang, sobald die Startvorbereitung voranschreitet.",
                 lblBizName: "Firmenname", lblEmail: "E-Mail", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stadt", lblMessage: "Nachricht / Fragen",
                 gdprText: "Ich stimme zu, Updates zu erhalten. Plätze sind auf 50 pro Land begrenzt.",
                 btnSubmit: "Platz sichern", btnProcessing: "Wird registriert...", shareBtn: "Link kopieren",
@@ -406,6 +675,34 @@
                 vision: ["Digital","Unified","Operations","Link","Your","Network"],
                 partnerTitle: "Partners i ", foundingTag: "Lansering sommaren 2026",
                 foundingTitle: "Founder-program", foundingDesc: "Lås in exklusiva priser för livet.",
+                pricingTitle: "Enkel och transparent prissättning", pricingSub: "Byggt för att växa med ditt företag.",
+                payFlowTitle: "Strategi för betalningsflöde", payFlow1: "Kunder betalar salonger <strong>direkt</strong>.", payFlow2: "Pengarna går direkt till ditt konto.", payFlow3: "Duolyn håller aldrig dina pengar.",
+                growTitle: "Väx mer. Betala mindre.", growSub: "Ju mer du skalar digitalt, desto mer sparar du.", growItem1: "Onlinebokningar", growItem2: "Digital lojalitet", costDown: "Kostnad ↓",
+                trust1Title: "Inga dolda avtal", trust1Desc: "Flexibla villkor för verklig drift.", trust2Title: "Flera kanaler", trust2Desc: "Support online, i salong eller mobilt.", trust3Title: "Founder-priser", trust3Desc: "Exklusiva prisfördelar för livet.",
+                workflowTitle: "Så fungerar Duolyn", workflowSub: "Ett sammanhållet flöde från första bokning till återbesök.",
+                workflow: [
+                    ["Boka", "Kunder bokar online eller teamet skapar besök i salongen."],
+                    ["Bekräfta", "Påminnelser, personalkalendrar och kunddata hålls samlade."],
+                    ["Utför", "Betalningar, lojalitet, anteckningar och produktförsäljning kopplas till besöket."],
+                    ["Väx", "Ägare följer intäkter, kundlojalitet och nästa bästa åtgärd."]
+                ],
+                planTags: ["Ett system", "Founder-tillgång", "Lanseringsstöd"],
+                plans: [
+                    ["Samlad plattform", "En sammanhängande produkt, inte separata prisnivåer.", ["Bokningar, lojalitet, personal, lager", "Marknadsföring, chatt, analys", "Byggd som ett operativsystem"]],
+                    ["Founder-priser", "Tidiga partners låser in förmånliga villkor för livet.", ["Transparent lanseringserbjudande", "Inga dolda avtal", "Prioriterad feedbackkanal"]],
+                    ["Guidad start", "Stöd för att flytta teamet till Duolyn.", ["Installationshjälp", "Onboarding efter företagstyp", "Tidig funktionsröstning"]]
+                ],
+                faqTitle: "Frågor före lansering", faqSub: "Korta svar på det founders oftast frågar.",
+                faqs: [
+                    ["När lanseras Duolyn?", "Vi förbereder en lansering sommaren 2026 med founding partners först."],
+                    ["Håller Duolyn salongens betalningar?", "Nej. Betalningsstrategin är direkt till salongen, så pengarna går till ditt konto."],
+                    ["Är det bara för salonger?", "Nej. Duolyn är byggt för salonger, spa, barberare, naglar, wellness, kliniker, fitness och tatueringsstudior."],
+                    ["Hur fungerar prissättningen?", "Vid lansering håller vi prissättningen enkel och transparent, med founder-fördelar för tidiga partners."],
+                    ["Är Duolyn GDPR-anpassat?", "Produkten designas för EU:s integritetskrav och transparent datahantering."],
+                    ["Vad ingår i founder-platser?", "Founder-platser är tänkta att omfatta tidig tillgång, lanseringsstöd och prisfördelar."]
+                ],
+                partnerSub: "Exklusivt founder-program: endast de första 50 platserna", availabilityLabel: "Tillgänglighet",
+                lblBusinessType: "Företagstyp", businessTypePlaceholder: "Välj företagstyp", founderCity: "Bli den första Duolyn founding partnern i {place}.", formSuccess: "Tack. Din founder partner-ansökan har skickats.", formError: "Något gick fel. Försök igen senare.", successTitle: "Du är på founder-listan", successDesc: "Vi har tagit emot din ansökan och kontaktar dig med information om tidig tillgång när lanseringen närmar sig.",
                 lblBizName: "Företagsnamn", lblEmail: "E-post", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stad", lblMessage: "Meddelande / Frågor",
                 gdprText: "Jag godkänner uppdateringar. Begränsat till 50 platser per land.",
                 btnSubmit: "Säkra min plats", btnProcessing: "Registrerar...", shareBtn: "Kopiera länk",
@@ -427,9 +724,13 @@
             }
         };
 
-        function changeLanguage(lang) {
+        function changeLanguage(lang, remember = false) {
+            if (!translations[lang]) lang = "en";
+            if (remember) localStorage.setItem(LANG_STORAGE_KEY, lang);
+            activeLanguage = lang;
             const t = translations[lang];
             document.getElementById('form-lang-hidden').value = t.langKey;
+            document.getElementById('hidden-selected-language').value = lang;
             document.getElementById('nav-cta').innerText = t.navCta;
             document.getElementById('hero-tag').innerText = t.heroTag;
             document.getElementById('hero-title-1').innerText = t.heroTitle1;
@@ -440,21 +741,48 @@
             document.getElementById('hero-link').innerText = t.heroLink;
             document.getElementById('built-tag').innerText = t.builtTag;
             document.getElementById('features-title').innerText = t.featuresTitle;
+            document.getElementById('workflow-title').innerText = t.workflowTitle;
+            document.getElementById('workflow-sub').innerText = t.workflowSub;
             document.getElementById('about-title').innerText = t.aboutTitle;
             document.getElementById('about-p1').innerText = t.aboutP1;
             document.getElementById('about-quote').innerText = t.aboutQuote;
             document.getElementById('partner-title').firstChild.textContent = t.partnerTitle;
+            document.getElementById('partner-sub').innerText = t.partnerSub;
+            document.getElementById('availability-label').innerText = t.availabilityLabel;
             document.getElementById('founding-tag').innerText = t.foundingTag;
             document.getElementById('founding-title').innerText = t.foundingTitle;
             document.getElementById('founding-desc').innerText = t.foundingDesc;
+            document.getElementById('pricing-title').innerHTML = t.pricingTitle;
+            document.getElementById('pricing-sub').innerText = t.pricingSub;
+            document.getElementById('pay-flow-title').innerText = t.payFlowTitle;
+            document.getElementById('pay-f1').innerHTML = t.payFlow1;
+            document.getElementById('pay-f2').innerHTML = t.payFlow2;
+            document.getElementById('pay-f3').innerHTML = t.payFlow3;
+            document.getElementById('grow-title').innerText = t.growTitle;
+            document.getElementById('grow-sub').innerText = t.growSub;
+            document.getElementById('grow-i1').innerText = t.growItem1;
+            document.getElementById('grow-i2').innerText = t.growItem2;
+            document.querySelectorAll('.cost-down').forEach(el => el.innerText = t.costDown);
+            document.getElementById('trust1-t').innerText = t.trust1Title;
+            document.getElementById('trust1-d').innerText = t.trust1Desc;
+            document.getElementById('trust2-t').innerText = t.trust2Title;
+            document.getElementById('trust2-d').innerText = t.trust2Desc;
+            document.getElementById('trust3-t').innerText = t.trust3Title;
+            document.getElementById('trust3-d').innerText = t.trust3Desc;
+            document.getElementById('faq-title').innerText = t.faqTitle;
+            document.getElementById('faq-sub').innerText = t.faqSub;
             document.getElementById('lbl-biz-name').innerText = t.lblBizName;
             document.getElementById('lbl-email').innerText = t.lblEmail;
             document.getElementById('lbl-phone').innerText = t.lblPhone;
             document.getElementById('lbl-country').innerText = t.lblCountry;
             document.getElementById('lbl-city').innerText = t.lblCity;
+            document.getElementById('lbl-business-type').innerText = t.lblBusinessType;
+            document.querySelector('#business-type option[value=""]').innerText = t.businessTypePlaceholder;
             document.getElementById('lbl-message').innerText = t.lblMessage;
             document.getElementById('gdpr-text').innerText = t.gdprText;
             document.getElementById('btn-submit').innerText = t.btnSubmit;
+            document.getElementById('success-title').innerText = t.successTitle;
+            document.getElementById('success-desc').innerText = t.successDesc;
             document.getElementById('share-btn').innerText = t.shareBtn;
             document.getElementById('footer-privacy').innerText = t.footerPrivacy;
             document.getElementById('footer-terms').innerText = t.footerTerms;
@@ -466,6 +794,25 @@
             document.getElementById('vision-list').innerHTML = t.vision.map(word => `<li><span class="text-duo-gradient font-bold">${word[0]}</span>${word.slice(1)}</li>`).join('');
             document.getElementById('business-types').innerHTML = t.businessTypes.map(b => `<div>${b}</div>`).join('');
             document.getElementById('feature-grid').innerHTML = t.features.map(f => `<div class="glass-card p-8 rounded-3xl"><span class="feature-icon">${f.icon}</span><h4 class="text-white font-bold mb-3">${f.title}</h4><p class="text-stone-400 text-sm">${f.desc}</p></div>`).join('');
+            t.workflow.forEach((step, index) => {
+                document.getElementById(`workflow${index + 1}-title`).innerText = step[0];
+                document.getElementById(`workflow${index + 1}-desc`).innerText = step[1];
+            });
+            t.plans.forEach((plan, index) => {
+                const n = index + 1;
+                document.getElementById(`plan${n}-tag`).innerText = t.planTags[index];
+                document.getElementById(`plan${n}-title`).innerText = plan[0];
+                document.getElementById(`plan${n}-desc`).innerText = plan[1];
+                document.getElementById(`plan${n}-list`).innerHTML = plan[2].map(item => `<li class="flex gap-3"><span class="text-teal-400">✓</span><span>${item}</span></li>`).join('');
+            });
+            document.getElementById('faq-list').innerHTML = t.faqs.map(item => `
+                <div class="glass-card p-8 rounded-[2rem]">
+                    <h3 class="text-white text-lg mb-3">${item[0]}</h3>
+                    <p class="text-stone-400 text-sm font-light">${item[1]}</p>
+                </div>
+            `).join('');
+            renderCountryBadges();
+            updateFounderCityMessage();
             document.getElementById('perks-list').innerHTML = t.perks.map(p => `<div class="flex gap-4"><span class="text-duo-gradient font-bold">✓</span><p class="text-[10px] text-stone-300 font-bold uppercase">${p}</p></div>`).join('');
 
             if(persistentCountry) {
@@ -480,12 +827,62 @@
             document.getElementById('lang-' + lang).classList.add('active');
         }
 
-        document.getElementById('contact-form').onsubmit = function() {
+        function renderCountryBadges() {
+            const wrap = document.getElementById('country-badges');
+            const countries = Object.keys(globalPartnerData);
+            wrap.innerHTML = countries.map(country => {
+                const data = globalPartnerData[country];
+                const active = country === persistentCountry;
+                return `<button type="button" onclick='renderPartners(${JSON.stringify(country)})' class="px-5 py-3 rounded-full border ${active ? 'border-teal-500 text-teal-300 bg-teal-500/10' : 'border-white/10 text-stone-400'} text-[10px] font-bold uppercase tracking-widest">${country} · ${data.spotsTaken}/50</button>`;
+            }).join('');
+        }
+
+        function updateFounderCityMessage() {
+            const t = translations[activeLanguage] || translations.en;
+            const city = document.getElementById('input-city')?.value.trim();
+            const country = document.getElementById('input-country')?.value.trim() || persistentCountry;
+            const place = city || country;
+            document.getElementById('founder-city-message').innerText = place ? t.founderCity.replace('{place}', place) : "";
+        }
+
+        function updateLeadHiddenFields() {
+            document.getElementById('hidden-selected-language').value = activeLanguage;
+            document.getElementById('hidden-detected-country').value = detectedCountry || persistentCountry;
+            document.getElementById('hidden-page-url').value = window.location.href;
+            document.getElementById('hidden-signup-timestamp').value = new Date().toISOString();
+        }
+
+        document.getElementById('contact-form').onsubmit = async function(e) {
+            e.preventDefault();
             const currentLang = document.getElementById('form-lang-hidden').value.toLowerCase();
             const langCode = currentLang === "se" ? "sv" : currentLang;
-            document.getElementById('btn-submit').innerText = translations[langCode].btnProcessing;
-            document.getElementById('btn-submit').style.opacity = "0.7";
-            document.getElementById('btn-submit').disabled = true;
+            const t = translations[langCode] || translations.en;
+            const button = document.getElementById('btn-submit');
+            const status = document.getElementById('form-status');
+            const form = e.currentTarget;
+
+            button.innerText = t.btnProcessing;
+            button.style.opacity = "0.7";
+            button.disabled = true;
+            status.innerText = "";
+            updateLeadHiddenFields();
+
+            try {
+                await fetch(form.action, { method: "POST", body: new FormData(form), mode: "no-cors" });
+                status.innerText = t.formSuccess;
+                form.reset();
+                document.getElementById('success-panel').classList.remove('hidden');
+                if (persistentCountry) document.getElementById('input-country').value = persistentCountry;
+                if (persistentCode) document.getElementById('ph-field').value = persistentCode + " ";
+                updateFounderCityMessage();
+            } catch (error) {
+                console.error("Form submit failed", error);
+                status.innerText = t.formError;
+            } finally {
+                button.innerText = t.btnSubmit;
+                button.style.opacity = "1";
+                button.disabled = false;
+            }
         };
 
         async function initLocation() {
@@ -494,13 +891,20 @@
                 const data = await res.json();
                 if(data.country_name) {
                     persistentCountry = data.country_name;
+                    detectedCountry = data.country_name;
                     persistentCode = data.country_calling_code;
+                    document.getElementById('hidden-detected-country').value = detectedCountry;
                     document.getElementById('partner-country-text').innerText = persistentCountry;
                     document.getElementById('input-country').value = persistentCountry;
                     document.getElementById('ph-field').value = persistentCode + " ";
                     renderPartners(persistentCountry);
                 }
-            } catch { renderPartners("Worldwide"); }
+                if (!localStorage.getItem(LANG_STORAGE_KEY)) {
+                    const languageByCountryCode = { DE: "de", LV: "lv", SE: "sv" };
+                    const detectedLanguage = languageByCountryCode[data.country_code] || "en";
+                    changeLanguage(detectedLanguage);
+                }
+            } catch { renderPartners("Your Country"); }
         }
 
         // UPDATED RENDER FUNCTION
@@ -509,12 +913,19 @@
             const countLabel = document.getElementById('spots-count');
             const countBar = document.getElementById('spots-bar');
             
-            // Find data or default
-            const data = globalPartnerData[country] || globalPartnerData["Worldwide"];
+            if (!globalPartnerData[country]) {
+                globalPartnerData[country] = { spotsTaken: 0, partners: [] };
+            }
+            const data = globalPartnerData[country];
             
             // Update UI Counter
+            persistentCountry = country;
+            document.getElementById('partner-country-text').innerText = country;
+            document.getElementById('input-country').value = country;
             countLabel.innerText = `${data.spotsTaken} / 50`;
             countBar.style.width = `${(data.spotsTaken / 50) * 100}%`;
+            renderCountryBadges();
+            updateFounderCityMessage();
 
             if (data.partners.length === 0) {
                 grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${country}</h3></div>`;
@@ -533,7 +944,7 @@
 
         // NEW MODAL FUNCTIONS
         function openPartner(country, index) {
-            const p = (globalPartnerData[country] || globalPartnerData["Worldwide"]).partners[index];
+            const p = globalPartnerData[country].partners[index];
             const modal = document.getElementById('partner-modal');
             const content = document.getElementById('modal-content');
             
@@ -577,8 +988,32 @@
             alert("Invite link copied!");
         }
 
-        changeLanguage('en');
+        function initCookieConsent() {
+            const key = "duolyn_cookie_consent";
+            const banner = document.getElementById('cookie-banner');
+            const saved = localStorage.getItem(key);
+            if (!saved) banner.classList.remove('hidden');
+            if (saved === "accepted" && window.gtag) {
+                gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied' });
+            }
+            document.getElementById('cookie-accept').addEventListener('click', () => {
+                localStorage.setItem(key, "accepted");
+                if (window.gtag) gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'denied' });
+                banner.classList.add('hidden');
+            });
+            document.getElementById('cookie-reject').addEventListener('click', () => {
+                localStorage.setItem(key, "rejected");
+                if (window.gtag) gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied' });
+                banner.classList.add('hidden');
+            });
+        }
+
+        changeLanguage(localStorage.getItem(LANG_STORAGE_KEY) || 'en');
+        document.getElementById('input-city').addEventListener('input', updateFounderCityMessage);
+        document.getElementById('input-country').addEventListener('input', updateFounderCityMessage);
+        updateLeadHiddenFields();
         initLocation();
+        initCookieConsent();
     </script>
 </body>
 </html>
