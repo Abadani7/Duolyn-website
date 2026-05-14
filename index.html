@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duolyn | Unified Operating System for Beauty & Wellness</title>
     <meta name="description" content="Duolyn is a unified operating system for beauty and wellness businesses, combining bookings, payments, loyalty, staff tools, inventory, marketing, and analytics.">
+    <meta name="theme-color" content="#0A0A0A">
+    <link rel="canonical" href="https://duolyn.com/">
     <!-- Professional Emoji Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     
@@ -22,7 +24,13 @@
     
     <meta property="og:title" content="Duolyn | Unified Operating System for Beauty & Wellness">
     <meta property="og:description" content="Bookings, payments, loyalty, staff, inventory, marketing, and analytics in one platform for modern service businesses.">
-    <meta property="og:image" content="logo.png">
+    <meta property="og:image" content="https://duolyn.com/logo.png">
+    <meta property="og:url" content="https://duolyn.com/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Duolyn | Unified Operating System for Beauty & Wellness">
+    <meta name="twitter:description" content="Bookings, payments, loyalty, staff, inventory, marketing, and analytics in one platform for modern service businesses.">
+    <meta name="twitter:image" content="https://duolyn.com/logo.png">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -62,7 +70,7 @@
 
         .bg-logo-shadow {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90vw; opacity: 0.04; z-index: -1; pointer-events: none; filter: invert(1) grayscale(100%);
+            width: 90vw; opacity: 0.075; z-index: -1; pointer-events: none; filter: invert(1) grayscale(100%);
         }
 
         .nav-dark {
@@ -79,6 +87,13 @@
             padding: 12px 0;
         }
 
+        .footer-logo {
+            max-height: 96px;
+            width: auto;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
         .section-padding { padding: 120px 0; }
         
         .glass-card {
@@ -93,7 +108,7 @@
         .lang-btn.active { opacity: 1; color: #2dd4bf; border-bottom: 1px solid #2dd4bf; }
 
         .legal-box { transition: all 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
-        .legal-box.open { max-height: 500px; opacity: 1; margin-top: 1.5rem; display: block !important; }
+        .legal-box.open { max-height: 1100px; opacity: 1; margin-top: 1.5rem; display: block !important; }
 
         .feature-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
         @media (max-width: 768px) {
@@ -112,18 +127,23 @@
     </style>
 </head>
 <body>
+    <noscript>
+        <div style="padding:16px;text-align:center;background:#111;color:#E5E5E5;font-family:Arial,sans-serif;">
+            Duolyn works best with JavaScript enabled. Please enable JavaScript to use language selection and the founding partner form.
+        </div>
+    </noscript>
 
     <img src="logo.png" alt="" aria-hidden="true" decoding="async" class="bg-logo-shadow">
 
     <nav class="fixed w-full z-50 nav-dark">
         <div class="max-w-7xl mx-auto px-8 py-1 flex justify-between items-center">
-            <a href="#" class="logo-container"><img src="logo.png" alt="Duolyn Logo" width="220" height="110" decoding="async"></a>
+            <a href="#" class="logo-container"><img src="logo1.png" alt="Duolyn Logo" width="220" height="110" decoding="async"></a>
             <div class="flex items-center gap-4 md:gap-8">
                 <div class="flex gap-3 uppercase tracking-widest border-r border-white/10 pr-6">
-                    <span onclick="changeLanguage('en', true)" id="lang-en" class="lang-btn active">EN</span>
-                    <span onclick="changeLanguage('lv', true)" id="lang-lv" class="lang-btn">LV</span>
-                    <span onclick="changeLanguage('de', true)" id="lang-de" class="lang-btn">DE</span>
-                    <span onclick="changeLanguage('sv', true)" id="lang-sv" class="lang-btn">SV</span>
+                    <span onclick="changeLanguage('en', true)" id="lang-en" class="lang-btn active" role="button" tabindex="0" aria-label="Switch language to English">EN</span>
+                    <span onclick="changeLanguage('lv', true)" id="lang-lv" class="lang-btn" role="button" tabindex="0" aria-label="Switch language to Latvian">LV</span>
+                    <span onclick="changeLanguage('de', true)" id="lang-de" class="lang-btn" role="button" tabindex="0" aria-label="Switch language to German">DE</span>
+                    <span onclick="changeLanguage('sv', true)" id="lang-sv" class="lang-btn" role="button" tabindex="0" aria-label="Switch language to Swedish">SV</span>
                 </div>
                 <a href="#waitlist" id="nav-cta" class="bg-duo-gradient text-white px-7 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:scale-105 transition-all hidden md:block">Early Access</a>
             </div>
@@ -360,25 +380,25 @@
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label id="lbl-biz-name" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="text" name="Business_Name" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="text" name="Business_Name" required autocomplete="organization" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
                         <div>
                             <label id="lbl-email" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="email" name="email" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="email" name="email" required autocomplete="email" inputmode="email" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
                     </div>
                     <div class="grid md:grid-cols-3 gap-6">
                         <div>
                             <label id="lbl-phone" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="tel" id="ph-field" name="Phone" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="tel" id="ph-field" name="Phone" required autocomplete="tel" inputmode="tel" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
                         <div>
                             <label id="lbl-country" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="text" name="Country" id="input-country" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="text" name="Country" id="input-country" required autocomplete="country-name" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
                         <div>
                             <label id="lbl-city" class="text-[10px] uppercase font-bold text-stone-500 block mb-2"></label>
-                            <input type="text" name="City" id="input-city" required class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
+                            <input type="text" name="City" id="input-city" required autocomplete="address-level2" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500">
                         </div>
                     </div>
                     <div>
@@ -417,28 +437,40 @@
                     <div class="text-4xl mb-5">✓</div>
                     <h3 id="success-title" class="text-3xl text-white mb-4"></h3>
                     <p id="success-desc" class="text-stone-400 max-w-xl mx-auto"></p>
+                    <div class="mt-8 grid md:grid-cols-2 gap-4 text-left">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                            <p id="success-next-title" class="text-[10px] text-teal-300 font-bold uppercase tracking-widest mb-2"></p>
+                            <p id="success-next-email" class="text-stone-400 text-sm"></p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                            <p id="success-share-title" class="text-[10px] text-teal-300 font-bold uppercase tracking-widest mb-2"></p>
+                            <p id="success-next-share" class="text-stone-400 text-sm"></p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="pt-10">
-                    <button onclick="shareLink()" id="share-btn" class="text-[10px] font-bold border border-white/10 text-stone-500 px-8 py-3 rounded-full hover:bg-white hover:text-black transition uppercase tracking-widest"></button>
+                    <button type="button" onclick="shareLink()" id="share-btn" class="text-[10px] font-bold border border-white/10 text-stone-500 px-8 py-3 rounded-full hover:bg-white hover:text-black transition uppercase tracking-widest"></button>
                 </div>
             </div>
         </div>
     </section>
 
 <footer class="py-20 text-center border-t border-white/5">
+        <img src="logo2.png" alt="Duolyn Logo" class="footer-logo" width="220" height="96" loading="lazy" decoding="async">
+
         <!-- Social Media & Contact Links -->
         <!-- Clicking these will open your profile in a new browser tab -->
         <div class="flex flex-wrap gap-8 justify-center text-[10px] font-bold uppercase text-stone-500 mb-12">
-            <a href="https://www.instagram.com/duolyn.official" target="_blank" class="hover:text-indigo-400 transition">Instagram</a>
-            <a href="https://www.facebook.com/share/1B1vTociBy/?mibextid=wwXIfr" target="_blank" class="hover:text-blue-500 transition">Facebook</a>
+            <a href="https://www.instagram.com/duolyn.official" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 transition">Instagram</a>
+            <a href="https://www.facebook.com/share/1B1vTociBy/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="hover:text-blue-500 transition">Facebook</a>
 
             <!-- WhatsApp Link: Replace 37129919904 with your actual phone number (no + sign) -->
-            <a href="https://wa.me/37129919904?text=Hi%20Duolyn%20team!%20I'm%20interested%20in%20becoming%20a%20Founding%20Partner." target="_blank" class="hover:text-emerald-400 transition">WhatsApp</a>
-            <a href="https://www.tiktok.com/@duolyn.official" target="_blank" class="hover:text-teal-400 transition">TikTok</a>
-            <a href="https://www.threads.com/@duolyn.official" target="_blank" class="hover:text-white transition">Threads</a>
-            <a href="https://www.youtube.com/@Duolyn.official" target="_blank" class="hover:text-red-500 transition">YouTube</a>
-            <a href="https://www.linkedin.com/company/duolyn" target="_blank" class="hover:text-sky-400 transition">LinkedIn</a>
+            <a href="https://wa.me/37129919904?text=Hi%20Duolyn%20team!%20I'm%20interested%20in%20becoming%20a%20Founding%20Partner." target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">WhatsApp</a>
+            <a href="https://www.tiktok.com/@duolyn.official" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition">TikTok</a>
+            <a href="https://www.threads.com/@duolyn.official" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Threads</a>
+            <a href="https://www.youtube.com/@Duolyn.official" target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition">YouTube</a>
+            <a href="https://www.linkedin.com/company/duolyn" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400 transition">LinkedIn</a>
         </div>
     
         <div class="mb-8">
@@ -447,11 +479,11 @@
         </div>
 
         <div class="flex gap-6 justify-center text-[9px] text-stone-500 uppercase font-bold mb-10">
-            <button onclick="toggleLegal('privacy')" id="footer-privacy">Privacy Policy</button>
+            <button type="button" onclick="toggleLegal('privacy')" id="footer-privacy">Privacy Policy</button>
             <span>|</span>
-            <button onclick="toggleLegal('terms')" id="footer-terms">Terms of Service</button>
+            <button type="button" onclick="toggleLegal('terms')" id="footer-terms">Terms of Service</button>
             <span>|</span>
-            <button onclick="toggleLegal('cookies')" id="footer-cookies">Cookies</button>
+            <button type="button" onclick="toggleLegal('cookies')" id="footer-cookies">Cookies</button>
         </div>
 
         <!-- Legal Content Boxes -->
@@ -524,7 +556,7 @@
                     ["Founder Pricing", "Early partners lock in preferred lifetime terms.", ["Transparent launch offer", "No hidden contracts", "Priority feedback channel"]],
                     ["Guided Start", "Support to move your team into Duolyn.", ["Setup guidance", "Business-type onboarding", "Early feature voting"]]
                 ],
-                faqTitle: "Questions Before Launch", faqSub: "The short version of what founders usually ask.",
+                faqTitle: "Questions Before Launch", faqSub: "Clear answers for business owners preparing for Duolyn.",
                 faqs: [
                     ["When does Duolyn launch?", "We are preparing for a summer 2026 launch with founding partners first."],
                     ["Do you hold salon payments?", "No. The payment strategy is direct-to-salon, so funds go to your account."],
@@ -534,14 +566,14 @@
                     ["What do founder spots include?", "Founder spots are intended to include early access, launch support, and lifetime pricing advantages."]
                 ],
                 partnerSub: "Exclusive Foundship: First 50 spots only", availabilityLabel: "Availability",
-                lblBusinessType: "Business Type", businessTypePlaceholder: "Select your business type", founderCity: "Be the first Duolyn founding partner in {place}.", formSuccess: "Thank you. Your founding partner request was sent.", formError: "Something went wrong. Please try again later.", successTitle: "You are on the founder list", successDesc: "We received your request and will contact you with early access details as launch preparation moves forward.",
+                lblBusinessType: "Business Type", businessTypePlaceholder: "Select your business type", founderCity: "Be the first Duolyn founding partner in {place}.", formSuccess: "Thank you. Your founding partner request was sent.", formError: "Something went wrong. Please try again later.", successTitle: "You are on the founder list", successDesc: "We received your request and will contact you with early access details as launch preparation moves forward.", successNextTitle: "Next step", successNextEmail: "Check your inbox for the Duolyn confirmation email. If you do not see it, check spam or promotions.", successShareTitle: "Invite", successNextShare: "Know another salon, spa, studio, or clinic owner? Share the invite link so they can apply early too.",
                 lblBizName: "Business Name", lblEmail: "Professional Email", lblPhone: "Phone Number", lblCountry: "Country", lblCity: "City", lblMessage: "Message / Questions",
                 gdprText: "I agree to receive updates about the Duolyn 2026 launch. I understand that spots are limited to 50 per country.",
                 btnSubmit: "Secure My Founding Spot", btnProcessing: "Registering...", shareBtn: "Copy Invite Link",
                 footerPrivacy: "Privacy Policy", footerTerms: "Terms of Service", footerCookies: "Cookies",
-                msgPrivacy: "<strong>Privacy:</strong> We collect business data solely for Duolyn launch updates. GDPR compliant.",
-                msgTerms: "<strong>Terms:</strong> This is a pre-launch phase. Application does not guarantee a service contract.",
-                msgCookies: "<strong>Cookies:</strong> Functional cookies only for location and language preference.",
+                msgPrivacy: "<strong>Privacy Policy:</strong> Duolyn collects the information you submit in this form, including business name, email, phone number, country, city, business type, message, selected language, detected country, page URL, and signup time. We use this data only to manage the Founding Partner waitlist, send launch updates, confirm your request, and contact you about early access. Data is stored in Google Sheets and used with Resend to send emails. We do not sell your data. You can request access, correction, or deletion by emailing info@duolyn.com. Duolyn is based in Riga, Latvia and is preparing its service with EU privacy expectations in mind.",
+                msgTerms: "<strong>Terms of Service:</strong> This website is for pre-launch interest registration only. Submitting the form does not create a paid subscription, partnership agreement, or guaranteed service contract. Founder spots, pricing, features, and launch timing may change before release. Duolyn may contact applicants to verify business details and decide whether early access is a good fit. Any future paid service will require separate terms before activation.",
+                msgCookies: "<strong>Cookies:</strong> Duolyn uses essential local storage for language preference and cookie consent. We also use optional Google Analytics only after consent, where required, to understand website traffic and improve the launch page. You can reject analytics cookies from the cookie banner. You can also clear stored preferences from your browser settings.",
                 features: [
                     { icon: "📅", title: "Smart Booking", desc: "Real-time scheduling and auto reminders." },
                     { icon: "💳", title: "Payments", desc: "Secure in-app checkout and history." },
@@ -584,7 +616,7 @@
                     ["Dibinātāju cenas", "Agrīnie partneri fiksē īpašus nosacījumus uz mūžu.", ["Caurspīdīgs palaišanas piedāvājums", "Nav slēptu līgumu", "Prioritārs atsauksmju kanāls"]],
                     ["Vadīts starts", "Atbalsts komandas pārejai uz Duolyn.", ["Ieviešanas vadība", "Pielāgošana biznesa tipam", "Agrīna funkciju balsošana"]]
                 ],
-                faqTitle: "Jautājumi pirms palaišanas", faqSub: "Īsās atbildes uz biežākajiem dibinātāju jautājumiem.",
+                faqTitle: "Jautājumi pirms palaišanas", faqSub: "Skaidras atbildes uzņēmumu īpašniekiem, kuri gatavojas Duolyn.",
                 faqs: [
                     ["Kad Duolyn tiks palaists?", "Mēs gatavojamies 2026. gada vasaras palaišanai ar dibinātāju partneriem."],
                     ["Vai Duolyn aiztur salona maksājumus?", "Nē. Maksājumu stratēģija ir tieši salonam, tāpēc līdzekļi nonāk jūsu kontā."],
@@ -594,14 +626,14 @@
                     ["Ko ietver dibinātāju vietas?", "Dibinātāju vietas paredz agrīnu piekļuvi, palaišanas atbalstu un cenu priekšrocības."]
                 ],
                 partnerSub: "Ekskluzīva dibinātāju programma: tikai pirmās 50 vietas", availabilityLabel: "Pieejamība",
-                lblBusinessType: "Biznesa tips", businessTypePlaceholder: "Izvēlieties biznesa tipu", founderCity: "Kļūstiet par pirmo Duolyn dibinātāju partneri: {place}.", formSuccess: "Paldies. Jūsu dibinātāja partnera pieteikums ir nosūtīts.", formError: "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.", successTitle: "Jūs esat dibinātāju sarakstā", successDesc: "Mēs saņēmām jūsu pieteikumu un sazināsimies ar agrīnās piekļuves informāciju, kad tuvosies palaišana.",
+                lblBusinessType: "Biznesa tips", businessTypePlaceholder: "Izvēlieties biznesa tipu", founderCity: "Kļūstiet par pirmo Duolyn dibinātāju partneri: {place}.", formSuccess: "Paldies. Jūsu dibinātāja partnera pieteikums ir nosūtīts.", formError: "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.", successTitle: "Jūs esat dibinātāju sarakstā", successDesc: "Mēs saņēmām jūsu pieteikumu un sazināsimies ar agrīnās piekļuves informāciju, kad tuvosies palaišana.", successNextTitle: "Nākamais solis", successNextEmail: "Pārbaudiet savu e-pastu, lai atrastu Duolyn apstiprinājuma ziņu. Ja tās nav, pārbaudiet surogātpastu vai reklāmu sadaļu.", successShareTitle: "Uzaicināt", successNextShare: "Ja pazīstat salona, SPA, studijas vai klīnikas īpašnieku, nosūtiet uzaicinājuma saiti arī viņiem.",
                 lblBizName: "Uzņēmuma nosaukums", lblEmail: "Darba e-pasts", lblPhone: "Tālruņa numurs", lblCountry: "Valsts", lblCity: "Pilsēta", lblMessage: "Ziņa / Jautājumi",
                 gdprText: "Es piekrītu saņemt jaunumus par Duolyn 2026. Es saprotu, ka vietu skaits ir ierobežots (50 katrā valstī).",
                 btnSubmit: "Nostiprināt savu vietu", btnProcessing: "Reģistrē...", shareBtn: "Kopēt saiti",
                 footerPrivacy: "Privātums", footerTerms: "Noteikumi", footerCookies: "Sīkdatnes",
-                msgPrivacy: "<strong>Privātums:</strong> Dati tiek vākti tikai jaunumiem. DVI/GDPR atbilstība.",
-                msgTerms: "<strong>Noteikumi:</strong> Šī ir pirms-palaišanas fāze. Reģistrācija negarantē līgumu.",
-                msgCookies: "<strong>Sīkdatnes:</strong> Tikai funkcionālās sīkdatnes lokācijai.",
+                msgPrivacy: "<strong>Privātuma politika:</strong> Duolyn apkopo informāciju, ko iesniedzat formā: uzņēmuma nosaukumu, e-pastu, tālruni, valsti, pilsētu, biznesa tipu, ziņu, izvēlēto valodu, noteikto valsti, lapas URL un pieteikšanās laiku. Šie dati tiek izmantoti tikai dibinātāju gaidīšanas sarakstam, palaišanas jaunumiem, pieteikuma apstiprināšanai un saziņai par agrīnu piekļuvi. Dati tiek glabāti Google Sheets un e-pastu nosūtīšanai tiek izmantots Resend. Mēs nepārdodam jūsu datus. Par piekļuvi, labošanu vai dzēšanu rakstiet uz info@duolyn.com.",
+                msgTerms: "<strong>Pakalpojuma noteikumi:</strong> Šī vietne ir paredzēta pirms-palaišanas intereses reģistrēšanai. Formas iesniegšana neveido maksas abonementu, partnerības līgumu vai garantētu pakalpojuma līgumu. Dibinātāju vietas, cenas, funkcijas un palaišanas laiks var mainīties pirms oficiālās izlaišanas. Jebkurš maksas pakalpojums vēlāk tiks apstiprināts ar atsevišķiem noteikumiem.",
+                msgCookies: "<strong>Sīkdatnes:</strong> Duolyn izmanto nepieciešamo lokālo glabātuvi valodas izvēlei un sīkdatņu piekrišanai. Pēc piekrišanas var tikt izmantota Google Analytics, lai saprastu vietnes apmeklējumu un uzlabotu palaišanas lapu. Analītiku var noraidīt sīkdatņu paziņojumā vai notīrīt pārlūka iestatījumos.",
                 features: [
                     { icon: "📅", title: "Viedā rezervācija", desc: "Plānošana un automātiskie atgādinājumi." },
                     { icon: "💳", title: "Maksājumi", desc: "Droši norēķini lietotnē." },
@@ -644,7 +676,7 @@
                     ["Founder-Preise", "Frühe Partner sichern bevorzugte Konditionen auf Lebenszeit.", ["Transparentes Launch-Angebot", "Keine versteckten Verträge", "Priorisierter Feedback-Kanal"]],
                     ["Geführter Start", "Unterstützung beim Wechsel Ihres Teams zu Duolyn.", ["Einrichtungsbegleitung", "Onboarding nach Geschäftstyp", "Frühe Funktionsabstimmung"]]
                 ],
-                faqTitle: "Fragen vor dem Start", faqSub: "Kurzantworten auf typische Fragen von Gründungspartnern.",
+                faqTitle: "Fragen vor dem Start", faqSub: "Klare Antworten für Geschäftsinhaber, die sich auf Duolyn vorbereiten.",
                 faqs: [
                     ["Wann startet Duolyn?", "Wir bereiten einen Start im Sommer 2026 zuerst mit Gründungspartnern vor."],
                     ["Hält Duolyn Salon-Zahlungen?", "Nein. Die Zahlungsstrategie ist direkt zum Salon, damit Gelder auf Ihr Konto gehen."],
@@ -654,14 +686,14 @@
                     ["Was enthalten Founder-Plätze?", "Founder-Plätze sollen frühen Zugang, Launch-Support und Preisvorteile auf Lebenszeit bieten."]
                 ],
                 partnerSub: "Exklusives Gründerprogramm: nur die ersten 50 Plätze", availabilityLabel: "Verfügbarkeit",
-                lblBusinessType: "Unternehmenstyp", businessTypePlaceholder: "Unternehmenstyp auswählen", founderCity: "Werden Sie der erste Duolyn-Gründungspartner in {place}.", formSuccess: "Danke. Ihre Anfrage als Gründungspartner wurde gesendet.", formError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.", successTitle: "Sie stehen auf der Founder-Liste", successDesc: "Wir haben Ihre Anfrage erhalten und melden uns mit Details zum frühen Zugang, sobald die Startvorbereitung voranschreitet.",
+                lblBusinessType: "Unternehmenstyp", businessTypePlaceholder: "Unternehmenstyp auswählen", founderCity: "Werden Sie der erste Duolyn-Gründungspartner in {place}.", formSuccess: "Danke. Ihre Anfrage als Gründungspartner wurde gesendet.", formError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.", successTitle: "Sie stehen auf der Founder-Liste", successDesc: "Wir haben Ihre Anfrage erhalten und melden uns mit Details zum frühen Zugang, sobald die Startvorbereitung voranschreitet.", successNextTitle: "Nächster Schritt", successNextEmail: "Prüfen Sie Ihr Postfach auf die Duolyn-Bestätigung. Falls Sie nichts sehen, prüfen Sie Spam oder Werbung.", successShareTitle: "Einladen", successNextShare: "Kennen Sie einen Salon-, Spa-, Studio- oder Klinikinhaber? Teilen Sie den Einladungslink, damit er sich ebenfalls früh bewerben kann.",
                 lblBizName: "Firmenname", lblEmail: "E-Mail", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stadt", lblMessage: "Nachricht / Fragen",
                 gdprText: "Ich stimme zu, Updates zu erhalten. Plätze sind auf 50 pro Land begrenzt.",
                 btnSubmit: "Platz sichern", btnProcessing: "Wird registriert...", shareBtn: "Link kopieren",
                 footerPrivacy: "Datenschutz", footerTerms: "AGB", footerCookies: "Cookies",
-                msgPrivacy: "<strong>Datenschutz:</strong> DSGVO-konform.",
-                msgTerms: "<strong>AGB:</strong> Vorverkaufsphase.",
-                msgCookies: "<strong>Cookies:</strong> Funktionale Cookies.",
+                msgPrivacy: "<strong>Datenschutz:</strong> Duolyn erfasst die Informationen, die Sie im Formular übermitteln, einschließlich Unternehmensname, E-Mail, Telefonnummer, Land, Stadt, Unternehmenstyp, Nachricht, gewählte Sprache, erkanntes Land, Seiten-URL und Anmeldezeit. Wir nutzen diese Daten nur für die Founder-Warteliste, Launch-Updates, Bestätigungen und Kontaktaufnahme zu Early Access. Die Daten werden in Google Sheets gespeichert und Resend wird für E-Mails verwendet. Wir verkaufen Ihre Daten nicht. Für Auskunft, Korrektur oder Löschung schreiben Sie an info@duolyn.com.",
+                msgTerms: "<strong>Nutzungsbedingungen:</strong> Diese Website dient nur der Registrierung von Interesse vor dem Launch. Das Absenden des Formulars erstellt kein kostenpflichtiges Abonnement, keine Partnerschaftsvereinbarung und keinen garantierten Servicevertrag. Founder-Plätze, Preise, Funktionen und Launch-Zeitpunkt können sich vor Veröffentlichung ändern. Jeder spätere kostenpflichtige Service erfordert separate Bedingungen.",
+                msgCookies: "<strong>Cookies:</strong> Duolyn verwendet notwendige lokale Speicherung für Spracheinstellungen und Cookie-Einwilligung. Optionale Google Analytics wird, soweit erforderlich, nur nach Zustimmung verwendet, um Website-Traffic zu verstehen und die Launch-Seite zu verbessern. Sie können Analytics im Cookie-Banner ablehnen oder Ihre Browserdaten löschen.",
                 features: [
                     { icon: "📅", title: "Buchung", desc: "Echtzeit-Termine." },
                     { icon: "💳", title: "Zahlung", desc: "In-App Checkout." },
@@ -704,7 +736,7 @@
                     ["Founder-priser", "Tidiga partners låser in förmånliga villkor för livet.", ["Transparent lanseringserbjudande", "Inga dolda avtal", "Prioriterad feedbackkanal"]],
                     ["Guidad start", "Stöd för att flytta teamet till Duolyn.", ["Installationshjälp", "Onboarding efter företagstyp", "Tidig funktionsröstning"]]
                 ],
-                faqTitle: "Frågor före lansering", faqSub: "Korta svar på det founders oftast frågar.",
+                faqTitle: "Frågor före lansering", faqSub: "Tydliga svar för företagsägare som förbereder sig för Duolyn.",
                 faqs: [
                     ["När lanseras Duolyn?", "Vi förbereder en lansering sommaren 2026 med founding partners först."],
                     ["Håller Duolyn salongens betalningar?", "Nej. Betalningsstrategin är direkt till salongen, så pengarna går till ditt konto."],
@@ -714,14 +746,14 @@
                     ["Vad ingår i founder-platser?", "Founder-platser är tänkta att omfatta tidig tillgång, lanseringsstöd och prisfördelar."]
                 ],
                 partnerSub: "Exklusivt founder-program: endast de första 50 platserna", availabilityLabel: "Tillgänglighet",
-                lblBusinessType: "Företagstyp", businessTypePlaceholder: "Välj företagstyp", founderCity: "Bli den första Duolyn founding partnern i {place}.", formSuccess: "Tack. Din founder partner-ansökan har skickats.", formError: "Något gick fel. Försök igen senare.", successTitle: "Du är på founder-listan", successDesc: "Vi har tagit emot din ansökan och kontaktar dig med information om tidig tillgång när lanseringen närmar sig.",
+                lblBusinessType: "Företagstyp", businessTypePlaceholder: "Välj företagstyp", founderCity: "Bli den första Duolyn founding partnern i {place}.", formSuccess: "Tack. Din founder partner-ansökan har skickats.", formError: "Något gick fel. Försök igen senare.", successTitle: "Du är på founder-listan", successDesc: "Vi har tagit emot din ansökan och kontaktar dig med information om tidig tillgång när lanseringen närmar sig.", successNextTitle: "Nästa steg", successNextEmail: "Kontrollera din inkorg för Duolyn-bekräftelsen. Om du inte ser den, kontrollera skräppost eller kampanjer.", successShareTitle: "Bjud in", successNextShare: "Känner du en salong-, spa-, studio- eller klinikägare? Dela inbjudningslänken så att de också kan ansöka tidigt.",
                 lblBizName: "Företagsnamn", lblEmail: "E-post", lblPhone: "Telefon", lblCountry: "Land", lblCity: "Stad", lblMessage: "Meddelande / Frågor",
                 gdprText: "Jag godkänner uppdateringar. Begränsat till 50 platser per land.",
                 btnSubmit: "Säkra min plats", btnProcessing: "Registrerar...", shareBtn: "Kopiera länk",
                 footerPrivacy: "Integritet", footerTerms: "Villkor", footerCookies: "Cookies",
-                msgPrivacy: "<strong>Integritet:</strong> GDPR-säkert.",
-                msgTerms: "<strong>Villkor:</strong> Förlansering.",
-                msgCookies: "<strong>Cookies:</strong> Endast funktionella.",
+                msgPrivacy: "<strong>Integritetspolicy:</strong> Duolyn samlar in informationen du skickar via formuläret, inklusive företagsnamn, e-post, telefonnummer, land, stad, företagstyp, meddelande, valt språk, upptäckt land, sidans URL och registreringstid. Vi använder detta endast för Founder-väntelistan, lanseringsuppdateringar, bekräftelser och kontakt om tidig tillgång. Data lagras i Google Sheets och Resend används för e-post. Vi säljer inte dina uppgifter. För åtkomst, rättelse eller radering, mejla info@duolyn.com.",
+                msgTerms: "<strong>Villkor:</strong> Denna webbplats är endast för intresseanmälan före lansering. Att skicka formuläret skapar inte en betald prenumeration, ett partneravtal eller ett garanterat serviceavtal. Founder-platser, priser, funktioner och lanseringstid kan ändras före lansering. Eventuell framtida betald tjänst kräver separata villkor.",
+                msgCookies: "<strong>Cookies:</strong> Duolyn använder nödvändig lokal lagring för språkval och cookie-samtycke. Valfri Google Analytics används, där det krävs, endast efter samtycke för att förstå webbplatstrafik och förbättra lanseringssidan. Du kan avvisa analytics i cookie-bannern eller rensa lagrade inställningar i webbläsaren.",
                 features: [
                     { icon: "📅", title: "Bokning", desc: "Realtidsscheman." },
                     { icon: "💳", title: "Betalning", desc: "Säker utcheckning." },
@@ -740,6 +772,7 @@
             if (!translations[lang]) lang = "en";
             if (remember) localStorage.setItem(LANG_STORAGE_KEY, lang);
             activeLanguage = lang;
+            document.documentElement.lang = lang === "sv" ? "sv" : lang;
             const t = translations[lang];
             document.getElementById('form-lang-hidden').value = t.langKey;
             document.getElementById('hidden-selected-language').value = lang;
@@ -795,6 +828,10 @@
             document.getElementById('btn-submit').innerText = t.btnSubmit;
             document.getElementById('success-title').innerText = t.successTitle;
             document.getElementById('success-desc').innerText = t.successDesc;
+            document.getElementById('success-next-title').innerText = t.successNextTitle;
+            document.getElementById('success-next-email').innerText = t.successNextEmail;
+            document.getElementById('success-share-title').innerText = t.successShareTitle;
+            document.getElementById('success-next-share').innerText = t.successNextShare;
             document.getElementById('share-btn').innerText = t.shareBtn;
             document.getElementById('footer-privacy').innerText = t.footerPrivacy;
             document.getElementById('footer-terms').innerText = t.footerTerms;
@@ -837,6 +874,8 @@
 
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('lang-' + lang).classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+            document.getElementById('lang-' + lang).setAttribute('aria-pressed', 'true');
         }
 
         function renderCountryBadges() {
@@ -1019,8 +1058,16 @@
         }
 
         function shareLink() {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Invite link copied!");
+            const url = window.location.href;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert("Invite link copied!");
+                }).catch(() => {
+                    prompt("Copy this invite link:", url);
+                });
+            } else {
+                prompt("Copy this invite link:", url);
+            }
         }
 
         function initCookieConsent() {
@@ -1042,6 +1089,23 @@
                 banner.classList.add('hidden');
             });
         }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    btn.click();
+                }
+            });
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !document.getElementById('partner-modal').classList.contains('hidden')) {
+                closePartner();
+            }
+        });
+        document.getElementById('partner-modal').addEventListener('click', event => {
+            if (event.target.id === 'partner-modal') closePartner();
+        });
 
         changeLanguage(localStorage.getItem(LANG_STORAGE_KEY) || 'en');
         document.getElementById('input-city').addEventListener('input', updateFounderCityMessage);
