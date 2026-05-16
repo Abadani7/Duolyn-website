@@ -65,6 +65,16 @@
             -webkit-text-fill-color: transparent;
             font-weight: 700;
         }
+
+        .brand-word {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: linear-gradient(120deg, #f0a6c8 0%, #2dd4bf 42%, #3b82f6 68%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 18px 34px rgba(45, 212, 191, 0.12);
+            white-space: nowrap;
+        }
         
         .bg-duo-gradient { background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6); }
 
@@ -159,6 +169,89 @@
             opacity: var(--cinema-shine-opacity);
             z-index: 2;
             pointer-events: none;
+        }
+
+        .story-section {
+            min-height: 180vh;
+        }
+
+        .story-visual {
+            top: 7rem;
+            min-height: 620px;
+        }
+
+        .story-video {
+            --story-progress: 0;
+            --story-scale: 1.04;
+            --story-status-y: 18px;
+            --story-status-opacity: 0.62;
+            min-height: 620px;
+            isolation: isolate;
+        }
+
+        .story-photo {
+            transform: scale(var(--story-scale));
+            transition: opacity 0.45s ease, transform 0.25s linear;
+        }
+
+        .story-photo.is-hidden {
+            opacity: 0;
+        }
+
+        .story-video::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 70% 25%, rgba(45, 212, 191, 0.24), transparent 32%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.12), transparent 35%, rgba(0, 0, 0, 0.72));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .story-ui {
+            position: absolute;
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            z-index: 2;
+        }
+
+        .story-status {
+            transform: translateY(var(--story-status-y));
+            opacity: var(--story-status-opacity);
+        }
+
+        .story-step {
+            min-height: 44vh;
+            opacity: 0.38;
+            transform: translateY(18px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .story-step.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-dot {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .story-dot.is-active {
+            background: #2dd4bf;
+            transform: scale(1.35);
+        }
+
+        @media (max-width: 768px) {
+            .story-section { min-height: auto; }
+            .story-visual { top: auto; min-height: auto; }
+            .story-video { min-height: 520px; }
+            .story-step { min-height: auto; opacity: 1; transform: none; }
         }
 
         @media (max-width: 768px) {
@@ -265,6 +358,74 @@
                     <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">04</span>
                     <h3 id="workflow4-title" class="text-white text-xl mt-6 mb-3"></h3>
                     <p id="workflow4-desc" class="text-stone-400 text-sm font-light"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cinematic-story" class="story-section section-padding bg-[#050505] border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-start">
+            <div class="space-y-14">
+                <div>
+                    <p id="story-tag" class="text-[10px] font-bold uppercase tracking-[0.35em] text-teal-300 mb-5"></p>
+                    <h2 id="story-title" class="text-5xl text-white mb-6"></h2>
+                    <p id="story-desc" class="text-stone-400 text-lg font-light leading-relaxed"></p>
+                </div>
+
+                <div class="space-y-10">
+                    <div class="story-step is-active" data-story-step="0">
+                        <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">01</span>
+                        <h3 id="story-step1-title" class="text-white text-2xl mt-5 mb-3 font-serif"></h3>
+                        <p id="story-step1-desc" class="text-stone-400 font-light leading-relaxed"></p>
+                    </div>
+                    <div class="story-step" data-story-step="1">
+                        <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">02</span>
+                        <h3 id="story-step2-title" class="text-white text-2xl mt-5 mb-3 font-serif"></h3>
+                        <p id="story-step2-desc" class="text-stone-400 font-light leading-relaxed"></p>
+                    </div>
+                    <div class="story-step" data-story-step="2">
+                        <span class="text-duo-gradient text-xs font-bold tracking-[0.3em] uppercase">03</span>
+                        <h3 id="story-step3-title" class="text-white text-2xl mt-5 mb-3 font-serif"></h3>
+                        <p id="story-step3-desc" class="text-stone-400 font-light leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-visual sticky">
+                <div id="story-video" class="story-video rounded-[2.5rem] overflow-hidden relative border border-white/10 shadow-2xl bg-stone-950">
+                    <img id="story-photo-1" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200" class="story-photo absolute inset-0 w-full h-full object-cover opacity-70" alt="Happy business owner using Duolyn-style booking tools" loading="lazy" decoding="async">
+                    <img id="story-photo-2" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Customer completing a smooth service checkout" loading="lazy" decoding="async">
+                    <img id="story-photo-3" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Business team reviewing growth results" loading="lazy" decoding="async">
+
+                    <div class="story-ui">
+                        <div class="glass-card story-status rounded-3xl p-5 border-white/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <p id="story-ui-label" class="text-[9px] uppercase tracking-[0.28em] text-teal-300 font-bold"></p>
+                                    <p id="story-ui-title" class="text-white text-xl font-serif mt-1"></p>
+                                </div>
+                                <div class="flex gap-2" aria-hidden="true">
+                                    <span class="story-dot is-active" data-story-dot="0"></span>
+                                    <span class="story-dot" data-story-dot="1"></span>
+                                    <span class="story-dot" data-story-dot="2"></span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="bg-white/5 rounded-2xl p-3">
+                                    <p id="story-metric1" class="text-white text-lg font-bold"></p>
+                                    <p id="story-metric1-label" class="text-stone-500 text-[9px] uppercase tracking-widest"></p>
+                                </div>
+                                <div class="bg-white/5 rounded-2xl p-3">
+                                    <p id="story-metric2" class="text-white text-lg font-bold"></p>
+                                    <p id="story-metric2-label" class="text-stone-500 text-[9px] uppercase tracking-widest"></p>
+                                </div>
+                                <div class="bg-white/5 rounded-2xl p-3">
+                                    <p id="story-metric3" class="text-white text-lg font-bold"></p>
+                                    <p id="story-metric3-label" class="text-stone-500 text-[9px] uppercase tracking-widest"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -601,6 +762,16 @@
                     ["Serve", "Payments, loyalty, notes, and product sales connect to the visit."],
                     ["Grow", "Owners track revenue, retention, and next-best actions."]
                 ],
+                storyTag: "A business day with Duolyn",
+                storyTitle: "Do what you are best at. Keep the rest on Duolyn.",
+                storyDesc: "A cinematic look at happier business owners: teams focus on their craft while Duolyn keeps bookings, payments, staff, loyalty, follow-up, and every location organized in one elegant system.",
+                storySteps: [
+                    ["The day is clear before the first appointment", "Bookings, staff schedules, and client details are organized in one place, so the owner starts calm."],
+                    ["The team focuses on the service, not admin", "They do what they are good at while Duolyn keeps payments, notes, loyalty, inventory, and reminders connected behind the scenes."],
+                    ["Run every location from one elegant system", "Revenue, retention, follow-up, staff activity, and next actions stay visible without chasing spreadsheets or messages."]
+                ],
+                storyUiLabel: "Business flow", storyUiTitle: "Management handled",
+                storyMetrics: [["12", "Bookings"], ["4", "Staff"], ["€", "Tracked"]],
                 planTags: ["One system", "Founder access", "Launch support"],
                 plans: [
                     ["Unified Platform", "One connected product, not separate pricing tiers.", ["Bookings, loyalty, staff, inventory", "Marketing, chat, analytics", "Built as one operating system"]],
@@ -661,6 +832,16 @@
                     ["Pakalpojums", "Maksājumi, lojalitāte, piezīmes un produktu pārdošana pieslēdzas vizītei."],
                     ["Izaugsme", "Īpašnieki seko ieņēmumiem, noturēšanai un nākamajām darbībām."]
                 ],
+                storyTag: "Biznesa diena ar Duolyn",
+                storyTitle: "Dariet to, kas jums padodas vislabāk. Pārējo uzticiet Duolyn.",
+                storyDesc: "Kinematogrāfisks ieskats laimīgāku biznesa īpašnieku dienā: komandas fokusējas uz savu amatu, kamēr Duolyn sakārto rezervācijas, maksājumus, komandu, lojalitāti, sekošanu un katru atrašanās vietu vienā elegantā sistēmā.",
+                storySteps: [
+                    ["Diena ir skaidra jau pirms pirmās vizītes", "Rezervācijas, komandas grafiki un klientu dati ir vienuviet, tāpēc īpašnieks sāk mierīgi."],
+                    ["Komanda fokusējas uz pakalpojumu, nevis administrāciju", "Viņi dara to, kas viņiem padodas, kamēr Duolyn fonā savieno maksājumus, piezīmes, lojalitāti, inventāru un atgādinājumus."],
+                    ["Pārvaldiet katru atrašanās vietu no vienas elegantas sistēmas", "Ieņēmumi, klientu noturība, sekošana, komandas aktivitāte un nākamie soļi ir redzami bez tabulu un ziņu meklēšanas."]
+                ],
+                storyUiLabel: "Biznesa plūsma", storyUiTitle: "Vadība sakārtota",
+                storyMetrics: [["12", "Rezerv."], ["4", "Komanda"], ["€", "Sekots"]],
                 planTags: ["Viena sistēma", "Dibinātāju piekļuve", "Palaišanas atbalsts"],
                 plans: [
                     ["Vienota platforma", "Viens savienots produkts, nevis atsevišķi cenu līmeņi.", ["Rezervācijas, lojalitāte, komanda, inventārs", "Mārketings, čats, analītika", "Veidota kā viena operāciju sistēma"]],
@@ -721,6 +902,16 @@
                     ["Bedienen", "Zahlungen, Treue, Notizen und Produktverkäufe verbinden sich mit dem Besuch."],
                     ["Wachsen", "Inhaber verfolgen Umsatz, Bindung und nächste Maßnahmen."]
                 ],
+                storyTag: "Ein Geschäftstag mit Duolyn",
+                storyTitle: "Tun Sie, was Sie am besten können. Den Rest übernimmt Duolyn.",
+                storyDesc: "Ein filmischer Blick auf zufriedenere Geschäftsinhaber: Teams konzentrieren sich auf ihr Handwerk, während Duolyn Buchungen, Zahlungen, Team, Treue, Follow-up und jeden Standort in einem eleganten System organisiert.",
+                storySteps: [
+                    ["Der Tag ist vor dem ersten Termin klar", "Buchungen, Teampläne und Kundendaten sind an einem Ort organisiert, damit Inhaber ruhig starten."],
+                    ["Das Team konzentriert sich auf den Service, nicht auf Admin", "Sie tun, was sie am besten können, während Duolyn Zahlungen, Notizen, Treue, Inventar und Erinnerungen im Hintergrund verbindet."],
+                    ["Führen Sie jeden Standort aus einem eleganten System", "Umsatz, Bindung, Follow-up, Teamaktivität und nächste Schritte bleiben sichtbar, ohne Tabellen oder Nachrichten zu suchen."]
+                ],
+                storyUiLabel: "Business-Ablauf", storyUiTitle: "Management erledigt",
+                storyMetrics: [["12", "Buchungen"], ["4", "Team"], ["€", "Erfasst"]],
                 planTags: ["Ein System", "Founder-Zugang", "Launch-Support"],
                 plans: [
                     ["Einheitliche Plattform", "Ein verbundenes Produkt, keine getrennten Preisstufen.", ["Buchungen, Treue, Team, Inventar", "Marketing, Chat, Analysen", "Als ein Betriebssystem gebaut"]],
@@ -781,6 +972,16 @@
                     ["Utför", "Betalningar, lojalitet, anteckningar och produktförsäljning kopplas till besöket."],
                     ["Väx", "Ägare följer intäkter, kundlojalitet och nästa bästa åtgärd."]
                 ],
+                storyTag: "En arbetsdag med Duolyn",
+                storyTitle: "Gör det ni är bäst på. Låt Duolyn ta hand om resten.",
+                storyDesc: "En filmisk känsla av gladare företagsägare: teamet fokuserar på sitt hantverk medan Duolyn håller bokningar, betalningar, personal, lojalitet, uppföljning och varje plats organiserad i ett elegant system.",
+                storySteps: [
+                    ["Dagen är tydlig före första bokningen", "Bokningar, personalscheman och kunddata är organiserade på ett ställe, så ägaren börjar lugnt."],
+                    ["Teamet fokuserar på tjänsten, inte admin", "De gör det de är bra på medan Duolyn håller betalningar, anteckningar, lojalitet, lager och påminnelser samman i bakgrunden."],
+                    ["Driv varje plats från ett elegant system", "Intäkter, retention, uppföljning, teamaktivitet och nästa steg syns utan att jaga kalkylblad eller meddelanden."]
+                ],
+                storyUiLabel: "Affärsflöde", storyUiTitle: "Management klart",
+                storyMetrics: [["12", "Bokningar"], ["4", "Team"], ["€", "Spårat"]],
                 planTags: ["Ett system", "Founder-tillgång", "Lanseringsstöd"],
                 plans: [
                     ["Samlad plattform", "En sammanhängande produkt, inte separata prisnivåer.", ["Bokningar, lojalitet, personal, lager", "Marknadsföring, chatt, analys", "Byggd som ett operativsystem"]],
@@ -819,6 +1020,12 @@
             }
         };
 
+        function brandifyDuolyn(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.innerHTML = el.textContent.replace(/Duolyn/g, '<span class="brand-word">Duolyn</span>');
+        }
+
         function changeLanguage(lang, remember = false) {
             if (!translations[lang]) lang = "en";
             if (remember) localStorage.setItem(LANG_STORAGE_KEY, lang);
@@ -839,6 +1046,11 @@
             document.getElementById('features-title').innerText = t.featuresTitle;
             document.getElementById('workflow-title').innerText = t.workflowTitle;
             document.getElementById('workflow-sub').innerText = t.workflowSub;
+            document.getElementById('story-tag').innerText = t.storyTag;
+            document.getElementById('story-title').innerText = t.storyTitle;
+            document.getElementById('story-desc').innerText = t.storyDesc;
+            document.getElementById('story-ui-label').innerText = t.storyUiLabel;
+            document.getElementById('story-ui-title').innerText = t.storyUiTitle;
             document.getElementById('about-title').innerText = t.aboutTitle;
             document.getElementById('about-p1').innerText = t.aboutP1;
             document.getElementById('about-quote').innerText = t.aboutQuote;
@@ -891,12 +1103,23 @@
             document.getElementById('terms-box').innerHTML = t.msgTerms;
             document.getElementById('cookies-box').innerHTML = t.msgCookies;
 
+            ['workflow-title', 'about-title', 'story-tag', 'story-title'].forEach(brandifyDuolyn);
+
             document.getElementById('vision-list').innerHTML = t.vision.map(word => `<li><span class="text-duo-gradient font-bold">${word[0]}</span>${word.slice(1)}</li>`).join('');
             document.getElementById('business-types').innerHTML = t.businessTypes.map(b => `<div>${b}</div>`).join('');
             document.getElementById('feature-grid').innerHTML = t.features.map(f => `<div class="glass-card p-8 rounded-3xl"><span class="feature-icon">${f.icon}</span><h4 class="text-white font-bold mb-3">${f.title}</h4><p class="text-stone-400 text-sm">${f.desc}</p></div>`).join('');
             t.workflow.forEach((step, index) => {
                 document.getElementById(`workflow${index + 1}-title`).innerText = step[0];
                 document.getElementById(`workflow${index + 1}-desc`).innerText = step[1];
+            });
+            t.storySteps.forEach((step, index) => {
+                document.getElementById(`story-step${index + 1}-title`).innerText = step[0];
+                document.getElementById(`story-step${index + 1}-desc`).innerText = step[1];
+            });
+            t.storyMetrics.forEach((metric, index) => {
+                const n = index + 1;
+                document.getElementById(`story-metric${n}`).innerText = metric[0];
+                document.getElementById(`story-metric${n}-label`).innerText = metric[1];
             });
             t.plans.forEach((plan, index) => {
                 const n = index + 1;
@@ -1171,6 +1394,57 @@
             window.addEventListener('resize', requestUpdate);
         }
 
+        function initCinematicStory() {
+            const section = document.getElementById('cinematic-story');
+            const video = document.getElementById('story-video');
+            if (!section || !video) return;
+
+            const steps = Array.from(document.querySelectorAll('[data-story-step]'));
+            const dots = Array.from(document.querySelectorAll('[data-story-dot]'));
+            const photos = [
+                document.getElementById('story-photo-1'),
+                document.getElementById('story-photo-2'),
+                document.getElementById('story-photo-3')
+            ];
+            let activeIndex = 0;
+            let ticking = false;
+
+            const setActive = index => {
+                if (index === activeIndex) return;
+                activeIndex = index;
+                steps.forEach((step, i) => step.classList.toggle('is-active', i === activeIndex));
+                dots.forEach((dot, i) => dot.classList.toggle('is-active', i === activeIndex));
+                photos.forEach((photo, i) => {
+                    if (photo) photo.classList.toggle('is-hidden', i !== activeIndex);
+                });
+            };
+
+            const update = () => {
+                const rect = section.getBoundingClientRect();
+                const scrollable = Math.max(1, rect.height - window.innerHeight);
+                const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+                const index = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+
+                video.style.setProperty('--story-progress', progress.toFixed(3));
+                video.style.setProperty('--story-scale', (1.04 + (progress * 0.08)).toFixed(3));
+                video.style.setProperty('--story-status-y', `${(1 - progress) * 18}px`);
+                video.style.setProperty('--story-status-opacity', (0.62 + (progress * 0.38)).toFixed(3));
+                setActive(index);
+                ticking = false;
+            };
+
+            const requestUpdate = () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(update);
+                    ticking = true;
+                }
+            };
+
+            update();
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate);
+        }
+
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.addEventListener('keydown', event => {
                 if (event.key === 'Enter' || event.key === ' ') {
@@ -1195,6 +1469,7 @@
         initLocation();
         initCookieConsent();
         initCinematicHero();
+        initCinematicStory();
     </script>
 </body>
 </html>
