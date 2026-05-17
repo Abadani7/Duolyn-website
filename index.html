@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duolyn | Unified Operating System for Beauty & Wellness</title>
     <meta name="description" content="Duolyn is a unified operating system for beauty and wellness businesses, combining bookings, payments, loyalty, staff tools, inventory, marketing, and analytics.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Duolyn">
     <meta name="theme-color" content="#0A0A0A">
     <link rel="canonical" href="https://duolyn.com/">
-    <!-- Professional Emoji Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WJC6JH9VSY"></script>
     <script>
@@ -24,26 +32,65 @@
     
     <meta property="og:title" content="Duolyn | Unified Operating System for Beauty & Wellness">
     <meta property="og:description" content="Bookings, payments, loyalty, staff, inventory, marketing, and analytics in one platform for modern service businesses.">
-    <meta property="og:image" content="https://duolyn.com/logo.png">
+    <meta property="og:image" content="https://duolyn.com/logo-display.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="879">
+    <meta property="og:image:alt" content="Duolyn logo for beauty and wellness business software">
     <meta property="og:url" content="https://duolyn.com/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Duolyn">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Duolyn | Unified Operating System for Beauty & Wellness">
     <meta name="twitter:description" content="Bookings, payments, loyalty, staff, inventory, marketing, and analytics in one platform for modern service businesses.">
-    <meta name="twitter:image" content="https://duolyn.com/logo.png">
+    <meta name="twitter:image" content="https://duolyn.com/logo-display.jpg">
+    <meta name="twitter:image:alt" content="Duolyn logo for beauty and wellness business software">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Duolyn",
+      "url": "https://duolyn.com/",
+      "image": "https://duolyn.com/logo-display.jpg",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "A unified operating system for beauty and wellness businesses.",
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Beauty, wellness, salon, spa, clinic, and service business owners"
+      },
       "offers": {
         "@type": "Offer",
         "availability": "https://schema.org/PreOrder",
         "priceCurrency": "EUR"
-      }
+      },
+      "sameAs": [
+        "https://www.instagram.com/duolyn.official",
+        "https://www.tiktok.com/@duolyn.official",
+        "https://www.youtube.com/@Duolyn.official",
+        "https://www.linkedin.com/company/duolyn"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Duolyn",
+      "url": "https://duolyn.com/",
+      "logo": "https://duolyn.com/logo-display.jpg",
+      "email": "info@duolyn.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Riga",
+        "addressCountry": "LV"
+      },
+      "sameAs": [
+        "https://www.instagram.com/duolyn.official",
+        "https://www.tiktok.com/@duolyn.official",
+        "https://www.youtube.com/@Duolyn.official",
+        "https://www.linkedin.com/company/duolyn"
+      ]
     }
     </script>
 
@@ -67,13 +114,33 @@
         }
 
         .brand-word {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.02em;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            background: linear-gradient(120deg, #f0a6c8 0%, #2dd4bf 42%, #3b82f6 68%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             text-shadow: 0 18px 34px rgba(45, 212, 191, 0.12);
             white-space: nowrap;
+            vertical-align: baseline;
+        }
+
+        .brand-mark {
+            width: 0.96em;
+            height: 1.05em;
+            display: inline-block;
+            background-image: url("brand-d-mark.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 0.08em;
+            transform: translateY(0.18em);
+            filter: drop-shadow(0 0.08em 0.16em rgba(0, 0, 0, 0.5));
+        }
+
+        .brand-tail {
+            background: linear-gradient(120deg, #2dd4bf 0%, #3b82f6 48%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .bg-duo-gradient { background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6); }
@@ -276,11 +343,11 @@
         </div>
     </noscript>
 
-    <img src="logo.png" alt="" aria-hidden="true" decoding="async" class="bg-logo-shadow">
+    <img src="logo-display.jpg" alt="" aria-hidden="true" decoding="async" class="bg-logo-shadow">
 
     <nav class="fixed w-full z-50 nav-dark">
         <div class="max-w-7xl mx-auto px-8 py-1 flex justify-between items-center">
-            <a href="#" class="logo-container"><img src="logo1.png" alt="Duolyn Logo" width="220" height="110" decoding="async"></a>
+            <a href="#" class="logo-container"><img src="logo1-display.jpg" alt="Duolyn Logo" width="220" height="110" decoding="async"></a>
             <div class="flex items-center gap-4 md:gap-8">
                 <div class="flex gap-3 uppercase tracking-widest border-r border-white/10 pr-6">
                     <span onclick="changeLanguage('en', true)" id="lang-en" class="lang-btn active" role="button" tabindex="0" aria-label="Switch language to English">EN</span>
@@ -393,9 +460,9 @@
 
             <div class="story-visual sticky">
                 <div id="story-video" class="story-video rounded-[2.5rem] overflow-hidden relative border border-white/10 shadow-2xl bg-stone-950">
-                    <img id="story-photo-1" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200" class="story-photo absolute inset-0 w-full h-full object-cover opacity-70" alt="Happy business owner using Duolyn-style booking tools" loading="lazy" decoding="async">
-                    <img id="story-photo-2" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Customer completing a smooth service checkout" loading="lazy" decoding="async">
-                    <img id="story-photo-3" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Business team reviewing growth results" loading="lazy" decoding="async">
+                    <img id="story-photo-1" src="https://images.unsplash.com/photo-1746723378067-83a345ff3160?auto=format&fit=crop&q=80&w=1200" class="story-photo absolute inset-0 w-full h-full object-cover opacity-70" alt="Modern salon reception with products, checkout tools, and stylists working in the background" loading="lazy" decoding="async">
+                    <img id="story-photo-2" src="https://images.unsplash.com/photo-1750263147700-8bea3899f287?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Happy hairstylist serving a client in a salon" loading="lazy" decoding="async">
+                    <img id="story-photo-3" src="https://images.unsplash.com/photo-1582582450303-48cc2cfa2c43?auto=format&fit=crop&q=80&w=1200" class="story-photo is-hidden absolute inset-0 w-full h-full object-cover opacity-70" alt="Business owner reviewing salon management on a tablet" loading="lazy" decoding="async">
 
                     <div class="story-ui">
                         <div class="glass-card story-status rounded-3xl p-5 border-white/20">
@@ -669,7 +736,7 @@
     </section>
 
 <footer class="py-20 text-center border-t border-white/5">
-        <img src="logo2.png" alt="Duolyn Logo" class="footer-logo" width="220" height="96" loading="lazy" decoding="async">
+        <img src="logo2-display.jpg" alt="Duolyn Logo" class="footer-logo" width="220" height="96" loading="lazy" decoding="async">
 
         <!-- Social Media & Contact Links -->
         <!-- Clicking these will open your profile in a new browser tab -->
@@ -763,11 +830,11 @@
                     ["Grow", "Owners track revenue, retention, and next-best actions."]
                 ],
                 storyTag: "A business day with Duolyn",
-                storyTitle: "Do what you are best at. Keep the rest on Duolyn.",
-                storyDesc: "A cinematic look at happier business owners: teams focus on their craft while Duolyn keeps bookings, payments, staff, loyalty, follow-up, and every location organized in one elegant system.",
+                storyTitle: "Happy business owners do what they are great at.",
+                storyDesc: "Duolyn takes care of the rest: bookings, payments, staff, loyalty, follow-up, and every location organized in one elegant system.",
                 storySteps: [
                     ["The day is clear before the first appointment", "Bookings, staff schedules, and client details are organized in one place, so the owner starts calm."],
-                    ["The team focuses on the service, not admin", "They do what they are good at while Duolyn keeps payments, notes, loyalty, inventory, and reminders connected behind the scenes."],
+                    ["The team focuses on the service, not admin", "Business owners and teams do what they are great at while Duolyn keeps payments, notes, loyalty, inventory, and reminders connected behind the scenes."],
                     ["Run every location from one elegant system", "Revenue, retention, follow-up, staff activity, and next actions stay visible without chasing spreadsheets or messages."]
                 ],
                 storyUiLabel: "Business flow", storyUiTitle: "Management handled",
@@ -833,11 +900,11 @@
                     ["Izaugsme", "Īpašnieki seko ieņēmumiem, noturēšanai un nākamajām darbībām."]
                 ],
                 storyTag: "Biznesa diena ar Duolyn",
-                storyTitle: "Dariet to, kas jums padodas vislabāk. Pārējo uzticiet Duolyn.",
-                storyDesc: "Kinematogrāfisks ieskats laimīgāku biznesa īpašnieku dienā: komandas fokusējas uz savu amatu, kamēr Duolyn sakārto rezervācijas, maksājumus, komandu, lojalitāti, sekošanu un katru atrašanās vietu vienā elegantā sistēmā.",
+                storyTitle: "Laimīgi biznesa īpašnieki dara to, kas viņiem padodas vislabāk.",
+                storyDesc: "Duolyn parūpējas par pārējo: rezervācijām, maksājumiem, komandu, lojalitāti, sekošanu un katru atrašanās vietu vienā elegantā sistēmā.",
                 storySteps: [
                     ["Diena ir skaidra jau pirms pirmās vizītes", "Rezervācijas, komandas grafiki un klientu dati ir vienuviet, tāpēc īpašnieks sāk mierīgi."],
-                    ["Komanda fokusējas uz pakalpojumu, nevis administrāciju", "Viņi dara to, kas viņiem padodas, kamēr Duolyn fonā savieno maksājumus, piezīmes, lojalitāti, inventāru un atgādinājumus."],
+                    ["Komanda fokusējas uz pakalpojumu, nevis administrāciju", "Biznesa īpašnieki un komandas dara to, kas viņiem padodas vislabāk, kamēr Duolyn fonā savieno maksājumus, piezīmes, lojalitāti, inventāru un atgādinājumus."],
                     ["Pārvaldiet katru atrašanās vietu no vienas elegantas sistēmas", "Ieņēmumi, klientu noturība, sekošana, komandas aktivitāte un nākamie soļi ir redzami bez tabulu un ziņu meklēšanas."]
                 ],
                 storyUiLabel: "Biznesa plūsma", storyUiTitle: "Vadība sakārtota",
@@ -903,11 +970,11 @@
                     ["Wachsen", "Inhaber verfolgen Umsatz, Bindung und nächste Maßnahmen."]
                 ],
                 storyTag: "Ein Geschäftstag mit Duolyn",
-                storyTitle: "Tun Sie, was Sie am besten können. Den Rest übernimmt Duolyn.",
-                storyDesc: "Ein filmischer Blick auf zufriedenere Geschäftsinhaber: Teams konzentrieren sich auf ihr Handwerk, während Duolyn Buchungen, Zahlungen, Team, Treue, Follow-up und jeden Standort in einem eleganten System organisiert.",
+                storyTitle: "Zufriedene Geschäftsinhaber tun, was sie am besten können.",
+                storyDesc: "Duolyn übernimmt den Rest: Buchungen, Zahlungen, Team, Treue, Follow-up und jeden Standort in einem eleganten System.",
                 storySteps: [
                     ["Der Tag ist vor dem ersten Termin klar", "Buchungen, Teampläne und Kundendaten sind an einem Ort organisiert, damit Inhaber ruhig starten."],
-                    ["Das Team konzentriert sich auf den Service, nicht auf Admin", "Sie tun, was sie am besten können, während Duolyn Zahlungen, Notizen, Treue, Inventar und Erinnerungen im Hintergrund verbindet."],
+                    ["Das Team konzentriert sich auf den Service, nicht auf Admin", "Geschäftsinhaber und Teams tun, was sie am besten können, während Duolyn Zahlungen, Notizen, Treue, Inventar und Erinnerungen im Hintergrund verbindet."],
                     ["Führen Sie jeden Standort aus einem eleganten System", "Umsatz, Bindung, Follow-up, Teamaktivität und nächste Schritte bleiben sichtbar, ohne Tabellen oder Nachrichten zu suchen."]
                 ],
                 storyUiLabel: "Business-Ablauf", storyUiTitle: "Management erledigt",
@@ -973,11 +1040,11 @@
                     ["Väx", "Ägare följer intäkter, kundlojalitet och nästa bästa åtgärd."]
                 ],
                 storyTag: "En arbetsdag med Duolyn",
-                storyTitle: "Gör det ni är bäst på. Låt Duolyn ta hand om resten.",
-                storyDesc: "En filmisk känsla av gladare företagsägare: teamet fokuserar på sitt hantverk medan Duolyn håller bokningar, betalningar, personal, lojalitet, uppföljning och varje plats organiserad i ett elegant system.",
+                storyTitle: "Glada företagsägare gör det de är bäst på.",
+                storyDesc: "Duolyn tar hand om resten: bokningar, betalningar, personal, lojalitet, uppföljning och varje plats organiserad i ett elegant system.",
                 storySteps: [
                     ["Dagen är tydlig före första bokningen", "Bokningar, personalscheman och kunddata är organiserade på ett ställe, så ägaren börjar lugnt."],
-                    ["Teamet fokuserar på tjänsten, inte admin", "De gör det de är bra på medan Duolyn håller betalningar, anteckningar, lojalitet, lager och påminnelser samman i bakgrunden."],
+                    ["Teamet fokuserar på tjänsten, inte admin", "Företagsägare och team gör det de är bäst på medan Duolyn håller betalningar, anteckningar, lojalitet, lager och påminnelser samman i bakgrunden."],
                     ["Driv varje plats från ett elegant system", "Intäkter, retention, uppföljning, teamaktivitet och nästa steg syns utan att jaga kalkylblad eller meddelanden."]
                 ],
                 storyUiLabel: "Affärsflöde", storyUiTitle: "Management klart",
@@ -1023,7 +1090,14 @@
         function brandifyDuolyn(id) {
             const el = document.getElementById(id);
             if (!el) return;
-            el.innerHTML = el.textContent.replace(/Duolyn/g, '<span class="brand-word">Duolyn</span>');
+            el.innerHTML = el.textContent.replace(/Duolyn/g, '<span class="brand-word" aria-label="Duolyn"><span class="brand-mark" aria-hidden="true"></span><span class="brand-tail">uolyn</span></span>');
+        }
+
+        function applyGradientText(ids) {
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('text-duo-gradient');
+            });
         }
 
         function changeLanguage(lang, remember = false) {
@@ -1103,7 +1177,23 @@
             document.getElementById('terms-box').innerHTML = t.msgTerms;
             document.getElementById('cookies-box').innerHTML = t.msgCookies;
 
-            ['workflow-title', 'about-title', 'story-tag', 'story-title'].forEach(brandifyDuolyn);
+            ['workflow-title', 'about-title'].forEach(brandifyDuolyn);
+            applyGradientText([
+                'features-title',
+                'story-title',
+                'pricing-title',
+                'plan1-title',
+                'plan2-title',
+                'plan3-title',
+                'pay-flow-title',
+                'grow-title',
+                'faq-title',
+                'founding-title',
+                'about-quote',
+                'story-step1-title',
+                'story-step2-title',
+                'story-step3-title'
+            ]);
 
             document.getElementById('vision-list').innerHTML = t.vision.map(word => `<li><span class="text-duo-gradient font-bold">${word[0]}</span>${word.slice(1)}</li>`).join('');
             document.getElementById('business-types').innerHTML = t.businessTypes.map(b => `<div>${b}</div>`).join('');
@@ -1276,7 +1366,7 @@
             updateFounderCityMessage();
 
             if (data.partners.length === 0) {
-                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-stone-300">Apply to be the first Partner in ${country}</h3></div>`;
+                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-duo-gradient">Apply to be the first Partner in ${country}</h3></div>`;
             } else {
                 grid.innerHTML = data.partners.map((p, index) => `
                     <div onclick="openPartner('${country}', ${index})" class="glass-card p-8 rounded-[2rem] cursor-pointer group">
