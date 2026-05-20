@@ -931,6 +931,7 @@
         let detectedCountry = "";
         let activeLanguage = "en";
         const LANG_STORAGE_KEY = "duolyn_lang";
+        const LANG_MANUAL_KEY = "duolyn_lang_manual";
 
         // --- MANUAL PARTNER CONTROL ---
         // Add your salons here and change spotsTaken manually
@@ -1247,7 +1248,10 @@
 
         function changeLanguage(lang, remember = false) {
             if (!translations[lang]) lang = "en";
-            if (remember) localStorage.setItem(LANG_STORAGE_KEY, lang);
+            if (remember) {
+                localStorage.setItem(LANG_STORAGE_KEY, lang);
+                sessionStorage.setItem(LANG_MANUAL_KEY, '1');
+            }
             activeLanguage = lang;
             document.documentElement.lang = lang === "sv" ? "sv" : lang;
             const t = translations[lang];
@@ -1494,10 +1498,11 @@
                     document.getElementById('ph-field').value = persistentCode + " ";
                     renderPartners(persistentCountry);
                 }
-                if (!localStorage.getItem(LANG_STORAGE_KEY)) {
+                if (!sessionStorage.getItem(LANG_MANUAL_KEY)) {
                     const languageByCountryCode = { DE: "de", LV: "lv", SE: "sv" };
                     const detectedLanguage = languageByCountryCode[data.country_code] || "en";
                     changeLanguage(detectedLanguage);
+                    localStorage.setItem(LANG_STORAGE_KEY, detectedLanguage);
                 }
             } catch { renderPartners("Your Country"); }
         }
