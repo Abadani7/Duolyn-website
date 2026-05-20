@@ -396,6 +396,18 @@
         }
         #back-to-top.visible { opacity: 1; transform: translateY(0); }
         #back-to-top:hover { transform: translateY(-3px); }
+        #contact-fab {
+            position: fixed; bottom: 5.5rem; right: 2rem;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+            color: #2dd4bf; font-size: 1.1rem; cursor: pointer;
+            z-index: 90; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            backdrop-filter: blur(8px);
+        }
+        #contact-fab.visible { opacity: 1; transform: translateY(0); }
+        #contact-fab:hover { background: rgba(45,212,191,0.15); border-color: #2dd4bf; }
     </style>
 </head>
 <body>
@@ -405,6 +417,7 @@
         </div>
     </noscript>
 
+    <button id="contact-fab" aria-label="Contact us" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">✉</button>
     <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
     <div class="bg-orb bg-orb-purple" aria-hidden="true"></div>
@@ -1722,8 +1735,11 @@
 
         function initBackToTop() {
             const btn = document.getElementById('back-to-top');
+            const fab = document.getElementById('contact-fab');
             window.addEventListener('scroll', () => {
-                btn.classList.toggle('visible', window.scrollY > 500);
+                const show = window.scrollY > 500;
+                btn.classList.toggle('visible', show);
+                fab.classList.toggle('visible', show);
             }, { passive: true });
         }
 
