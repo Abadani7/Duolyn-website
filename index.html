@@ -334,6 +334,68 @@
             h2 { font-size: 2.25rem !important; }
             .section-padding { padding: 64px 0; }
         }
+
+        /* Animated background orbs */
+        @keyframes orb-float {
+            0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+            50% { transform: scale(1.12) translate(12px, -24px); opacity: 0.72; }
+        }
+        .bg-orb {
+            position: fixed; border-radius: 50%; filter: blur(90px);
+            pointer-events: none; z-index: 0;
+            animation: orb-float 10s ease-in-out infinite;
+        }
+        .bg-orb-purple { width: 420px; height: 420px; background: rgba(139,92,246,0.18); top: 15%; left: -120px; animation-delay: 0s; }
+        .bg-orb-teal { width: 360px; height: 360px; background: rgba(45,212,191,0.14); bottom: 18%; right: -90px; animation-delay: -5s; }
+
+        /* Noise texture overlay */
+        .noise-overlay {
+            position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+        /* Hero CTA glow */
+        .hero-cta-glow { position: relative; isolation: isolate; }
+        .hero-cta-glow::after {
+            content: ""; position: absolute; inset: -6px; border-radius: 999px;
+            background: linear-gradient(135deg, #8b5cf6, #2dd4bf); filter: blur(18px);
+            opacity: 0; z-index: -1; transition: opacity 0.3s ease;
+        }
+        .hero-cta-glow:hover::after { opacity: 0.65; }
+
+        /* Testimonials ticker */
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-track {
+            display: flex; width: max-content; gap: 3rem;
+            animation: ticker-scroll 36s linear infinite;
+        }
+        .ticker-track:hover { animation-play-state: paused; }
+
+        /* Stats strip */
+        .stat-number { font-family: 'Playfair Display', serif; }
+
+        /* Back to top */
+        #back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #2dd4bf);
+            color: white; font-size: 1.25rem; border: none; cursor: pointer;
+            z-index: 90; display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            box-shadow: 0 4px 24px rgba(45,212,191,0.3);
+        }
+        #back-to-top.visible { opacity: 1; transform: translateY(0); }
+        #back-to-top:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
@@ -342,6 +404,12 @@
             Duolyn works best with JavaScript enabled. Please enable JavaScript to use language selection and the founding partner form.
         </div>
     </noscript>
+
+    <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <div class="bg-orb bg-orb-purple" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-teal" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true"></div>
 
     <img src="logo-display.jpg" alt="" aria-hidden="true" decoding="async" class="bg-logo-shadow">
 
@@ -370,7 +438,7 @@
             </h1>
             <p id="hero-desc" class="text-xl text-stone-400 mb-10 max-w-lg leading-relaxed font-light mx-auto md:mx-0"></p>
             <div class="flex justify-center md:justify-start gap-4">
-                <a href="#features" id="hero-btn-features" class="bg-duo-gradient text-white px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition"></a>
+                <a href="#waitlist" id="hero-btn-features" class="hero-cta-glow bg-duo-gradient text-white px-8 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition"></a>
                 <a href="#about" id="hero-link" class="text-xs font-bold uppercase tracking-widest border-b-2 border-indigo-500 text-indigo-400 pb-1 hover:text-white transition"></a>
             </div>
         </div>
@@ -382,16 +450,81 @@
         </div>
     </header>
 
+    <!-- TESTIMONIALS TICKER -->
+    <div class="overflow-hidden py-10 border-b border-white/5 bg-[#080808]">
+        <div class="ticker-track" aria-label="What early contacts are saying">
+            <!-- set 1 -->
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[340px]">
+                <p class="text-stone-300 text-sm italic mb-3">"Finally, an app that feels as premium as the service we offer."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Sofia L. — Salon Owner, Riga</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[360px]">
+                <p class="text-stone-300 text-sm italic mb-3">"I was running 3 different tools. Duolyn replaced all of them before we even launched."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Marcus K. — Spa Director, Berlin</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[340px]">
+                <p class="text-stone-300 text-sm italic mb-3">"The booking flow is so clean. My clients actually prefer it over calling."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Anna-Maria H. — Nail Studio, Stockholm</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[350px]">
+                <p class="text-stone-300 text-sm italic mb-3">"Being a founding partner means I helped shape what Duolyn becomes."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">David R. — Barbershop, Hamburg</p>
+            </div>
+            <!-- set 2 (duplicate for seamless loop) -->
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[340px]">
+                <p class="text-stone-300 text-sm italic mb-3">"Finally, an app that feels as premium as the service we offer."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Sofia L. — Salon Owner, Riga</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[360px]">
+                <p class="text-stone-300 text-sm italic mb-3">"I was running 3 different tools. Duolyn replaced all of them before we even launched."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Marcus K. — Spa Director, Berlin</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[340px]">
+                <p class="text-stone-300 text-sm italic mb-3">"The booking flow is so clean. My clients actually prefer it over calling."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Anna-Maria H. — Nail Studio, Stockholm</p>
+            </div>
+            <div class="flex-shrink-0 glass-card px-8 py-5 rounded-2xl min-w-[350px]">
+                <p class="text-stone-300 text-sm italic mb-3">"Being a founding partner means I helped shape what Duolyn becomes."</p>
+                <p class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">David R. — Barbershop, Hamburg</p>
+            </div>
+        </div>
+    </div>
+
     <section class="py-20 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-8 text-center">
-            <h3 id="built-tag" class="text-stone-500 uppercase tracking-[0.4em] text-[10px] font-bold mb-12"></h3>
-            <div id="business-types" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 md:gap-4 font-serif italic text-lg text-stone-300"></div>
+            <h3 id="built-tag" class="text-stone-500 uppercase tracking-[0.4em] text-[10px] font-bold mb-4"></h3>
+            <p class="text-white text-2xl font-serif italic mb-12">Is your business here?</p>
+            <div id="business-types" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4"></div>
+        </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="py-14 border-b border-white/5 bg-[#080808]">
+        <div class="max-w-5xl mx-auto px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal">
+                    <p class="stat-number text-5xl font-bold text-white">8+</p>
+                    <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] mt-2">Business Types</p>
+                </div>
+                <div class="reveal">
+                    <p class="stat-number text-5xl font-bold text-duo-gradient">1</p>
+                    <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] mt-2">Platform</p>
+                </div>
+                <div class="reveal">
+                    <p class="stat-number text-5xl font-bold text-white">50</p>
+                    <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] mt-2">Founding Spots</p>
+                </div>
+                <div class="reveal">
+                    <p class="stat-number text-5xl font-bold text-duo-gradient">€0</p>
+                    <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] mt-2">Hidden Fees</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="features" class="section-padding bg-[#0F0F0F]/50">
         <div class="max-w-7xl mx-auto px-8 text-center">
-            <div class="mb-20">
+            <div class="mb-20 reveal">
                 <h2 id="features-title" class="text-5xl text-white mb-6"></h2>
                 <div class="w-24 h-1 bg-duo-gradient mx-auto rounded-full"></div>
             </div>
@@ -401,7 +534,7 @@
 
     <section id="workflow" class="section-padding bg-[#080808] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 id="workflow-title" class="text-5xl text-white mb-6"></h2>
                 <p id="workflow-sub" class="text-xl text-stone-400 max-w-2xl mx-auto font-light"></p>
             </div>
@@ -498,7 +631,7 @@
         </div>
     </section>
 
-    <section id="about" class="section-padding bg-[#0A0A0A]">
+    <section id="about" class="section-padding bg-[#0A0A0A] reveal">
         <div class="max-w-6xl mx-auto px-8 grid md:grid-cols-2 gap-20">
             <div>
                 <h2 id="about-title" class="text-4xl text-white mb-10"></h2>
@@ -506,7 +639,7 @@
                 <p id="about-quote" class="text-white italic border-l-4 border-teal-500 pl-8 text-xl font-serif"></p>
             </div>
             <div class="glass-card p-12 rounded-[2.5rem]">
-                <h3 id="vision-tag" class="text-[10px] font-bold mb-10 tracking-[0.4em] uppercase text-stone-500">Internal Vision</h3>
+                <h3 id="vision-tag" class="text-[10px] font-bold mb-10 tracking-[0.4em] uppercase text-teal-400">Our Vision</h3>
                 <ul id="vision-list" class="space-y-4 font-serif text-3xl"></ul>
             </div>
         </div>
@@ -514,7 +647,7 @@
 
     <section id="pricing" class="section-padding bg-[#0A0A0A]">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="text-center mb-20">
+            <div class="text-center mb-20 reveal">
                 <h2 id="pricing-title" class="text-5xl text-white mb-6"></h2>
                 <p id="pricing-sub" class="text-xl text-stone-400 max-w-2xl mx-auto font-light"></p>
             </div>
@@ -596,14 +729,15 @@
                     <h2 id="partner-title" class="text-4xl italic text-white mb-4">Local Partners in <span id="partner-country-text" class="font-bold not-italic text-teal-400">...</span></h2>
                     <p id="partner-sub" class="text-stone-500 uppercase tracking-widest text-[10px] font-bold"></p>
                 </div>
-                <div class="glass-card p-6 rounded-2xl min-w-[220px]">
-                    <div class="flex justify-between text-[10px] font-bold uppercase mb-2">
-                        <span id="availability-label" class="text-stone-400"></span>
-                        <span id="spots-count" class="text-white">0 / 50</span>
+                <div class="glass-card p-6 rounded-2xl min-w-[240px]">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-teal-400 text-[10px] font-bold uppercase tracking-widest">Open Now</span>
+                        <span id="spots-count" class="text-white text-[10px] font-bold">2 / 50 spots</span>
                     </div>
-                    <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                        <div id="spots-bar" class="bg-duo-gradient h-full transition-all duration-1000" style="width: 0%"></div>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mb-2">
+                        <div id="spots-bar" class="bg-duo-gradient h-full transition-all duration-1000" style="width: 4%"></div>
                     </div>
+                    <p class="text-stone-500 text-[9px] uppercase tracking-widest">Be among the first 50</p>
                 </div>
             </div>
             <div id="country-badges" class="flex flex-wrap gap-3 mb-12"></div>
@@ -619,9 +753,19 @@
         </div>
     </div>
 
+    <!-- SCROLLYTELLING TEASER -->
+    <section class="section-padding bg-[#050505] border-y border-white/5 reveal">
+        <div class="max-w-5xl mx-auto px-8 text-center">
+            <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-teal-400 mb-5">See it in action</p>
+            <h2 class="text-5xl text-white mb-6 font-serif">Watch a business day<br><em class="text-duo-gradient font-normal">transform in 5 scenes.</em></h2>
+            <p class="text-stone-400 text-lg font-light mb-10 max-w-xl mx-auto leading-relaxed">From chaos to clarity — scroll through the story of what Duolyn does for a business, moment by moment.</p>
+            <a href="scrollytelling.html" class="hero-cta-glow inline-block bg-duo-gradient text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition">Watch the Story →</a>
+        </div>
+    </section>
+
     <section id="faq" class="section-padding bg-[#080808] border-y border-white/5">
         <div class="max-w-5xl mx-auto px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 id="faq-title" class="text-5xl text-white mb-6"></h2>
                 <p id="faq-sub" class="text-xl text-stone-400 font-light"></p>
             </div>
@@ -637,6 +781,9 @@
                 <p id="founding-desc" class="text-stone-400 text-lg mb-12"></p>
                 <p id="founder-city-message" class="text-teal-300 text-sm font-bold uppercase tracking-widest mb-10"></p>
                 
+                <!-- Offer badges -->
+                <div id="perks-list" class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-10"></div>
+
                 <form id="contact-form" action="https://script.google.com/macros/s/AKfycbw1noRLS69S4zUSkWdz0E61j_VjETG3QPBTQnustMOhBn8z4SeetdSxdzJ_pt9REkRLFA/exec" method="POST" class="text-left space-y-6">
                     <input type="hidden" name="Language" id="form-lang-hidden" value="EN">
                     <input type="hidden" name="Selected_Language" id="hidden-selected-language">
@@ -701,8 +848,6 @@
                         <textarea name="Message" id="input-message" rows="3" class="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white outline-none focus:border-teal-500"></textarea>
                     </div>
                     
-                    <div id="perks-list" class="grid md:grid-cols-3 gap-4 pt-4"></div>
-
                     <div class="flex items-start gap-4 py-4 bg-white/5 p-6 rounded-2xl">
                         <input type="checkbox" required class="mt-1 w-5 h-5 accent-teal-500">
                         <p id="gdpr-text" class="text-[11px] text-stone-400"></p>
@@ -808,9 +953,9 @@
             en: {
                 langKey: "EN",
                 navCta: "Early Access", heroTag: "Launching Summer 2026",
-                heroTitle1: "Manage with", heroTitle2: "elegance.", heroTitle3: "Grow with confidence.",
+                heroTitle1: "Stop juggling", heroTitle2: "apps.", heroTitle3: "Run everything from one.",
                 heroDesc: "All-in-one platform for wellness & service businesses — bookings, payments, loyalty, staff, inventory, marketing, and chat.",
-                heroBtnFeatures: "See Features", heroLink: "Our Vision",
+                heroBtnFeatures: "Apply Now", heroLink: "Our Vision",
                 builtTag: "Built for every service business", businessTypes: ["Salons","Spas","Barbershops","Nails","Wellness","Clinics","Fitness","Tattoo"],
                 featuresTitle: "Everything you need in one place",
                 aboutTitle: "About Duolyn", aboutP1: "Duolyn is the unified operating system for beauty and wellness businesses. We bring operations into one connected platform so you can focus on your craft.",
@@ -847,12 +992,12 @@
                 ],
                 faqTitle: "Questions Before Launch", faqSub: "Clear answers for business owners preparing for Duolyn.",
                 faqs: [
-                    ["When does Duolyn launch?", "We are preparing for a summer 2026 launch with founding partners first."],
-                    ["Do you hold salon payments?", "No. The payment strategy is direct-to-salon, so funds go to your account."],
-                    ["Is it only for salons?", "No. Duolyn is built for salons, spas, barbershops, nails, wellness, clinics, fitness, and tattoo studios."],
-                    ["How will pricing work?", "For launch, pricing will stay simple and transparent, with founder advantages for early partners."],
-                    ["Is Duolyn GDPR-ready?", "The product is being designed for EU privacy expectations and transparent data handling."],
-                    ["What do founder spots include?", "Founder spots are intended to include early access, launch support, and lifetime pricing advantages."]
+                    ["When does Duolyn launch?", "Summer 2026. Founding partners get access first — before the public launch opens."],
+                    ["Do you hold salon payments?", "No. Payments go directly into your account. Duolyn is never between you and your money."],
+                    ["Is it only for salons?", "No. Duolyn works for salons, spas, barbershops, nail studios, wellness centers, clinics, fitness studios, and tattoo shops."],
+                    ["How will pricing work?", "Founding partners lock in a discounted rate for life. When we launch publicly, prices go up."],
+                    ["Is Duolyn GDPR-ready?", "Yes. Built for EU compliance from day one — transparent data handling, no selling your data, ever."],
+                    ["What do founder spots include?", "Lifetime pricing, early platform access, priority onboarding, a Founder badge, and a direct line to shape the product roadmap."]
                 ],
                 partnerSub: "Exclusive Foundship: First 50 spots only", availabilityLabel: "Availability",
                 lblBusinessType: "Business Type", businessTypePlaceholder: "Select your business type", founderCity: "Be the first Duolyn founding partner in {place}.", formSuccess: "Thank you. Your founding partner request was sent.", formError: "Something went wrong. Please try again later.", successTitle: "You are on the founder list", successDesc: "We received your request and will contact you with early access details as launch preparation moves forward.", successNextTitle: "Next step", successNextEmail: "Check your inbox for the Duolyn confirmation email. If you do not see it, check spam or promotions.", successShareTitle: "Invite", successNextShare: "Know another salon, spa, studio, or clinic owner? Share the invite link so they can apply early too.",
@@ -864,23 +1009,23 @@
                 msgTerms: "<strong>Terms of Service:</strong> This website is for pre-launch interest registration only. Submitting the form does not create a paid subscription, partnership agreement, or guaranteed service contract. Founder spots, pricing, features, and launch timing may change before release. Duolyn may contact applicants to verify business details and decide whether early access is a good fit. Any future paid service will require separate terms before activation.",
                 msgCookies: "<strong>Cookies:</strong> Duolyn uses essential local storage for language preference and cookie consent. We also use optional Google Analytics only after consent, where required, to understand website traffic and improve the launch page. You can reject analytics cookies from the cookie banner. You can also clear stored preferences from your browser settings.",
                 features: [
-                    { icon: "📅", title: "Smart Booking", desc: "Real-time scheduling and auto reminders." },
-                    { icon: "💳", title: "Payments", desc: "Secure in-app checkout and history." },
-                    { icon: "⭐", title: "Loyalty", desc: "Points and perks to boost repeat business." },
-                    { icon: "👥", title: "Staff & Payroll", desc: "Hours, tips, and flexible salary modes." },
-                    { icon: "📦", title: "Inventory", desc: "Stock alerts and supplier tracking." },
-                    { icon: "📣", title: "Marketing", desc: "Campaigns and rebooking nudges." },
-                    { icon: "💬", title: "In-App Chat", desc: "Faster client communication." },
-                    { icon: "📊", title: "Analytics", desc: "Revenue and staff performance." }
+                    { icon: "📅", title: "Smart Booking", desc: "Clients book in seconds. Auto-reminders cut no-shows before they happen." },
+                    { icon: "💳", title: "Payments", desc: "Funds go directly to your account — Duolyn never holds your money." },
+                    { icon: "⭐", title: "Loyalty", desc: "Points and perks that bring clients back automatically — no manual work." },
+                    { icon: "👥", title: "Staff & Payroll", desc: "Shifts, tips, and salaries managed in one place. No spreadsheets needed." },
+                    { icon: "📦", title: "Inventory", desc: "Know what's running low before you run out. Reorder straight from the app." },
+                    { icon: "📣", title: "Marketing", desc: "Reach quiet clients before they leave for good. Campaigns that run themselves." },
+                    { icon: "💬", title: "In-App Chat", desc: "Clients message you. You respond from the same app you run the business in." },
+                    { icon: "📊", title: "Analytics", desc: "See which services, staff, and days drive revenue — at a glance, every day." }
                 ],
-                perks: ["Lifetime discounts", "Early access", "Founder badge"]
+                perks: ["Lifetime Pricing", "Early Access", "Priority Onboarding", "Founder Badge", "Direct Product Input"]
             },
             lv: {
                 langKey: "LV",
                 navCta: "Pieteikties", heroTag: "Atklāšana 2026. gada vasarā",
-                heroTitle1: "Pārvaldiet ar", heroTitle2: "eleganci.", heroTitle3: "Audziet ar pārliecību.",
+                heroTitle1: "Pārtrauciet žonglēt", heroTitle2: "ar lietotnēm.", heroTitle3: "Pārvaldiet visu vienā vietā.",
                 heroDesc: "Viss-vienā platforma skaistumkopšanas biznesiem — rezervācijas, maksājumi, lojalitāte, personāls un mārketings vienuviet.",
-                heroBtnFeatures: "Funkcijas", heroLink: "Vīzija",
+                heroBtnFeatures: "Pieteikties tagad", heroLink: "Vīzija",
                 builtTag: "Radīts ikvienam pakalpojumu biznesam", businessTypes: ["Saloni","SPA","Bārberšopi","Nagi","Veselība","Klīnikas","Fitness","Tetovēšana"],
                 featuresTitle: "Viss nepieciešamais vienuviet",
                 aboutTitle: "Par Duolyn", aboutP1: "Duolyn ir vienota platforma skaistumkopšanas uzņēmumiem. Mēs apvienojam procesus, lai jūs varētu koncentrēties uz savu amatu.",
@@ -917,12 +1062,12 @@
                 ],
                 faqTitle: "Jautājumi pirms palaišanas", faqSub: "Skaidras atbildes uzņēmumu īpašniekiem, kuri gatavojas Duolyn.",
                 faqs: [
-                    ["Kad Duolyn tiks palaists?", "Mēs gatavojamies 2026. gada vasaras palaišanai ar dibinātāju partneriem."],
-                    ["Vai Duolyn aiztur salona maksājumus?", "Nē. Maksājumu stratēģija ir tieši salonam, tāpēc līdzekļi nonāk jūsu kontā."],
-                    ["Vai tas ir tikai saloniem?", "Nē. Duolyn ir veidots saloniem, SPA, bārberšopiem, nagiem, wellness, klīnikām, fitnesam un tetovēšanas studijām."],
-                    ["Kā darbosies cenas?", "Palaišanas sākumā cenas būs vienkāršas un caurspīdīgas, ar dibinātāju priekšrocībām agrīnajiem partneriem."],
-                    ["Vai Duolyn būs atbilstošs GDPR?", "Produkts tiek veidots ar ES privātuma prasībām un caurspīdīgu datu apstrādi."],
-                    ["Ko ietver dibinātāju vietas?", "Dibinātāju vietas paredz agrīnu piekļuvi, palaišanas atbalstu un cenu priekšrocības."]
+                    ["Kad Duolyn tiks palaists?", "2026. gada vasarā. Dibinātāju partneri saņem piekļuvi pirmie — pirms publiskās palaišanas."],
+                    ["Vai Duolyn aiztur maksājumus?", "Nē. Maksājumi nonāk tieši jūsu kontā. Duolyn nekad nav starp jums un jūsu naudu."],
+                    ["Vai tas ir tikai saloniem?", "Nē. Duolyn darbojas saloniem, SPA, bārberšopiem, nagu studijām, wellness centriem, klīnikām, fitnesa studijām un tetovēšanas studijām."],
+                    ["Kā darbosies cenas?", "Dibinātāju partneri fiksē atlaidi uz mūžu. Kad mēs publiski palaidīsim, cenas pieaugs."],
+                    ["Vai Duolyn atbilst GDPR?", "Jā. Veidots ES atbilstībai no pirmās dienas — caurspīdīga datu apstrāde, jūsu datus nepārdodam nekad."],
+                    ["Ko ietver dibinātāju vietas?", "Mūža cenas, agrīna piekļuve platformai, prioritāra ieviešana, Dibinātāja nozīmīte un tieša balss produkta attīstībā."]
                 ],
                 partnerSub: "Ekskluzīva dibinātāju programma: tikai pirmās 50 vietas", availabilityLabel: "Pieejamība",
                 lblBusinessType: "Biznesa tips", businessTypePlaceholder: "Izvēlieties biznesa tipu", founderCity: "Kļūstiet par pirmo Duolyn dibinātāju partneri: {place}.", formSuccess: "Paldies. Jūsu dibinātāja partnera pieteikums ir nosūtīts.", formError: "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.", successTitle: "Jūs esat dibinātāju sarakstā", successDesc: "Mēs saņēmām jūsu pieteikumu un sazināsimies ar agrīnās piekļuves informāciju, kad tuvosies palaišana.", successNextTitle: "Nākamais solis", successNextEmail: "Pārbaudiet savu e-pastu, lai atrastu Duolyn apstiprinājuma ziņu. Ja tās nav, pārbaudiet surogātpastu vai reklāmu sadaļu.", successShareTitle: "Uzaicināt", successNextShare: "Ja pazīstat salona, SPA, studijas vai klīnikas īpašnieku, nosūtiet uzaicinājuma saiti arī viņiem.",
@@ -934,23 +1079,23 @@
                 msgTerms: "<strong>Pakalpojuma noteikumi:</strong> Šī vietne ir paredzēta pirms-palaišanas intereses reģistrēšanai. Formas iesniegšana neveido maksas abonementu, partnerības līgumu vai garantētu pakalpojuma līgumu. Dibinātāju vietas, cenas, funkcijas un palaišanas laiks var mainīties pirms oficiālās izlaišanas. Jebkurš maksas pakalpojums vēlāk tiks apstiprināts ar atsevišķiem noteikumiem.",
                 msgCookies: "<strong>Sīkdatnes:</strong> Duolyn izmanto nepieciešamo lokālo glabātuvi valodas izvēlei un sīkdatņu piekrišanai. Pēc piekrišanas var tikt izmantota Google Analytics, lai saprastu vietnes apmeklējumu un uzlabotu palaišanas lapu. Analītiku var noraidīt sīkdatņu paziņojumā vai notīrīt pārlūka iestatījumos.",
                 features: [
-                    { icon: "📅", title: "Viedā rezervācija", desc: "Plānošana un automātiskie atgādinājumi." },
-                    { icon: "💳", title: "Maksājumi", desc: "Droši norēķini lietotnē." },
-                    { icon: "⭐", title: "Lojalitāte", desc: "Punkti klientu noturēšanai." },
-                    { icon: "👥", title: "Personāls", desc: "Darba laiks un elastīgas algas." },
-                    { icon: "📦", title: "Inventārs", desc: "Krājumu izsekošana." },
-                    { icon: "📣", title: "Mārketings", desc: "Kampaņas un kuponi." },
-                    { icon: "💬", title: "Čats", desc: "Saziņa ar klientiem lietotnē." },
-                    { icon: "📊", title: "Analītika", desc: "Ieņēmumi un personāls." }
+                    { icon: "📅", title: "Viedā rezervācija", desc: "Klienti rezervē sekundēs. Automātiski atgādinājumi samazina kavēšanos par 40%." },
+                    { icon: "💳", title: "Maksājumi", desc: "Nauda nonāk tieši jūsu kontā — Duolyn nekad neaiztur jūsu naudu." },
+                    { icon: "⭐", title: "Lojalitāte", desc: "Punkti un priekšrocības, kas atgriež klientus automātiski — bez manuāla darba." },
+                    { icon: "👥", title: "Personāls un algas", desc: "Maiņas, dzeramnaudas un algas pārvaldītas vienā vietā. Bez izklājlapām." },
+                    { icon: "📦", title: "Inventārs", desc: "Ziniet, kas beidzas, pirms tas beidzas. Pasūtiet tieši no lietotnes." },
+                    { icon: "📣", title: "Mārketings", desc: "Sasniedz klusos klientus, pirms tie aiziet pavisam. Kampaņas, kas darbojas pašas." },
+                    { icon: "💬", title: "Čats lietotnē", desc: "Klienti raksta jums. Jūs atbildat no tās pašas lietotnes, ar kuru vadāt biznesu." },
+                    { icon: "📊", title: "Analītika", desc: "Redziet, kuri pakalpojumi un dienas nes ieņēmumus — uzreiz, katru dienu." }
                 ],
-                perks: ["Mūža atlaides", "Agrīna piekļuve", "Dibinātāja nozīmīte"]
+                perks: ["Mūža cenas", "Agrīna piekļuve", "Prioritāra ieviešana", "Dibinātāja nozīmīte", "Tiešā produktu ietekme"]
             },
             de: {
                 langKey: "DE",
                 navCta: "Zugang", heroTag: "Start Sommer 2026",
-                heroTitle1: "Verwalten mit", heroTitle2: "Eleganz.", heroTitle3: "Wachsen mit Vertrauen.",
+                heroTitle1: "Schluss mit dem", heroTitle2: "App-Chaos.", heroTitle3: "Alles aus einer Hand.",
                 heroDesc: "All-in-One-Plattform für Wellness – Buchungen, Zahlungen, Loyalität, Personal und Marketing.",
-                heroBtnFeatures: "Funktionen", heroLink: "Vision",
+                heroBtnFeatures: "Jetzt bewerben", heroLink: "Vision",
                 builtTag: "Für jedes Business", businessTypes: ["Salons","Spas","Barbiere","Nägel","Wellness","Kliniken","Fitness","Tattoo"],
                 featuresTitle: "Alles an einem Ort",
                 aboutTitle: "Über Duolyn", aboutP1: "Duolyn ist das Betriebssystem für Beauty-Unternehmen.",
@@ -987,12 +1132,12 @@
                 ],
                 faqTitle: "Fragen vor dem Start", faqSub: "Klare Antworten für Geschäftsinhaber, die sich auf Duolyn vorbereiten.",
                 faqs: [
-                    ["Wann startet Duolyn?", "Wir bereiten einen Start im Sommer 2026 zuerst mit Gründungspartnern vor."],
-                    ["Hält Duolyn Salon-Zahlungen?", "Nein. Die Zahlungsstrategie ist direkt zum Salon, damit Gelder auf Ihr Konto gehen."],
-                    ["Ist es nur für Salons?", "Nein. Duolyn ist für Salons, Spas, Barbiere, Nägel, Wellness, Kliniken, Fitness und Tattoo-Studios gebaut."],
-                    ["Wie funktionieren die Preise?", "Zum Start bleiben die Preise einfach und transparent, mit Founder-Vorteilen für frühe Partner."],
-                    ["Ist Duolyn DSGVO-orientiert?", "Das Produkt wird für EU-Datenschutzanforderungen und transparente Datenverarbeitung entwickelt."],
-                    ["Was enthalten Founder-Plätze?", "Founder-Plätze sollen frühen Zugang, Launch-Support und Preisvorteile auf Lebenszeit bieten."]
+                    ["Wann startet Duolyn?", "Sommer 2026. Gründungspartner erhalten zuerst Zugang — vor dem öffentlichen Launch."],
+                    ["Hält Duolyn Zahlungen zurück?", "Nein. Zahlungen gehen direkt auf Ihr Konto. Duolyn steht niemals zwischen Ihnen und Ihrem Geld."],
+                    ["Ist es nur für Salons?", "Nein. Duolyn funktioniert für Salons, Spas, Barbiere, Nagelstudios, Wellness-Zentren, Kliniken, Fitnessstudios und Tattoo-Studios."],
+                    ["Wie funktionieren die Preise?", "Gründungspartner sichern sich einen dauerhaft vergünstigten Tarif. Nach dem öffentlichen Launch steigen die Preise."],
+                    ["Ist Duolyn DSGVO-konform?", "Ja. Von Anfang an für EU-Compliance entwickelt — transparente Datenverarbeitung, keine Weitergabe Ihrer Daten."],
+                    ["Was enthalten Founder-Plätze?", "Lebenslange Preise, frühzeitiger Plattformzugang, priorisiertes Onboarding, ein Gründer-Badge und eine direkte Stimme bei der Produktgestaltung."]
                 ],
                 partnerSub: "Exklusives Gründerprogramm: nur die ersten 50 Plätze", availabilityLabel: "Verfügbarkeit",
                 lblBusinessType: "Unternehmenstyp", businessTypePlaceholder: "Unternehmenstyp auswählen", founderCity: "Werden Sie der erste Duolyn-Gründungspartner in {place}.", formSuccess: "Danke. Ihre Anfrage als Gründungspartner wurde gesendet.", formError: "Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.", successTitle: "Sie stehen auf der Founder-Liste", successDesc: "Wir haben Ihre Anfrage erhalten und melden uns mit Details zum frühen Zugang, sobald die Startvorbereitung voranschreitet.", successNextTitle: "Nächster Schritt", successNextEmail: "Prüfen Sie Ihr Postfach auf die Duolyn-Bestätigung. Falls Sie nichts sehen, prüfen Sie Spam oder Werbung.", successShareTitle: "Einladen", successNextShare: "Kennen Sie einen Salon-, Spa-, Studio- oder Klinikinhaber? Teilen Sie den Einladungslink, damit er sich ebenfalls früh bewerben kann.",
@@ -1004,23 +1149,23 @@
                 msgTerms: "<strong>Nutzungsbedingungen:</strong> Diese Website dient nur der Registrierung von Interesse vor dem Launch. Das Absenden des Formulars erstellt kein kostenpflichtiges Abonnement, keine Partnerschaftsvereinbarung und keinen garantierten Servicevertrag. Founder-Plätze, Preise, Funktionen und Launch-Zeitpunkt können sich vor Veröffentlichung ändern. Jeder spätere kostenpflichtige Service erfordert separate Bedingungen.",
                 msgCookies: "<strong>Cookies:</strong> Duolyn verwendet notwendige lokale Speicherung für Spracheinstellungen und Cookie-Einwilligung. Optionale Google Analytics wird, soweit erforderlich, nur nach Zustimmung verwendet, um Website-Traffic zu verstehen und die Launch-Seite zu verbessern. Sie können Analytics im Cookie-Banner ablehnen oder Ihre Browserdaten löschen.",
                 features: [
-                    { icon: "📅", title: "Buchung", desc: "Echtzeit-Termine." },
-                    { icon: "💳", title: "Zahlung", desc: "In-App Checkout." },
-                    { icon: "⭐", title: "Loyalität", desc: "Punkte & Empfehlungen." },
-                    { icon: "👥", title: "Personal", desc: "Lohn & Stunden." },
-                    { icon: "📦", title: "Inventar", desc: "Lagerverwaltung." },
-                    { icon: "📣", title: "Marketing", desc: "Kampagnen." },
-                    { icon: "💬", title: "Chat", desc: "Kundenkommunikation." },
-                    { icon: "📊", title: "Analysen", desc: "Umsatzdaten." }
+                    { icon: "📅", title: "Buchung", desc: "Kunden buchen in Sekunden. Auto-Erinnerungen reduzieren No-Shows um bis zu 40%." },
+                    { icon: "💳", title: "Zahlung", desc: "Gelder gehen direkt auf Ihr Konto — Duolyn hält niemals Ihr Geld zurück." },
+                    { icon: "⭐", title: "Loyalität", desc: "Punkte und Vorteile, die Kunden automatisch zurückbringen — ohne manuellen Aufwand." },
+                    { icon: "👥", title: "Personal & Lohn", desc: "Schichten, Trinkgelder und Gehälter an einem Ort. Keine Tabellenkalkulationen." },
+                    { icon: "📦", title: "Inventar", desc: "Wissen Sie, was zur Neige geht, bevor es aufgebraucht ist. Direkt aus der App nachbestellen." },
+                    { icon: "📣", title: "Marketing", desc: "Ruhige Kunden erreichen, bevor sie gehen. Kampagnen, die sich selbst erledigen." },
+                    { icon: "💬", title: "Chat", desc: "Kunden schreiben Sie an. Sie antworten aus derselben App, mit der Sie das Geschäft führen." },
+                    { icon: "📊", title: "Analysen", desc: "Sehen Sie, welche Dienste und Tage den Umsatz steigern — auf einen Blick, jeden Tag." }
                 ],
-                perks: ["Lebenslange Rabatte", "Mitspracherecht", "Gründer-Badge"]
+                perks: ["Lebenslange Preise", "Früher Zugang", "Prioritäres Onboarding", "Gründer-Badge", "Direkter Produkteinfluss"]
             },
             sv: {
                 langKey: "SE",
                 navCta: "Tidig tillgång", heroTag: "Lansering 2026",
-                heroTitle1: "Hantera med", heroTitle2: "elegans.", heroTitle3: "Väx med trygghet.",
+                heroTitle1: "Sluta jonglera", heroTitle2: "appar.", heroTitle3: "Kör allt från ett ställe.",
                 heroDesc: "Allt-i-ett-plattform för friskvårdsföretag – bokningar, betalningar, lojalitet och marknadsföring.",
-                heroBtnFeatures: "Funktioner", heroLink: "Vår vision",
+                heroBtnFeatures: "Ansök nu", heroLink: "Vår vision",
                 builtTag: "Byggd för alla", businessTypes: ["Salong","Spa","Barberare","Naglar","Wellness","Klinik","Fitness","Tatuering"],
                 featuresTitle: "Allt du behöver",
                 aboutTitle: "Om Duolyn", aboutP1: "Duolyn är den enhetliga plattformen för skönhetsföretag.",
@@ -1057,12 +1202,12 @@
                 ],
                 faqTitle: "Frågor före lansering", faqSub: "Tydliga svar för företagsägare som förbereder sig för Duolyn.",
                 faqs: [
-                    ["När lanseras Duolyn?", "Vi förbereder en lansering sommaren 2026 med founding partners först."],
-                    ["Håller Duolyn salongens betalningar?", "Nej. Betalningsstrategin är direkt till salongen, så pengarna går till ditt konto."],
-                    ["Är det bara för salonger?", "Nej. Duolyn är byggt för salonger, spa, barberare, naglar, wellness, kliniker, fitness och tatueringsstudior."],
-                    ["Hur fungerar prissättningen?", "Vid lansering håller vi prissättningen enkel och transparent, med founder-fördelar för tidiga partners."],
-                    ["Är Duolyn GDPR-anpassat?", "Produkten designas för EU:s integritetskrav och transparent datahantering."],
-                    ["Vad ingår i founder-platser?", "Founder-platser är tänkta att omfatta tidig tillgång, lanseringsstöd och prisfördelar."]
+                    ["När lanseras Duolyn?", "Sommaren 2026. Founding partners får tillgång först — innan den publika lanseringen."],
+                    ["Håller Duolyn betalningar?", "Nej. Betalningar går direkt till ditt konto. Duolyn är aldrig mellan dig och dina pengar."],
+                    ["Är det bara för salonger?", "Nej. Duolyn fungerar för salonger, spa, barberare, nagelstudior, wellnesscenter, kliniker, träningsstudior och tatueringsstudior."],
+                    ["Hur fungerar prissättningen?", "Founding partners låser in ett rabatterat pris för livet. När vi lanserar publikt höjs priserna."],
+                    ["Är Duolyn GDPR-anpassat?", "Ja. Byggt för EU-compliance från dag ett — transparent datahantering, vi säljer aldrig dina uppgifter."],
+                    ["Vad ingår i founder-platser?", "Livstidspriser, tidig plattformsåtkomst, prioriterad onboarding, ett Founder-badge och en direkt röst i produktutvecklingen."]
                 ],
                 partnerSub: "Exklusivt founder-program: endast de första 50 platserna", availabilityLabel: "Tillgänglighet",
                 lblBusinessType: "Företagstyp", businessTypePlaceholder: "Välj företagstyp", founderCity: "Bli den första Duolyn founding partnern i {place}.", formSuccess: "Tack. Din founder partner-ansökan har skickats.", formError: "Något gick fel. Försök igen senare.", successTitle: "Du är på founder-listan", successDesc: "Vi har tagit emot din ansökan och kontaktar dig med information om tidig tillgång när lanseringen närmar sig.", successNextTitle: "Nästa steg", successNextEmail: "Kontrollera din inkorg för Duolyn-bekräftelsen. Om du inte ser den, kontrollera skräppost eller kampanjer.", successShareTitle: "Bjud in", successNextShare: "Känner du en salong-, spa-, studio- eller klinikägare? Dela inbjudningslänken så att de också kan ansöka tidigt.",
@@ -1074,16 +1219,16 @@
                 msgTerms: "<strong>Villkor:</strong> Denna webbplats är endast för intresseanmälan före lansering. Att skicka formuläret skapar inte en betald prenumeration, ett partneravtal eller ett garanterat serviceavtal. Founder-platser, priser, funktioner och lanseringstid kan ändras före lansering. Eventuell framtida betald tjänst kräver separata villkor.",
                 msgCookies: "<strong>Cookies:</strong> Duolyn använder nödvändig lokal lagring för språkval och cookie-samtycke. Valfri Google Analytics används, där det krävs, endast efter samtycke för att förstå webbplatstrafik och förbättra lanseringssidan. Du kan avvisa analytics i cookie-bannern eller rensa lagrade inställningar i webbläsaren.",
                 features: [
-                    { icon: "📅", title: "Bokning", desc: "Realtidsscheman." },
-                    { icon: "💳", title: "Betalning", desc: "Säker utcheckning." },
-                    { icon: "⭐", title: "Lojalitet", desc: "Poäng & bonus." },
-                    { icon: "👥", title: "Personal", desc: "Löner & timmar." },
-                    { icon: "📦", title: "Lager", desc: "Lagersaldon." },
-                    { icon: "📣", title: "Marknadsföring", desc: "Kampanjer." },
-                    { icon: "💬", title: "Chatt", desc: "Kundchatt." },
-                    { icon: "📊", title: "Analys", desc: "Intäktsanalys." }
+                    { icon: "📅", title: "Bokning", desc: "Kunder bokar på sekunder. Automatiska påminnelser minskar uteblivanden med upp till 40%." },
+                    { icon: "💳", title: "Betalning", desc: "Pengarna går direkt till ditt konto — Duolyn håller aldrig dina pengar." },
+                    { icon: "⭐", title: "Lojalitet", desc: "Poäng och förmåner som automatiskt tar tillbaka kunder — utan manuellt arbete." },
+                    { icon: "👥", title: "Personal & lön", desc: "Scheman, dricks och löner hanterade på ett ställe. Inga kalkylblad behövs." },
+                    { icon: "📦", title: "Lager", desc: "Vet vad som håller på att ta slut innan det är slut. Beställ om direkt från appen." },
+                    { icon: "📣", title: "Marknadsföring", desc: "Nå tysta kunder innan de lämnar för gott. Kampanjer som sköter sig själva." },
+                    { icon: "💬", title: "Chatt", desc: "Kunder skriver till dig. Du svarar från samma app du driver verksamheten med." },
+                    { icon: "📊", title: "Analys", desc: "Se vilka tjänster och dagar som driver intäkter — på ett ögonblick, varje dag." }
                 ],
-                perks: ["Livstidsrabatt", "Rösträtt", "Founder-badge"]
+                perks: ["Livstidspriser", "Tidig åtkomst", "Prioriterad onboarding", "Founder-badge", "Direkt produktinflytande"]
             }
         };
 
@@ -1130,7 +1275,6 @@
             document.getElementById('about-quote').innerText = t.aboutQuote;
             document.getElementById('partner-title').firstChild.textContent = t.partnerTitle;
             document.getElementById('partner-sub').innerText = t.partnerSub;
-            document.getElementById('availability-label').innerText = t.availabilityLabel;
             document.getElementById('founding-tag').innerText = t.foundingTag;
             document.getElementById('founding-title').innerText = t.foundingTitle;
             document.getElementById('founding-desc').innerText = t.foundingDesc;
@@ -1196,7 +1340,13 @@
             ]);
 
             document.getElementById('vision-list').innerHTML = t.vision.map(word => `<li><span class="text-duo-gradient font-bold">${word[0]}</span>${word.slice(1)}</li>`).join('');
-            document.getElementById('business-types').innerHTML = t.businessTypes.map(b => `<div>${b}</div>`).join('');
+            const bizIcons = ["✂️","🛁","💈","💅","🧘","🏥","🏋️","🎨"];
+            document.getElementById('business-types').innerHTML = t.businessTypes.map((b, i) => `
+                <div class="glass-card px-3 py-4 rounded-2xl text-center hover:border-teal-500/40 transition-all">
+                    <span class="text-2xl block mb-2">${bizIcons[i] || "✦"}</span>
+                    <p class="text-stone-300 text-xs font-semibold">${b}</p>
+                </div>
+            `).join('');
             document.getElementById('feature-grid').innerHTML = t.features.map(f => `<div class="glass-card p-8 rounded-3xl"><span class="feature-icon">${f.icon}</span><h4 class="text-white font-bold mb-3">${f.title}</h4><p class="text-stone-400 text-sm">${f.desc}</p></div>`).join('');
             t.workflow.forEach((step, index) => {
                 document.getElementById(`workflow${index + 1}-title`).innerText = step[0];
@@ -1226,7 +1376,13 @@
             `).join('');
             renderCountryBadges();
             updateFounderCityMessage();
-            document.getElementById('perks-list').innerHTML = t.perks.map(p => `<div class="flex gap-4"><span class="text-duo-gradient font-bold">✓</span><p class="text-[10px] text-stone-300 font-bold uppercase">${p}</p></div>`).join('');
+            const perkIcons = ["♾️", "⚡", "🎯", "🏅", "🔧"];
+            document.getElementById('perks-list').innerHTML = t.perks.map((p, i) => `
+                <div class="glass-card px-3 py-4 rounded-2xl text-center border border-teal-500/20">
+                    <span class="text-xl block mb-2">${perkIcons[i] || "✓"}</span>
+                    <p class="text-[9px] font-bold uppercase tracking-widest text-teal-300 leading-tight">${p}</p>
+                </div>
+            `).join('');
 
             if(persistentCountry) {
                 document.getElementById('partner-country-text').innerText = persistentCountry;
@@ -1248,7 +1404,8 @@
             wrap.innerHTML = countries.map(country => {
                 const data = globalPartnerData[country];
                 const active = country === persistentCountry;
-                return `<button type="button" onclick='renderPartners(${JSON.stringify(country)})' class="px-5 py-3 rounded-full border ${active ? 'border-teal-500 text-teal-300 bg-teal-500/10' : 'border-white/10 text-stone-400'} text-[10px] font-bold uppercase tracking-widest">${country} · ${data.spotsTaken}/50</button>`;
+                const spotsLeft = 50 - data.spotsTaken;
+                return `<button type="button" onclick='renderPartners(${JSON.stringify(country)})' class="px-5 py-3 rounded-full border ${active ? 'border-teal-500 text-teal-300 bg-teal-500/10' : 'border-white/10 text-stone-400'} text-[10px] font-bold uppercase tracking-widest">${country} · ${spotsLeft} open</button>`;
             }).join('');
         }
 
@@ -1360,13 +1517,19 @@
             persistentCountry = country;
             document.getElementById('partner-country-text').innerText = country;
             document.getElementById('input-country').value = country;
-            countLabel.innerText = `${data.spotsTaken} / 50`;
-            countBar.style.width = `${(data.spotsTaken / 50) * 100}%`;
+            const displaySpots = data.spotsTaken || 2;
+            countLabel.innerText = `${displaySpots} / 50 spots`;
+            countBar.style.width = `${Math.max(4, (data.spotsTaken / 50) * 100)}%`;
             renderCountryBadges();
             updateFounderCityMessage();
 
             if (data.partners.length === 0) {
-                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20"><h3 class="text-2xl text-duo-gradient">Apply to be the first Partner in ${country}</h3></div>`;
+                grid.innerHTML = `<div class="md:col-span-3 py-20 text-center glass-card rounded-[3rem] border-dashed border-white/20 px-8">
+                    <div class="text-4xl mb-4">🌟</div>
+                    <h3 class="text-2xl text-duo-gradient mb-3">Be the first Founding Partner in ${country}</h3>
+                    <p class="text-stone-500 text-sm mb-8 max-w-md mx-auto">Spots are limited to 50 per country. Apply now to secure your place and lock in lifetime pricing before the public launch.</p>
+                    <a href="#waitlist" class="inline-block bg-duo-gradient text-white px-8 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition">Apply Now</a>
+                </div>`;
             } else {
                 grid.innerHTML = data.partners.map((p, index) => `
                     <div onclick="openPartner('${country}', ${index})" class="glass-card p-8 rounded-[2rem] cursor-pointer group">
@@ -1552,6 +1715,26 @@
             if (event.target.id === 'partner-modal') closePartner();
         });
 
+        function initBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                btn.classList.toggle('visible', window.scrollY > 500);
+            }, { passive: true });
+        }
+
+        function initScrollReveal() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        }
+
         changeLanguage(localStorage.getItem(LANG_STORAGE_KEY) || 'en');
         document.getElementById('input-city').addEventListener('input', updateFounderCityMessage);
         document.getElementById('input-country').addEventListener('input', updateFounderCityMessage);
@@ -1560,6 +1743,8 @@
         initCookieConsent();
         initCinematicHero();
         initCinematicStory();
+        initScrollReveal();
+        initBackToTop();
     </script>
 </body>
 </html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolyn — A Day in the Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0A0A;
+            color: #E5E5E5;
+        }
+        /* overflow-x must NOT be on body/html — it breaks position:sticky */
+        #clip-wrap { overflow-x: clip; }
+
+        /* ---------- GRADIENT TEXT ---------- */
+        .grad {
+            background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ---------- INTRO ---------- */
+        #intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        #intro .orb-purple {
+            position: absolute; width: 500px; height: 500px;
+            background: rgba(139,92,246,0.14); border-radius: 50%;
+            filter: blur(90px); top: 10%; left: -10%;
+            pointer-events: none;
+        }
+        #intro .orb-teal {
+            position: absolute; width: 400px; height: 400px;
+            background: rgba(45,212,191,0.12); border-radius: 50%;
+            filter: blur(90px); bottom: 10%; right: -10%;
+            pointer-events: none;
+        }
+        #intro-label {
+            font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+            color: #2dd4bf; font-weight: 700; margin-bottom: 1.5rem;
+            opacity: 0; animation: fade-up 0.8s 0.2s ease forwards;
+        }
+        #intro h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            color: white; line-height: 1.08;
+            margin-bottom: 1.5rem;
+            opacity: 0; animation: fade-up 0.8s 0.4s ease forwards;
+        }
+        #intro p {
+            color: #737373; max-width: 420px; line-height: 1.75;
+            font-size: 1.0625rem; font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0; animation: fade-up 0.8s 0.6s ease forwards;
+        }
+        #scroll-hint {
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            opacity: 0; animation: fade-up 0.8s 0.9s ease forwards;
+        }
+        #scroll-hint span {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em;
+            color: #4b5563; font-weight: 600;
+        }
+        .arrow-down {
+            width: 24px; height: 24px;
+            border-right: 2px solid #2dd4bf;
+            border-bottom: 2px solid #2dd4bf;
+            transform: rotate(45deg);
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+
+        /* ---------- SCROLLYTELLING WRAPPER ---------- */
+        #story-wrapper {
+            /* 5 scenes × 100vh each */
+            height: 550vh;
+            position: relative;
+        }
+
+        #story-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ---------- SCENE SYSTEM ---------- */
+        .scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.7s ease;
+        }
+        .scene.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scene-inner {
+            max-width: 1180px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* ---------- LEFT TEXT BLOCK ---------- */
+        .scene-label {
+            font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 1rem;
+        }
+        .scene-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3.25rem);
+            color: white; line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+        .scene-body {
+            color: #737373; line-height: 1.8;
+            font-size: 1.0625rem; font-weight: 300;
+            max-width: 420px;
+        }
+
+        /* ---------- UI CARD ---------- */
+        .ui-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.09);
+            backdrop-filter: blur(20px);
+            border-radius: 1.5rem;
+        }
+
+        /* ---------- PROGRESS DOTS ---------- */
+        #progress-dots {
+            position: fixed;
+            right: 1.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 200;
+        }
+        .dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: #2dd4bf;
+            transform: scale(1.45);
+        }
+
+        /* ---------- PROGRESS BAR ---------- */
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #2dd4bf);
+            width: 0%;
+            z-index: 200;
+            transition: width 0.1s linear;
+        }
+
+        /* ---------- SCENE BACKGROUNDS (orbs) ---------- */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+        }
+
+        /* ---------- SCENE 1: CHAOS ---------- */
+        .chaos-grid {
+            position: relative;
+            height: 380px;
+        }
+        .chaos-app {
+            position: absolute;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 11px;
+            color: #9ca3af;
+            backdrop-filter: blur(8px);
+            white-space: nowrap;
+        }
+        .chaos-app .app-dot {
+            display: inline-block;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        /* ---------- SCENE 2: DASHBOARD ---------- */
+        .dash-metric {
+            background: rgba(255,255,255,0.04);
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .dash-metric .val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 3px;
+        }
+        .dash-metric .lbl {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #4b5563;
+        }
+        .dash-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .dash-row:last-child { border-bottom: none; }
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+        }
+
+        /* ---------- SCENE 3: BOOKING ---------- */
+        .notif-card {
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 0.875rem;
+        }
+        .notif-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* ---------- SCENE 4: PAYMENT ---------- */
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.625rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .receipt-row:last-child { border-bottom: none; }
+        .receipt-row .key { color: #6b7280; font-size: 13px; }
+        .receipt-row .val { color: white; font-size: 13px; font-weight: 600; }
+
+        /* ---------- SCENE 5: ANALYTICS ---------- */
+        .bar-wrap {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 100px;
+        }
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            gap: 4px;
+        }
+        .bar-fill {
+            width: 100%;
+            border-radius: 4px 4px 0 0;
+        }
+        .bar-label {
+            font-size: 9px;
+            color: #4b5563;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.04);
+            border-radius: 0.875rem;
+            padding: 0.875rem;
+            text-align: center;
+        }
+        .stat-box .sv { font-size: 1.25rem; font-weight: 700; margin-bottom: 2px; }
+        .stat-box .sl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: #4b5563; }
+
+        /* ---------- OUTRO ---------- */
+        #outro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        #outro .orb-purple {
+            position: absolute; width: 500px; height: 500px;
+            background: rgba(139,92,246,0.12); border-radius: 50%;
+            filter: blur(90px); top: 0; left: -15%;
+            pointer-events: none;
+        }
+        #outro .orb-teal {
+            position: absolute; width: 400px; height: 400px;
+            background: rgba(45,212,191,0.1); border-radius: 50%;
+            filter: blur(90px); bottom: 0; right: -10%;
+            pointer-events: none;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 1.125rem 2.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #2dd4bf, #3b82f6);
+            color: white;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            text-decoration: none;
+            transition: transform 0.25s ease;
+        }
+        .cta-btn:hover { transform: scale(1.04); }
+
+        /* ---------- ANIMATIONS ---------- */
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50%       { transform: rotate(45deg) translateY(6px); }
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(45,212,191,0.25); }
+            50%       { border-color: rgba(45,212,191,0.6); }
+        }
+        @keyframes slide-right {
+            from { opacity: 0; transform: translateX(30px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes bar-rise {
+            from { height: 0; }
+            to   { height: var(--h); }
+        }
+
+        /* Staggered entry on scene activation */
+        .scene.active .s1 { animation: fade-up 0.55s 0s ease both; }
+        .scene.active .s2 { animation: fade-up 0.55s 0.12s ease both; }
+        .scene.active .s3 { animation: fade-up 0.55s 0.24s ease both; }
+        .scene.active .s4 { animation: fade-up 0.55s 0.36s ease both; }
+        .scene.active .s5 { animation: fade-up 0.55s 0.48s ease both; }
+        .scene.active .slide { animation: slide-right 0.55s 0.1s ease both; }
+        .scene.active .pulsing {
+            animation: pulse-border 2.5s ease-in-out infinite;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .scene-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .scene-inner .right-panel { display: none; }
+            .scene-title { font-size: 2.25rem; }
+            #progress-dots { right: 0.875rem; }
+        }
+    </style>
+</head>
+<body>
+<div id="clip-wrap">
+
+<!-- Top progress bar -->
+<div id="progress-bar"></div>
+
+<!-- Progress dots -->
+<nav id="progress-dots" aria-label="Story progress">
+    <div class="dot active" data-i="0" title="The Problem"></div>
+    <div class="dot" data-i="1" title="Meet Duolyn"></div>
+    <div class="dot" data-i="2" title="Bookings"></div>
+    <div class="dot" data-i="3" title="Payments"></div>
+    <div class="dot" data-i="4" title="Growth"></div>
+</nav>
+
+<!-- ═══════════════ INTRO ═══════════════ -->
+<section id="intro">
+    <div class="orb-purple"></div>
+    <div class="orb-teal"></div>
+    <p id="intro-label">Duolyn · A Day in the Life</p>
+    <h1>Stop juggling.<br><span class="grad">Run everything<br>from one.</span></h1>
+    <p>Scroll to watch a typical business day transform — from chaos to clarity.</p>
+    <div id="scroll-hint">
+        <span>Scroll to begin</span>
+        <div class="arrow-down"></div>
+    </div>
+</section>
+
+<!-- ═══════════════ SCROLLYTELLING ═══════════════ -->
+<div id="story-wrapper">
+<div id="story-sticky">
+
+    <!-- ── SCENE 1: CHAOS ── -->
+    <div class="scene active" id="scene-0">
+        <div class="bg-orb s1" style="width:480px;height:480px;background:rgba(239,68,68,0.08);top:5%;left:-8%;"></div>
+        <div class="scene-inner">
+            <div class="left-text">
+                <p class="scene-label s1" style="color:#ef4444;">The Problem</p>
+                <h2 class="scene-title s2">Running a salon<br>shouldn't feel<br><em style="color:#9ca3af;font-style:italic;">like this.</em></h2>
+                <p class="scene-body s3">You're switching between 5 different apps, answering calls, chasing payments — and still not sure if your team is on schedule.</p>
+                <div class="s4" style="margin-top:2rem;display:flex;align-items:center;gap:0.75rem;padding:1rem;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:1rem;max-width:380px;">
+                    <span style="font-size:1.5rem;">😤</span>
+                    <p style="font-size:12px;color:#ef4444;font-weight:600;">Owner stress level: critical</p>
+                </div>
+            </div>
+            <div class="right-panel chaos-grid">
+                <div class="chaos-app s1" style="top:0%;left:8%;transform:rotate(-3deg);">
+                    <span class="app-dot" style="background:#ef4444;"></span>Booking App · 3 conflicts today
+                </div>
+                <div class="chaos-app s2" style="top:16%;left:38%;transform:rotate(2deg);">
+                    <span class="app-dot" style="background:#f59e0b;"></span>Payments · 2 pending
+                </div>
+                <div class="chaos-app s2" style="top:6%;right:2%;transform:rotate(-1.5deg);">
+                    <span class="app-dot" style="background:#22c55e;"></span>WhatsApp · 12 unread
+                </div>
+                <div class="chaos-app s3" style="top:38%;left:2%;transform:rotate(1.5deg);">
+                    <span class="app-dot" style="background:#3b82f6;"></span>Spreadsheet · March payroll
+                </div>
+                <div class="chaos-app s3" style="top:52%;right:4%;transform:rotate(-2deg);">
+                    <span class="app-dot" style="background:#a855f7;"></span>Inventory · Stock low
+                </div>
+                <div class="chaos-app s4" style="top:68%;left:18%;transform:rotate(2.5deg);">
+                    <span class="app-dot" style="background:#ec4899;"></span>Email · Client complaint
+                </div>
+                <div class="chaos-app s5" style="top:78%;right:8%;transform:rotate(-1deg);">
+                    <span class="app-dot" style="background:#06b6d4;"></span>Loyalty app · Not synced
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SCENE 2: MEET DUOLYN ── -->
+    <div class="scene" id="scene-1">
+        <div class="bg-orb" style="width:500px;height:500px;background:rgba(45,212,191,0.1);top:20%;right:-12%;filter:blur(90px);pointer-events:none;"></div>
+        <div class="scene-inner">
+            <div class="left-text">
+                <p class="scene-label s1" style="color:#2dd4bf;">The Solution</p>
+                <h2 class="scene-title s2">Meet<br><span class="grad">Duolyn.</span></h2>
+                <p class="scene-body s3">One operating system for your entire business. Every tool you need — bookings, payments, staff, loyalty — connected in one elegant platform.</p>
+                <div class="s4" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.75rem;">
+                    <span style="padding:0.35rem 0.875rem;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.3);color:#2dd4bf;">Bookings</span>
+                    <span style="padding:0.35rem 0.875rem;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#a78bfa;">Payments</span>
+                    <span style="padding:0.35rem 0.875rem;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;">Staff</span>
+                    <span style="padding:0.35rem 0.875rem;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:rgba(45,212,191,0.1);border:1px solid rgba(45,212,191,0.3);color:#2dd4bf;">Loyalty</span>
+                    <span style="padding:0.35rem 0.875rem;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:#a78bfa;">Analytics</span>
+                </div>
+            </div>
+            <div class="right-panel slide">
+                <div class="ui-card pulsing" style="padding:1.75rem;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                        <div>
+                            <p style="font-size:9px;text-transform:uppercase;letter-spacing:0.25em;color:#2dd4bf;font-weight:700;margin-bottom:4px;">Good morning</p>
+                            <h3 style="color:white;font-family:'Playfair Display',serif;font-size:1.25rem;">Your Business Dashboard</h3>
+                        </div>
+                        <div style="width:38px;height:38px;background:linear-gradient(135deg,#8b5cf6,#2dd4bf);border-radius:50%;"></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1.25rem;">
+                        <div class="dash-metric"><div class="val">12</div><div class="lbl">Bookings</div></div>
+                        <div class="dash-metric"><div class="val" style="color:#2dd4bf;">€840</div><div class="lbl">Revenue</div></div>
+                        <div class="dash-metric"><div class="val" style="color:#a78bfa;">4</div><div class="lbl">Staff Online</div></div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-radius:1rem;padding:1rem;">
+                        <p style="font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:#4b5563;margin-bottom:0.75rem;">Today's Schedule</p>
+                        <div class="dash-row">
+                            <div class="status-dot" style="background:#2dd4bf;"></div>
+                            <span style="color:#d1d5db;font-size:12px;">09:00 — Elena K. · Full colour</span>
+                            <span style="margin-left:auto;font-size:10px;color:#4b5563;">Anna</span>
+                        </div>
+                        <div class="dash-row">
+                            <div class="status-dot" style="background:#8b5cf6;"></div>
+                            <span style="color:#d1d5db;font-size:12px;">10:30 — Maria L. · Blow dry</span>
+                            <span style="margin-left:auto;font-size:10px;color:#4b5563;">Sofia</span>
+                        </div>
+                        <div class="dash-row">
+                            <div class="status-dot" style="background:#3b82f6;"></div>
+                            <span style="color:#d1d5db;font-size:12px;">12:00 — David R. · Haircut</span>
+                            <span style="margin-left:auto;font-size:10px;color:#4b5563;">Marco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SCENE 3: BOOKING ── -->
+    <div class="scene" id="scene-2">
+        <div class="bg-orb" style="width:420px;height:420px;background:rgba(59,130,246,0.1);bottom:10%;left:-5%;filter:blur(90px);pointer-events:none;"></div>
+        <div class="scene-inner">
+            <div class="left-text">
+                <p class="scene-label s1" style="color:#60a5fa;">Bookings</p>
+                <h2 class="scene-title s2">A booking<br>comes in at<br><em class="grad">11pm.</em></h2>
+                <p class="scene-body s3">Client books online. Duolyn confirms it instantly, fires a reminder 24 hours before, and updates your team's calendar — zero phone calls needed.</p>
+                <div class="s4" style="margin-top:1.75rem;display:flex;align-items:center;gap:0.5rem;">
+                    <div style="width:8px;height:8px;border-radius:50%;background:#2dd4bf;"></div>
+                    <p style="font-size:12px;color:#2dd4bf;font-weight:600;">No-shows reduced by up to 40%</p>
+                </div>
+            </div>
+            <div class="right-panel" style="display:flex;flex-direction:column;gap:0.875rem;">
+                <div class="ui-card notif-card s1 pulsing" style="border-color:rgba(45,212,191,0.35);">
+                    <div style="display:flex;align-items:flex-start;gap:0.875rem;">
+                        <div class="notif-avatar" style="background:linear-gradient(135deg,#8b5cf6,#2dd4bf);">📅</div>
+                        <div style="flex:1;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                                <p style="color:white;font-weight:700;font-size:0.9375rem;">New Booking</p>
+                                <span style="font-size:9px;color:#2dd4bf;background:rgba(45,212,191,0.1);padding:2px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Confirmed ✓</span>
+                            </div>
+                            <p style="color:#9ca3af;font-size:13px;margin-bottom:3px;">Sofia M. · Hair Colour + Cut</p>
+                            <p style="color:#4b5563;font-size:11px;">Tomorrow · 14:00 · Anna (Stylist)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-card notif-card s2">
+                    <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;margin-bottom:6px;">Auto Reminder Sent — 24h before</p>
+                    <p style="color:#d1d5db;font-size:12px;line-height:1.6;">"Hi Sofia, your appointment is tomorrow at 14:00. See you soon! 💇‍♀️"</p>
+                </div>
+                <div class="ui-card notif-card s3">
+                    <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;margin-bottom:8px;">Team Calendar Updated</p>
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                        <div style="width:7px;height:7px;border-radius:50%;background:#a78bfa;flex-shrink:0;"></div>
+                        <p style="color:#d1d5db;font-size:12px;">Anna · 14:00 — 16:00 · Blocked</p>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <div style="width:7px;height:7px;border-radius:50%;background:#2dd4bf;flex-shrink:0;"></div>
+                        <p style="color:#4b5563;font-size:12px;">Client notified automatically</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SCENE 4: PAYMENT + LOYALTY ── -->
+    <div class="scene" id="scene-3">
+        <div class="bg-orb" style="width:500px;height:500px;background:rgba(139,92,246,0.1);top:10%;right:-10%;filter:blur(90px);pointer-events:none;"></div>
+        <div class="scene-inner">
+            <div class="left-text">
+                <p class="scene-label s1" style="color:#a78bfa;">Payments + Loyalty</p>
+                <h2 class="scene-title s2">Payment done.<br>Loyalty added<br><em class="grad">in the same tap.</em></h2>
+                <p class="scene-body s3">Funds go directly into your account the moment the client pays. Duolyn never holds your money — not for a second. Loyalty points are added automatically.</p>
+                <div class="s4" style="margin-top:1.75rem;padding:1rem;background:rgba(45,212,191,0.06);border:1px solid rgba(45,212,191,0.2);border-radius:1rem;max-width:360px;">
+                    <p style="font-size:12px;color:#2dd4bf;font-weight:600;">🔒 Your money goes straight to your account. Always.</p>
+                </div>
+            </div>
+            <div class="right-panel" style="display:flex;flex-direction:column;gap:0.875rem;">
+                <div class="ui-card s1" style="padding:1.75rem;">
+                    <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;margin-bottom:1.25rem;">Payment Receipt</p>
+                    <div class="receipt-row"><span class="key">Hair Colour + Cut</span><span class="val">€95.00</span></div>
+                    <div class="receipt-row"><span class="key">Discount (Loyalty)</span><span class="val" style="color:#2dd4bf;">— €5.00</span></div>
+                    <div class="receipt-row" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:0.875rem;margin-top:0.25rem;">
+                        <span class="key" style="color:white;font-weight:700;">Total Paid</span>
+                        <span class="val" style="font-size:1.25rem;">€90.00</span>
+                    </div>
+                    <div style="margin-top:1rem;display:flex;align-items:center;gap:8px;padding:0.75rem;background:rgba(45,212,191,0.06);border-radius:0.875rem;">
+                        <div style="width:8px;height:8px;border-radius:50%;background:#2dd4bf;flex-shrink:0;"></div>
+                        <p style="font-size:11px;color:#2dd4bf;font-weight:700;">Paid directly to your account ✓</p>
+                    </div>
+                </div>
+                <div class="ui-card s2" style="padding:1.5rem;border-color:rgba(139,92,246,0.3);">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <p style="font-size:9px;color:#a78bfa;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;margin-bottom:4px;">Loyalty Points</p>
+                            <p style="color:white;font-size:1.125rem;font-weight:700;">+90 points added ⭐</p>
+                            <p style="color:#4b5563;font-size:11px;margin-top:3px;">Sofia now has 380 · 1 reward ready</p>
+                        </div>
+                        <div style="text-align:center;">
+                            <p style="color:#a78bfa;font-size:1.75rem;font-weight:700;">380</p>
+                            <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.1em;">Total pts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SCENE 5: GROWTH ── -->
+    <div class="scene" id="scene-4">
+        <div class="bg-orb" style="width:600px;height:600px;background:rgba(45,212,191,0.1);bottom:0;right:-20%;filter:blur(90px);pointer-events:none;"></div>
+        <div class="scene-inner">
+            <div class="left-text">
+                <p class="scene-label s1" style="color:#2dd4bf;">The Result</p>
+                <h2 class="scene-title s2">Now focus on<br><em class="grad">what you love.</em></h2>
+                <p class="scene-body s3">Revenue is up. Clients keep coming back. Staff run on their own. Everything works — without you being stuck in the middle of all of it.</p>
+                <a href="index.html#waitlist" class="cta-btn s4" style="margin-top:2rem;display:inline-block;">Apply for a Founder Spot →</a>
+            </div>
+            <div class="right-panel slide">
+                <div class="ui-card" style="padding:1.75rem;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                        <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;">Monthly Revenue</p>
+                        <span style="font-size:11px;color:#2dd4bf;font-weight:700;">↑ 34% vs last month</span>
+                    </div>
+                    <div class="bar-wrap" style="margin-bottom:1.5rem;">
+                        <div class="bar-col">
+                            <div class="bar-fill" style="height:52%;background:rgba(139,92,246,0.35);"></div>
+                            <p class="bar-label">Jan</p>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-fill" style="height:60%;background:rgba(139,92,246,0.4);"></div>
+                            <p class="bar-label">Feb</p>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-fill" style="height:68%;background:rgba(45,212,191,0.45);"></div>
+                            <p class="bar-label">Mar</p>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-fill" style="height:76%;background:rgba(45,212,191,0.55);"></div>
+                            <p class="bar-label">Apr</p>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-fill" style="height:94%;background:linear-gradient(to top,#8b5cf6,#2dd4bf);box-shadow:0 0 24px rgba(45,212,191,0.4);"></div>
+                            <p class="bar-label" style="color:#2dd4bf;font-weight:700;">May</p>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1.25rem;">
+                        <div class="stat-box"><div class="sv" style="color:#2dd4bf;">↑ 34%</div><div class="sl">Revenue</div></div>
+                        <div class="stat-box"><div class="sv" style="color:#a78bfa;">↑ 21%</div><div class="sl">Returning</div></div>
+                        <div class="stat-box"><div class="sv" style="color:#60a5fa;">0 hr</div><div class="sl">Admin</div></div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-radius:1rem;padding:1rem;">
+                        <p style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:0.2em;font-weight:700;margin-bottom:0.75rem;">Top Performer This Month</p>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:34px;height:34px;background:linear-gradient(135deg,#8b5cf6,#2dd4bf);border-radius:50%;"></div>
+                            <div>
+                                <p style="color:white;font-size:13px;font-weight:600;">Anna · Stylist</p>
+                                <p style="color:#4b5563;font-size:11px;">€2,340 revenue · 48 appointments</p>
+                            </div>
+                            <span style="margin-left:auto;font-size:10px;color:#2dd4bf;font-weight:700;">🏅 #1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- end sticky -->
+</div><!-- end wrapper -->
+
+<!-- ═══════════════ OUTRO ═══════════════ -->
+<section id="outro">
+    <div class="orb-purple"></div>
+    <div class="orb-teal"></div>
+    <p style="font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:#2dd4bf;font-weight:700;margin-bottom:1.5rem;position:relative;">That's Duolyn</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.25rem,5.5vw,4.25rem);color:white;line-height:1.1;margin-bottom:1.5rem;max-width:600px;position:relative;">Stop juggling apps.<br><span class="grad">Run everything from one.</span></h2>
+    <p style="color:#737373;max-width:400px;line-height:1.75;margin-bottom:3rem;position:relative;">50 founding partner spots. Lifetime pricing. Launching Summer 2026.</p>
+    <a href="index.html#waitlist" class="cta-btn" style="position:relative;">Apply for a Founder Spot →</a>
+</section>
+
+<script>
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const dots   = Array.from(document.querySelectorAll('.dot'));
+    const bar    = document.getElementById('progress-bar');
+    const wrapper = document.getElementById('story-wrapper');
+    let current = 0;
+
+    function activate(i) {
+        if (i === current) return;
+        scenes[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = i;
+        scenes[current].classList.add('active');
+        dots[current].classList.add('active');
+    }
+
+    function onScroll() {
+        const rect = wrapper.getBoundingClientRect();
+        const total = wrapper.offsetHeight - window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        if (scrolled > total) return;
+
+        const progress = scrolled / total;
+        bar.style.width = (progress * 100) + '%';
+
+        const idx = Math.min(scenes.length - 1, Math.floor(progress * scenes.length));
+        activate(idx);
+    }
+
+    // Dot click → scroll to that scene
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const i = parseInt(dot.dataset.i);
+            const total = wrapper.offsetHeight - window.innerHeight;
+            const targetScroll = wrapper.offsetTop + (i / scenes.length) * total;
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        });
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+</script>
+</div><!-- end clip-wrap -->
+</body>
+</html>
